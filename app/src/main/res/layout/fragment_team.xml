@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/team_background"
     tools:context=".view.coach.fragment.TeamFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,4 +26,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="@color/colorGreen"
         />
+
+
 </RelativeLayout>
