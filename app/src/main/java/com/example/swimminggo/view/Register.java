@@ -34,7 +34,6 @@ public class Register extends AppCompatActivity {
 
         edtUsername = findViewById(R.id.edt_username);
         edtPassword = findViewById(R.id.edt_password);
-        edtRepassword = findViewById(R.id.edt_repassword);
         edtEmail = findViewById(R.id.edt_email);
     }
 
@@ -42,10 +41,7 @@ public class Register extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerPresenter.validateForm(edtUsername.getText().toString(),
-                        edtPassword.getText().toString(),
-                        edtRepassword.getText().toString(),
-                        edtEmail.getText().toString());
+                registerPresenter.onRegister(edtUsername.getText().toString(), edtPassword.getText().toString());
             }
         });
     }
