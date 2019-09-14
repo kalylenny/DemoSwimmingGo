@@ -4,14 +4,14 @@ import org.json.JSONObject;
 
 public class Coach extends User {
 
-    public Coach(String username, String address, String dob, String email, String first_name, String last_name, String phone, int gender, int id, int role_id) {
-        super(username,address, dob, email, first_name, last_name, phone, gender, id, role_id);
+    public Coach(String username, String dob, String email, String firstName, String lastName, String phone, int gender, int id, String roleName, int isVerified) {
+        super(username, dob, email, firstName, lastName, phone, gender, id, roleName, isVerified);
     }
 
     @Override
     public void getDataFromJSONObject(JSONObject jsonObject) {
         try {
-            super.setUser(jsonObject.getString("address"),
+            super.setUser(
                     jsonObject.getString("dob"),
                     jsonObject.getString("email"),
                     jsonObject.getString("first_name"),
@@ -19,7 +19,8 @@ public class Coach extends User {
                     jsonObject.getString("phone"),
                     jsonObject.getInt("gender"),
                     jsonObject.getInt("id"),
-                    jsonObject.getInt("role_id")
+                    jsonObject.getString("role_name"),
+                    jsonObject.getInt("is_verified")
             );
         }catch (Exception e){
             e.printStackTrace();
