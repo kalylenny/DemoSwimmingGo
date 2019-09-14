@@ -3,31 +3,24 @@ package com.example.swimminggo.models;
 import org.json.JSONObject;
 
 public abstract class User {
-    private String username, address, dob, email, first_name, last_name, phone;
-    private int gender, id, role_id;
+    private String username, dob, email, firstName, lastName, phone, roleName;
+    private int gender, id;
+    private int isVerified;
 
     public User(){
-        username = address = dob = email = first_name = last_name = phone = "";
+        username = dob = email = firstName = lastName = phone = "";
     }
-    public User(String username,String address, String dob, String email, String first_name, String last_name, String phone, int gender, int id, int role_id) {
+    public User(String username, String dob, String email, String firstName, String lastName, String phone, int gender, int id, String roleName, int isVerified) {
         this.username = username;
         this.dob = dob;
         this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phone = phone;
         this.gender = gender;
         this.id = id;
-        this.role_id = role_id;
-    }
-
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+        this.roleName = roleName;
+        this.isVerified = isVerified;
     }
 
     public String getUsername() {
@@ -42,12 +35,12 @@ public abstract class User {
         return email;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getPhone() {
@@ -62,12 +55,12 @@ public abstract class User {
         return id;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public String getRoleName() {
+        return roleName;
     }
 
     public String getName(){
-        return first_name + " " + last_name;
+        return firstName + " " + lastName;
     }
 
     public void setUsername(String username){
@@ -82,12 +75,12 @@ public abstract class User {
         this.email = email;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setPhone(String phone) {
@@ -102,29 +95,37 @@ public abstract class User {
         this.id = id;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public void setUser(String address, String dob, String email,String first_name, String last_name, String phone, int gender, int id, int role_id ){
-        setAddress(address);
+    public void setUser(String dob, String email,String firstName, String lastName, String phone, int gender, int id, String roleName, int isVerified ){
         setDob(dob);
         setEmail(email);
-        setFirst_name(first_name);
-        setLast_name(last_name);
+        setFirstName(firstName);
+        setLastName(lastName);
         setPhone(phone);
         setGender(gender);
         setId(id);
-        setRole_id(role_id);
+        setRoleName(roleName);
+        setIsVerified(isVerified);
     }
-
 
     public String getFullName(){
-        if (last_name.equals("null") || first_name.equals("null"))
+        if (lastName.equals("null") || firstName.equals("null"))
             return "Chưa cập nhật";
-        return first_name + " " + last_name;
+        return firstName + " " + lastName;
 
     }
+
+    public int getIsVerified() {
+        return isVerified;
+    }
+
+    public void setIsVerified(int isVerified) {
+        this.isVerified = isVerified;
+    }
+
     public abstract void getDataFromJSONObject(JSONObject jsonObject);
     public abstract JSONObject convertToJSONObject();
 

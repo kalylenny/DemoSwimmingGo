@@ -1,6 +1,5 @@
 package com.example.swimminggo.view.coach.fragment;
 
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
