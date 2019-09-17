@@ -83,6 +83,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_person"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:ems="11" />
         </LinearLayout>
 
@@ -102,6 +104,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_password"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:ems="11"
+                android:inputType="textPassword" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhập lại mật khẩu"
+                android:textColor="@color/colorGray" />
+
+            <EditText
+                android:id="@+id/edt_repassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_password"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:ems="11"
                 android:inputType="textPassword" />
         </LinearLayout>
@@ -121,8 +146,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_email"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:ems="11"
-                android:inputType="textPassword" />
+                />
         </LinearLayout>
     </LinearLayout>
 
