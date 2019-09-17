@@ -4,6 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.EditProfile">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_profile_background"
+        android:orientation="horizontal"
+        android:paddingVertical="5sp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sửa thông tin"
+            android:textColor="@color/colorWhite"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:background="@drawable/background_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="100sp">
+
+            <ImageView
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:src="@drawable/no_avatar"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="@color/colorGray" />
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_email"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:ems="11"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
