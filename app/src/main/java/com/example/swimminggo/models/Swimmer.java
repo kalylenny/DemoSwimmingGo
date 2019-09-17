@@ -11,12 +11,12 @@ public class Swimmer extends User {
     public Swimmer(){
         super();
     }
-    public Swimmer(String username, String address, String dob, String email, String first_name, String last_name, String phone, int gender, int id, int role_id, float height, float weight, String parent_name, String parent_phone) {
-        super(username, address, dob, email, first_name, last_name, phone, gender, id, role_id);
+    public Swimmer(String username, String dob, String email, String firstName, String lastName, String phone, int gender, int id, String roleName, float height, float weight, String parentName, String parentPhone, int isVerified) {
+        super(username, dob, email, firstName, lastName, phone, gender, id, roleName, isVerified);
         this.weight = weight;
         this.height = height;
-        this.parent_name = parent_name;
-        this.parent_phone = parent_phone;
+        this.parent_name = parentName;
+        this.parent_phone = parentPhone;
     }
 
     public String getParent_name() {
@@ -54,7 +54,7 @@ public class Swimmer extends User {
     @Override
     public void getDataFromJSONObject(JSONObject jsonObject) {
         try {
-            super.setUser(jsonObject.getString("address"),
+            super.setUser(
                     jsonObject.getString("dob"),
                     jsonObject.getString("email"),
                     jsonObject.getString("first_name"),
@@ -62,7 +62,8 @@ public class Swimmer extends User {
                     jsonObject.getString("phone"),
                     jsonObject.getInt("gender"),
                     jsonObject.getInt("id"),
-                    jsonObject.getInt("role_id")
+                    jsonObject.getString("role_name"),
+                    jsonObject.getInt("is_verified")
             );
             setHeight((float)jsonObject.getDouble("height"));
             setWeight((float)jsonObject.getDouble("weight"));
@@ -81,8 +82,8 @@ public class Swimmer extends User {
     public void getSwimmerFromJSONObject(JSONObject jsonObject){
         try{
             super.setDob(jsonObject.getString("dob"));
-            super.setFirst_name(jsonObject.getString("first_name"));
-            super.setLast_name(jsonObject.getString("last_name"));
+            super.setFirstName(jsonObject.getString("first_name"));
+            super.setLastName(jsonObject.getString("last_name"));
             super.setId(jsonObject.getInt("user_id"));
             super.setUsername(jsonObject.getString("username"));
         }catch(Exception e){

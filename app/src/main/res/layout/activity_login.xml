@@ -83,6 +83,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_person"
+                android:lines="1"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:ems="11" />
         </LinearLayout>
 
@@ -103,7 +106,10 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/ic_password"
                 android:ems="11"
-                android:inputType="textPassword" />
+                android:lines="1"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:maxLines="1"/>
         </LinearLayout>
 
         <TextView

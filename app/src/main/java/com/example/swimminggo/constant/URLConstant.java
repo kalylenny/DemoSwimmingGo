@@ -1,7 +1,7 @@
 package com.example.swimminggo.constant;
 
 public class URLConstant {
-    public String mainUrl = "https://198.168.1.178:5000";
+    public String mainUrl = "http://ec2-13-229-83-241.ap-southeast-1.compute.amazonaws.com";
     public String URL_LOGIN = mainUrl + "/api/public/login";
 
     private static URLConstant ourInstance;

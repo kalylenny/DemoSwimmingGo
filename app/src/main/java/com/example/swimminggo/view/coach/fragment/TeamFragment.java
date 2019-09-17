@@ -32,7 +32,7 @@ public class TeamFragment extends Fragment {
         list.add("Team 4");
         list.add("Team 5");
         ArrayAdapter adapter;
-        adapter = new ArrayAdapter(TeamFragment,android.R.layout.simple_list_item_1,list);
+//        adapter = new ArrayAdapter(TeamFragment,android.R.layout.simple_list_item_1,list);
 
         return view;
     }
