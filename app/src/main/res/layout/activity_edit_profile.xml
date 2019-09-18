@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.EditProfile">
+    tools:context=".view.EditProfile"
+    android:background="@color/colorWhite">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_profile_background"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:paddingVertical="5sp"
-        android:gravity="center">
+        android:paddingVertical="5sp">
 
         <TextView
             android:id="@+id/txt_title"
@@ -25,20 +27,70 @@
     </LinearLayout>
 
     <ScrollView
-        android:background="@drawable/background_edit_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
-            android:paddingTop="100sp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="150sp"
-                android:layout_height="150sp"
-                android:src="@drawable/no_avatar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250sp"
+                android:gravity="center|bottom"
+                android:background="@drawable/background_edit_profile">
+
+                <ImageView
+                    android:id="@+id/img_avatar"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp"
+                    android:src="@drawable/no_avatar" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Họ"
+                    android:textColor="@color/colorGray" />
+
+                <EditText
+                    android:id="@+id/edt_first_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_person"
+                    android:ems="11"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên"
+                    android:textColor="@color/colorGray" />
+
+                <EditText
+                    android:id="@+id/edt_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_person"
+                    android:ems="11"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -56,11 +108,79 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableRight="@drawable/ic_email"
-                    android:maxLines="1"
-                    android:singleLine="true"
                     android:ems="11"
-                    />
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại"
+                    android:textColor="@color/colorGray" />
+
+                <EditText
+                    android:id="@+id/edt_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_phone"
+                    android:ems="11"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày sinh"
+                    android:textColor="@color/colorGray" />
+
+                <TextView
+                    android:id="@+id/txt_dob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_birthday"
+                    android:ems="14"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="11pt"
+                    android:ems="14"
+                    android:text="Giới tính"
+                    android:textColor="@color/colorGray" />
+
+                <Spinner
+                    android:id="@+id/spn_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25sp"
+                android:background="@drawable/button_login_border"
+                android:ems="11"
+                android:text="lưu thay đổi"
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
     </ScrollView>
 
