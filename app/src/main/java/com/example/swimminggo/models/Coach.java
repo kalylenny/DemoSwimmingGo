@@ -1,5 +1,6 @@
 package com.example.swimminggo.models;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Coach extends User {
@@ -29,7 +30,19 @@ public class Coach extends User {
 
     @Override
     public JSONObject convertToJSONObject() {
-        return null;
+        JSONObject coachObject = new JSONObject();
+        try {
+            coachObject.put("username", super.getUsername());
+            coachObject.put("first_name", super.getFirstName());
+            coachObject.put("last_name", super.getLastName());
+            coachObject.put("phone", super.getPhone());
+            coachObject.put("email",super.getEmail());
+            coachObject.put("dob", super.getDob());
+            coachObject.put("gender", super.getGender());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return coachObject;
     }
 
     public Coach(){

@@ -26,7 +26,7 @@ public class LoginPresenterImpl implements com.example.swimminggo.presenter.Logi
     }
 
     @Override
-    public void onLogin(String username, String password) {
+    public void onLogin(final String username, String password) {
         if (!isValidateUserName(username)) {
             Toast.makeText(loginView, "Tên đăng nhập sai", Toast.LENGTH_SHORT).show();
         } else if (!isValidatePassowrd(password)){

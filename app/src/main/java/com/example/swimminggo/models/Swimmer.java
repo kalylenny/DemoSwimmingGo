@@ -76,7 +76,19 @@ public class Swimmer extends User {
 
     @Override
     public JSONObject convertToJSONObject() {
-        return null;
+        JSONObject swimmerObject = new JSONObject();
+        try {
+            swimmerObject.put("username", super.getUsername());
+            swimmerObject.put("first_name", super.getFirstName());
+            swimmerObject.put("last_name", super.getLastName());
+            swimmerObject.put("phone", super.getPhone());
+            swimmerObject.put("email",super.getEmail());
+            swimmerObject.put("dob", super.getDob());
+            swimmerObject.put("gender", super.getGender());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return swimmerObject;
     }
 
     public void getSwimmerFromJSONObject(JSONObject jsonObject){
