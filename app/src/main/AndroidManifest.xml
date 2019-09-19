@@ -11,9 +11,10 @@
         android:roundIcon="@drawable/logo_swimminggo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.ChangePassword"></activity>
+        <activity android:name=".view.ForgotPassword3" />
         <activity android:name=".view.swimmer.MainActivity"></activity>
         <activity android:name=".view.EditProfile" />
-        <activity android:name=".view.ForgotPassword3" />
         <activity android:name=".view.ForgotPassword2" />
         <activity android:name=".view.ForgotPassword1" />
         <activity android:name=".view.coach.MainActivity" />
