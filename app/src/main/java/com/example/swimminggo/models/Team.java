@@ -9,11 +9,11 @@ public class Team {
     private String teamAge;
     private List<Integer> swimmerID;
 
-    public Team(int teamID, String teamName, String teamAge, List<Integer> swimmerID) {
-        this.teamID = teamID;
+    public Team(String teamName, String teamAge) {
+        //this.teamID = teamID;
         this.teamName = teamName;
         this.teamAge = teamAge;
-        this.swimmerID = swimmerID;
+        //this.swimmerID = swimmerID;
     }
 
     public int getTeamID() {
