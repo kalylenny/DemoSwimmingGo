@@ -101,6 +101,5 @@ public class Swimmer extends User {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 }
