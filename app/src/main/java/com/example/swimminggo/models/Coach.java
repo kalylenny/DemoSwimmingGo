@@ -39,6 +39,7 @@ public class Coach extends User {
             coachObject.put("email",super.getEmail());
             coachObject.put("dob", super.getDob());
             coachObject.put("gender", super.getGender());
+            coachObject.put("avatar","null");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -57,6 +57,8 @@ public class EditProfilePresenterImpl implements EditProfilePresenter {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("get Response", "onResponse: ");
+                        Log.d("Rep", response.toString());
                         try {
                             if (response.getBoolean("success")) {
                                 editProfile.doEditProfile(true, "Sửa thành công");
@@ -76,6 +78,12 @@ public class EditProfilePresenterImpl implements EditProfilePresenter {
     }
 
     private JSONObject convertProfileToJSONObject(User dataUser) {
-        return dataUser.convertToJSONObject();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user", dataUser.convertToJSONObject());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 }
