@@ -64,7 +64,7 @@ public class Login extends AppCompatActivity {
             if (UserProfile.getInstance().currentUser.getIsVerified() == 1) {
                 startActivity(new Intent(Login.this, MainActivity.class));
             } else {
-                startActivity(new Intent(Login.this, EditProfile.class));
+                startActivity(new Intent(Login.this, MainActivity.class));
             }
         } else {
             Log.d("failed", message);
