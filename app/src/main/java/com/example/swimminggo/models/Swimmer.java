@@ -86,6 +86,7 @@ public class Swimmer extends User {
             swimmerObject.put("email",super.getEmail());
             swimmerObject.put("dob", super.getDob());
             swimmerObject.put("gender", super.getGender());
+            swimmerObject.put("avatar", "kkkk");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -136,6 +136,8 @@ public class EditProfile extends AppCompatActivity {
             } else {
                 startActivity(new Intent(EditProfile.this, com.example.swimminggo.view.swimmer.MainActivity.class));
             }
+        } else{
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
     }
 }
