@@ -1,19 +1,41 @@
 package com.example.swimminggo.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class Team {
 
     private int teamID;
+    private int coachID;
     private String teamName;
-    private String teamAge;
+    private int teamAge;
     private List<Integer> swimmerID;
 
-    public Team(String teamName, String teamAge) {
+    public Team(String teamName, int teamAge) {
         //this.teamID = teamID;
         this.teamName = teamName;
         this.teamAge = teamAge;
         //this.swimmerID = swimmerID;
+    }
+
+    public Team(int teamID, int coachID, String teamName, int teamAge) {
+        this.teamID = teamID;
+        this.teamName = teamName;
+        this.teamAge = teamAge;
+        this.swimmerID = swimmerID;
+    }
+
+    public Team(JSONObject team){
+        try {
+            this.teamID = team.getInt("id");
+            this.coachID = team.getInt("coach_id");
+            this.teamAge = team.getInt("age_num");
+            this.teamName = team.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getTeamID() {
@@ -32,11 +54,11 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public String getTeamAge() {
+    public int getTeamAge() {
         return teamAge;
     }
 
-    public void setTeamAge(String teamAge) {
+    public void setTeamAge(int teamAge) {
         this.teamAge = teamAge;
     }
 
