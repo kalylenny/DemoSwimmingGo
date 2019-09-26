@@ -49,7 +49,7 @@ public class EditProfilePresenterImpl implements EditProfilePresenter {
     @Override
     public void onEdit(User dataUser) {
         JSONObject profileObject = convertProfileToJSONObject(dataUser);
-        Log.d("OnEdit", "success: ");
+
         AndroidNetworking.put(URLConstant.getInstance().getEditProfileUrl(currentUser.getId()))
                 .addJSONObjectBody(profileObject)
                 .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
@@ -57,9 +57,8 @@ public class EditProfilePresenterImpl implements EditProfilePresenter {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("get Response", "onResponse: ");
-                        Log.d("Rep", response.toString());
                         try {
+                            Log.d("JSON", response.toString());
                             if (response.getBoolean("success")) {
                                 editProfile.doEditProfile(true, "Sửa thành công");
                             } else {
@@ -78,12 +77,12 @@ public class EditProfilePresenterImpl implements EditProfilePresenter {
     }
 
     private JSONObject convertProfileToJSONObject(User dataUser) {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject result = new JSONObject();
         try {
-            jsonObject.put("user", dataUser.convertToJSONObject());
+            result.put("user", dataUser.convertToJSONObject());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return jsonObject;
+        return result;
     }
 }
