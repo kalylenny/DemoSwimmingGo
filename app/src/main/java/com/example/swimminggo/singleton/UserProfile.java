@@ -10,8 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserProfile {
-    public User currentUser;
-    public String accessToken;
+    public  User currentUser;
+    public  String accessToken;
     private static UserProfile ourInstance;
 
     public static UserProfile getInstance() {

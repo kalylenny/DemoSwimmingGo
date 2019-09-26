@@ -1,9 +1,12 @@
-package com.example.swimminggo.view;
+package com.example.swimminggo.view.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -52,7 +55,7 @@ public class EditProfile extends AppCompatActivity {
     private void initComponentView() {
         editProfilePresenter = new EditProfilePresenterImpl(this);
 
-        imgAvatar = findViewById(R.id.img_avatar);
+        //imgAvatar = findViewById(R.id.img_avatar);
 
         edtFirstName = findViewById(R.id.edt_first_name);
         edtLastName = findViewById(R.id.edt_last_name);
@@ -84,9 +87,10 @@ public class EditProfile extends AppCompatActivity {
         ArrayAdapter<String> listSexAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>(Arrays.asList("Nam", "Nữ")));
         spnGender.setAdapter(listSexAdapter);
         edtEmail.setText(currentUser.getEmail());
-        edtEmail.setSelection(0);
-
-        txtDob.setText("1998/2/28");
+        txtDob.setText(currentUser.getDob());
+        edtFirstName.setText(currentUser.getFirstName());
+        edtLastName.setText(currentUser.getLastName());
+        edtPhone.setText(currentUser.getPhone());
     }
 
     public void action() {

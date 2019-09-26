@@ -9,7 +9,7 @@ import com.example.swimminggo.constant.URLConstant;
 import com.example.swimminggo.models.User;
 import com.example.swimminggo.presenter.EditProfilePresenter;
 import com.example.swimminggo.singleton.UserProfile;
-import com.example.swimminggo.view.EditProfile;
+import com.example.swimminggo.view.profile.EditProfile;
 
 import org.json.JSONException;
 import org.json.JSONObject;

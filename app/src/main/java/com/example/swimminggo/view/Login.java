@@ -15,6 +15,7 @@ import com.example.swimminggo.presenter.LoginPresenter;
 import com.example.swimminggo.presenter.presenterImpl.LoginPresenterImpl;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.coach.MainActivity;
+import com.example.swimminggo.view.profile.EditProfile;
 
 public class Login extends AppCompatActivity {
 
@@ -64,7 +65,7 @@ public class Login extends AppCompatActivity {
             if (UserProfile.getInstance().currentUser.getIsVerified() == 1) {
                 startActivity(new Intent(Login.this, MainActivity.class));
             } else {
-                startActivity(new Intent(Login.this, MainActivity.class));
+                startActivity(new Intent(Login.this, EditProfile.class));
             }
         } else {
             Log.d("failed", message);

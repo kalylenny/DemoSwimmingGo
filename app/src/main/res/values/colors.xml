@@ -10,5 +10,7 @@
     <color name="colorGreen">#4DF302</color>
     <color name="colorTitle">#CBD9F0</color>
     <color name="colorYellow">#F8E254</color>
+    <color name="colorTextView">#DFE9FD</color>
+    <color name="colorTextBlue">#74b9ff</color>
 
 </resources>
