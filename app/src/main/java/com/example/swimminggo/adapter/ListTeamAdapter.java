@@ -40,7 +40,7 @@ public class ListTeamAdapter extends RecyclerView.Adapter<ListTeamAdapter.TeamVi
     public void onBindViewHolder(TeamViewHolder holder, int position) {
         Team team = teams.get(position);
         holder.teamName.setText(team.getTeamName());
-        holder.teamAge.setText(team.getTeamAge());
+        holder.teamAge.setText(team.getTeamAge()+"");
     }
 
     @Override

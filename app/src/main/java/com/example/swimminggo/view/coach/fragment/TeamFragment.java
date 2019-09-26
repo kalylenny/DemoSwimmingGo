@@ -2,6 +2,7 @@ package com.example.swimminggo.view.coach.fragment;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,9 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.ListTeamAdapter;
 import com.example.swimminggo.models.Team;
+import com.example.swimminggo.presenter.TeamPresenter;
+import com.example.swimminggo.presenter.presenterImpl.TeamPresenterImpl;
+import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.view.coach.SwipeController;
 import com.example.swimminggo.view.coach.SwipeControllerActions;
 
@@ -24,8 +28,9 @@ import java.util.List;
 
 public class TeamFragment extends Fragment {
 
-    View view;
+    public View view;
     private ListTeamAdapter mAdapter;
+    private TeamPresenter teamPresenter;
     SwipeController swipeController = null;
 
     public TeamFragment(){
@@ -36,54 +41,22 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_team, container, false);
-        setListTeamAdapter();
-        setupRecyclerView();
+        teamPresenter = new TeamPresenterImpl(this);
+        initDatabase();
         return view;
     }
 
-    private void setListTeamAdapter() {
-        List<Team> team = new ArrayList<>();
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-        team.add(new Team("Nhóm bơi nam 1","15"));
-//            String line;
-//            String[] st;
-//            while ((line = reader.readLine()) != null) {
-//                st = line.split(",");
-//                Player player = new Player();
-//                player.setName(st[0]);
-//                player.setNationality(st[1]);
-//                player.setClub(st[4]);
-//                player.setRating(Integer.parseInt(st[9]));
-//                player.setAge(Integer.parseInt(st[14]));
-//                players.add(player);
-//            }
-//        } catch (IOException e) {
-//
-//        }
-
-        mAdapter = new ListTeamAdapter(team);
+    private void initDatabase(){
+        if (ListTeam.getInstance() == null){
+            ListTeam.newInstance();
+            teamPresenter.getListTeam();
+        } else {
+            setupRecyclerView();
+        }
     }
 
-    private void setupRecyclerView() {
+    public void setupRecyclerView() {
+        mAdapter = new ListTeamAdapter(ListTeam.getInstance().getListTeam());
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));

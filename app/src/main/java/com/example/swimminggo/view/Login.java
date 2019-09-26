@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.presenter.LoginPresenter;
@@ -68,7 +69,7 @@ public class Login extends AppCompatActivity {
                 startActivity(new Intent(Login.this, EditProfile.class));
             }
         } else {
-            Log.d("failed", message);
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
     }
 }
