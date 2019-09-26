@@ -6,6 +6,7 @@ public class URLConstant {
     public String URL_REGISTER = mainUrl +"/api/public/register";
     public String URL_GET_OTP = mainUrl + "/api/public/otp/send/";
     public String URL_FORGOT_PASSWORD = mainUrl + "/api/password/forgot";
+    public String URL_CHANGE_PASSWORD = mainUrl + "/api/password/change";
     private static URLConstant ourInstance;
 
     public static URLConstant getInstance() {
