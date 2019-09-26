@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.EditProfile"
+    tools:context=".view.profile.EditProfile"
     android:background="@color/colorWhite">
 
     <LinearLayout
@@ -40,12 +40,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="250sp"
                 android:gravity="center|bottom"
-                android:background="@drawable/background_edit_profile">
-
-                <ImageView
+                android:background="@drawable/background_edit_profile"
+                android:paddingBottom="20sp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/img_avatar"
-                    android:layout_width="150sp"
-                    android:layout_height="150sp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:src="@drawable/no_avatar" />
             </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.example.swimminggo.view;
+package com.example.swimminggo.view.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 

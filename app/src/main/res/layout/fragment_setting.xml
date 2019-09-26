@@ -3,6 +3,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".view.coach.fragment.SettingFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="4"
+        android:background="@drawable/edit_profile_background"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_avatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/no_avatar" />
+
+        <TextView
+            android:id="@+id/txt_fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:ems="11"
+            android:gravity="center"
+            android:text="Nguyen Tri Hung"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/txt_rolename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="11"
+            android:gravity="center"
+            android:text="asdasd"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="6"
+        android:orientation="vertical"
+        android:padding="30sp">
+
+        <LinearLayout
+            android:id="@+id/layout_view_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20sp">
+            <ImageView
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:src="@drawable/ic_profile"
+                />
+            <TextView
+                android:paddingLeft="20sp"
+                android:gravity="center|left"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:text="Xem thông tin"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/colorGray"/>
+
+        <LinearLayout
+            android:id="@+id/layout_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20sp">
+            <ImageView
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:src="@drawable/key"
+                />
+            <TextView
+                android:paddingLeft="20sp"
+                android:gravity="center|left"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:text="Đổi mật khẩu"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/colorGray"/>
+
+        <LinearLayout
+            android:id="@+id/layout_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20sp">
+            <ImageView
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:src="@drawable/ic_logout"
+                />
+            <TextView
+                android:paddingLeft="20sp"
+                android:gravity="center|left"
+                android:layout_width="match_parent"
+                android:layout_height="45sp"
+                android:text="Đăng xuất"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 
 </LinearLayout>
