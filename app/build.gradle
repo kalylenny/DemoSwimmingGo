@@ -38,4 +38,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
     implementation 'com.baoyz.swipemenulistview:library:1.3.0'
+    implementation 'com.github.ashik94vc:ElegantNumberButton:v1.0.3'
 }

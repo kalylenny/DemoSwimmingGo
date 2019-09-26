@@ -19,6 +19,7 @@ public class Swimmer extends User {
         this.parent_phone = parentPhone;
     }
 
+
     public String getParent_name() {
         return parent_name;
     }
