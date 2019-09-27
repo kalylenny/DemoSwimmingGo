@@ -1,5 +1,6 @@
 package com.example.swimminggo.view.coach.fragment;
 
+import android.app.Dialog;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -17,12 +21,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.ListTeamAdapter;
+import com.example.swimminggo.constant.AgeConstant;
 import com.example.swimminggo.models.Team;
 import com.example.swimminggo.presenter.TeamPresenter;
 import com.example.swimminggo.presenter.presenterImpl.TeamPresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.view.coach.SwipeController;
 import com.example.swimminggo.view.coach.SwipeControllerActions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +39,11 @@ public class TeamFragment extends Fragment {
     private ListTeamAdapter mAdapter;
     private TeamPresenter teamPresenter;
     SwipeController swipeController = null;
+    private Spinner spnListAge;
+    public Dialog dialog;
+    FloatingActionButton btn_addteam;
 
-    public TeamFragment() {
+    public TeamFragment(){
 
     }
 
@@ -44,6 +53,36 @@ public class TeamFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_team, container, false);
         teamPresenter = new TeamPresenterImpl(this);
         initDatabase();
+        setupRecyclerView();
+        btn_addteam = (FloatingActionButton) view.findViewById(R.id.btn_add);
+        btn_addteam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_add_team);
+                spnListAge = dialog.findViewById(R.id.spn_age);
+                spnListAge.setAdapter(new ArrayAdapter<Integer>(getContext(), R.layout.support_simple_spinner_dropdown_item, AgeConstant.getInstance().listAge));
+                final EditText edtTeamName = dialog.findViewById(R.id.edt_team_name);
+                Button btnAddTeam = dialog.findViewById(R.id.btn_add_team);
+                btnAddTeam.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        teamPresenter.onAddTeam(new Team(edtTeamName.getText().toString(),Integer.parseInt(spnListAge.getSelectedItem().toString())));
+                    }
+                });
+
+                Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+               dialog.show();
+            }
+        });
+
         return view;
     }
 
@@ -86,6 +125,12 @@ public class TeamFragment extends Fragment {
         });
     }
 
+    public void doAddTeam(boolean result) {
+        if (result) {
+            mAdapter = new ListTeamAdapter(ListTeam.getInstance().getListTeam());
+            dialog.dismiss();
+        }
+    }
     public void doDeleteTeam(Boolean result, String message) {
         if (result) {
             mAdapter.notifyDataSetChanged();
