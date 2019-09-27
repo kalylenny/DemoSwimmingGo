@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -33,7 +34,7 @@ public class TeamFragment extends Fragment {
     private TeamPresenter teamPresenter;
     SwipeController swipeController = null;
 
-    public TeamFragment(){
+    public TeamFragment() {
 
     }
 
@@ -46,8 +47,8 @@ public class TeamFragment extends Fragment {
         return view;
     }
 
-    private void initDatabase(){
-        if (ListTeam.getInstance() == null){
+    private void initDatabase() {
+        if (ListTeam.getInstance() == null) {
             ListTeam.newInstance();
             teamPresenter.getListTeam();
         } else {
@@ -57,7 +58,7 @@ public class TeamFragment extends Fragment {
 
     public void setupRecyclerView() {
         mAdapter = new ListTeamAdapter(ListTeam.getInstance().getListTeam());
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
@@ -65,9 +66,12 @@ public class TeamFragment extends Fragment {
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
-                mAdapter.teams.remove(position);
-                mAdapter.notifyItemRemoved(position);
-                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+                teamPresenter.deleteTeam(position);
+            }
+
+            @Override
+            public void onLeftClicked(int position) {
+
             }
         });
 
@@ -81,5 +85,15 @@ public class TeamFragment extends Fragment {
             }
         });
     }
+
+    public void doDeleteTeam(Boolean result, String message) {
+        if (result) {
+            mAdapter.notifyDataSetChanged();
+        } else{
+            Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
 }

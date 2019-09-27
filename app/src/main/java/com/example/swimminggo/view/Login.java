@@ -21,7 +21,7 @@ import com.example.swimminggo.view.profile.EditProfile;
 public class Login extends AppCompatActivity {
 
     private LoginPresenter loginPresenter;
-    private TextView txtRegister;
+    private TextView txtRegister, txtForgotPassword;
     EditText edtUsername, edtPassword;
     Button btnLogin;
 
@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
         edtPassword = findViewById(R.id.edt_password);
 
         txtRegister = findViewById(R.id.txt_register);
-
+        txtForgotPassword = findViewById(R.id.txt_forgot_password);
     }
 
     private void action() {
@@ -57,6 +57,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Register.class));
+            }
+        });
+
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, ForgotPassword1.class));
             }
         });
     }
