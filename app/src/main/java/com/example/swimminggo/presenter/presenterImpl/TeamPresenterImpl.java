@@ -66,7 +66,7 @@ public class TeamPresenterImpl implements TeamPresenter {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if (response.getBoolean("success")){
+                            if (response.getBoolean("success")) {
                                 ListTeam.getInstance().getListTeam().remove(position);
                                 teamFragment.doDeleteTeam(true, "Xóa thành công");
                             } else {
@@ -85,35 +85,68 @@ public class TeamPresenterImpl implements TeamPresenter {
     }
 
     @Override
-    public int updateTeam(int teamId, Team team) {
-        return 0;
+    public void updateTeam(final int position, final Team team) {
+        if (team.getTeamName().equals("")) {
+            teamFragment.doEditTeam(false, "Tên nhóm không được trống");
+        } else {
+            JSONObject teamObject = teamObject(team);
+            AndroidNetworking.put(URLConstant.getInstance().getUrlEditTeam(team.getTeamID()))
+                    .addJSONObjectBody(teamObject)
+                    .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response.getBoolean("success")) {
+                                    ListTeam.getInstance().getListTeam().set(position, team);
+                                    teamFragment.doEditTeam(true, "Sửa thành công");
+                                } else {
+                                    teamFragment.doEditTeam(false, response.getString("message"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+        }
     }
 
     @Override
-    public boolean onAddTeam(final Team team) {
-        JSONObject teamObject = teamObject(team);
-        AndroidNetworking.post(URLConstant.getInstance().URL_ADD_TEAM)
-                .addJSONObjectBody(teamObject)
-                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
-                .build().getAsJSONObject(new JSONObjectRequestListener() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    if (response.getBoolean("success")) {
-                        ListTeam.getInstance().getListTeam().add(new Team(response.getJSONObject("team")));
-                        teamFragment.doAddTeam(true);
+    public void onAddTeam(final Team team) {
+        if (team.getTeamName().equals("")) {
+            teamFragment.doAddTeam(false, "Tên nhóm không được trống");
+        } else {
+            JSONObject teamObject = teamObject(team);
+            AndroidNetworking.post(URLConstant.getInstance().URL_ADD_TEAM)
+                    .addJSONObjectBody(teamObject)
+                    .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                    .build().getAsJSONObject(new JSONObjectRequestListener() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (response.getBoolean("success")) {
+                            ListTeam.getInstance().getListTeam().add(new Team(response.getJSONObject("team")));
+                            teamFragment.doAddTeam(true, "Sửa thành công");
+                        } else {
+                            teamFragment.doAddTeam(false, response.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
 
-            @Override
-            public void onError(ANError anError) {
+                @Override
+                public void onError(ANError anError) {
 
-            }
-        });
-        return true;
+                }
+            });
+        }
     }
 
     private JSONObject teamObject(Team team) {
