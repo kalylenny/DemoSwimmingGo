@@ -42,7 +42,7 @@
 
             android:textColorHint="@color/colorGray"
             android:hint="Tên nhóm"
-            android:id="@+id/edt_username"
+            android:id="@+id/edt_team_name"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:drawableRight="@drawable/ic_team" />
@@ -70,6 +70,7 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spn_age"
                 android:paddingRight="50dp"
                 android:autofillHints="Độ tuổi"
                 android:layout_width="match_parent"
@@ -97,7 +98,7 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/btn_add_team"
+                android:id="@+id/btn_edit_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_login_border"

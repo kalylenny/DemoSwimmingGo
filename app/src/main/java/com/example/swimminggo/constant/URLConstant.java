@@ -41,4 +41,8 @@ public class URLConstant {
     public String getUrlDeleteTeam(int teamId) {
         return mainUrl + "/api/team/delete/" + teamId;
     }
+
+    public String getUrlEditTeam(int teamId){
+        return mainUrl + "/api/team/edit/" + teamId;
+    }
 }
