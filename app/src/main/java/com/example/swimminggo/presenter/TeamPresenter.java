@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TeamPresenter {
     void getListTeam();
-    Team getTeamById(int teamId);
-    int deleteTeam(int teamId);
+    Team getTeamById(int position);
+    void deleteTeam(int teamId);
     int updateTeam(int teamId, Team team);
 }

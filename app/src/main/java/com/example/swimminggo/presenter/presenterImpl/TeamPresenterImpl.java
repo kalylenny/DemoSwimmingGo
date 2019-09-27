@@ -63,8 +63,31 @@ public class TeamPresenterImpl implements TeamPresenter {
     }
 
     @Override
-    public int deleteTeam(int teamId) {
-        return 0;
+    public void deleteTeam(final int position) {
+        Team teamOnDelete = ListTeam.getInstance().getListTeam().get(position);
+        AndroidNetworking.get(URLConstant.getInstance().getUrlDeleteTeam(teamOnDelete.getTeamID()))
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getBoolean("success")){
+                                ListTeam.getInstance().getListTeam().remove(position);
+                                teamFragment.doDeleteTeam(true, "Xóa thành công");
+                            } else {
+                                teamFragment.doDeleteTeam(false, "Lỗi");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
     }
     @Override
     public int updateTeam(int teamId, Team team) {

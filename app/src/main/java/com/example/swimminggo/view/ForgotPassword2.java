@@ -45,10 +45,10 @@ public class ForgotPassword2 extends AppCompatActivity {
         });
     }
 
-    public void doSendOtp(Boolean result) {
+    public void doSendOtp(Boolean result, String otp) {
         if (result) {
             Intent intent = new Intent(ForgotPassword2.this, ForgotPassword3.class);
-            intent.putExtra("otp", edtOtp.getText().toString());
+            intent.putExtra("otp", otp);
             startActivity(intent);
         } else {
             Toast.makeText(this, "Mã OTP không chính xác", Toast.LENGTH_SHORT).show();

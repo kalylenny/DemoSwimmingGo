@@ -19,13 +19,13 @@ public class ForgotPasswordPresenterImpl2 implements ForgotPasswordPresenter2 {
     }
     @Override
     public void onSendOtp(String otp) {
-        AndroidNetworking.get(URLConstant.getInstance().getOTPUrl(otp))
+        AndroidNetworking.get(URLConstant.getInstance().getUrlCheckOtp(otp))
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try{
-                            forgotPassword2.doSendOtp(response.getBoolean("success"));
+                            forgotPassword2.doSendOtp(response.getBoolean("success"), response.getString("otp"));
                         }catch(Exception e){
 
                         }

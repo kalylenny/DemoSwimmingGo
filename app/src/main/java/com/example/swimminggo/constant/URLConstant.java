@@ -8,6 +8,7 @@ public class URLConstant {
     public String URL_FORGOT_PASSWORD = mainUrl + "/api/password/forgot";
     public String URL_CHANGE_PASSWORD = mainUrl + "/api/password/change";
     public String URL_TEAM = mainUrl + "/api/team";
+    public String URL_AGE = mainUrl + "/api/public/age";
     private static URLConstant ourInstance;
 
     public static URLConstant getInstance() {
@@ -33,5 +34,9 @@ public class URLConstant {
     }
 
     private URLConstant() {
+    }
+
+    public String getUrlDeleteTeam(int teamId) {
+        return mainUrl + "/api/team/delete/" + teamId;
     }
 }
