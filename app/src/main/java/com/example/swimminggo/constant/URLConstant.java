@@ -10,6 +10,7 @@ public class URLConstant {
     public String URL_TEAM = mainUrl + "/api/team";
     public String URL_AGE = mainUrl + "/api/public/age";
     private static URLConstant ourInstance;
+    public String URL_ADD_TEAM = mainUrl + "/api/team/add";
 
     public static URLConstant getInstance() {
         if (ourInstance == null)
@@ -32,6 +33,7 @@ public class URLConstant {
     public String getOTPUrl(String email){
         return URL_GET_OTP + email;
     }
+
 
     private URLConstant() {
     }

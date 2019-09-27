@@ -1,7 +1,5 @@
 package com.example.swimminggo.presenter.presenterImpl;
 
-import android.view.View;
-
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
@@ -16,15 +14,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 public class TeamPresenterImpl implements TeamPresenter {
 
     TeamFragment teamFragment;
 
-    public TeamPresenterImpl(TeamFragment teamFragment){
+    public TeamPresenterImpl(TeamFragment teamFragment) {
         this.teamFragment = teamFragment;
         AndroidNetworking.initialize(teamFragment.getContext());
     }
@@ -38,9 +32,9 @@ public class TeamPresenterImpl implements TeamPresenter {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if (response.getBoolean("success")){
+                            if (response.getBoolean("success")) {
                                 JSONArray list = response.getJSONArray("team");
-                                for(int i = 0; i < list.length(); i++){
+                                for (int i = 0; i < list.length(); i++) {
                                     ListTeam.getInstance().getListTeam().add(new Team(list.getJSONObject(i)));
                                 }
                                 teamFragment.setupRecyclerView();
@@ -89,8 +83,46 @@ public class TeamPresenterImpl implements TeamPresenter {
                     }
                 });
     }
+
     @Override
     public int updateTeam(int teamId, Team team) {
         return 0;
+    }
+
+    @Override
+    public boolean onAddTeam(final Team team) {
+        JSONObject teamObject = teamObject(team);
+        AndroidNetworking.post(URLConstant.getInstance().URL_ADD_TEAM)
+                .addJSONObjectBody(teamObject)
+                .build().getAsJSONObject(new JSONObjectRequestListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getBoolean("success")) {
+                        ListTeam.getInstance().getListTeam().add(new Team(response.getJSONObject("team")));
+                        teamFragment.doAddTeam(true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(ANError anError) {
+
+            }
+        });
+        return true;
+    }
+
+    private JSONObject teamObject(Team team) {
+        JSONObject result = new JSONObject();
+        try {
+            result.put("team_name", team.getTeamName());
+            result.put("team_age", team.getTeamAge());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

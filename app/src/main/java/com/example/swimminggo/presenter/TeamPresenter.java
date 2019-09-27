@@ -9,4 +9,5 @@ public interface TeamPresenter {
     Team getTeamById(int position);
     void deleteTeam(int teamId);
     int updateTeam(int teamId, Team team);
+    boolean onAddTeam(Team team);
 }
