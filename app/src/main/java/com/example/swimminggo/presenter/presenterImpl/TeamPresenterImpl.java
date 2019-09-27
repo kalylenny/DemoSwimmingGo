@@ -59,7 +59,7 @@ public class TeamPresenterImpl implements TeamPresenter {
     @Override
     public void deleteTeam(final int position) {
         Team teamOnDelete = ListTeam.getInstance().getListTeam().get(position);
-        AndroidNetworking.get(URLConstant.getInstance().getUrlDeleteTeam(teamOnDelete.getTeamID()))
+        AndroidNetworking.delete(URLConstant.getInstance().getUrlDeleteTeam(teamOnDelete.getTeamID()))
                 .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -94,6 +94,7 @@ public class TeamPresenterImpl implements TeamPresenter {
         JSONObject teamObject = teamObject(team);
         AndroidNetworking.post(URLConstant.getInstance().URL_ADD_TEAM)
                 .addJSONObjectBody(teamObject)
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
                 .build().getAsJSONObject(new JSONObjectRequestListener() {
             @Override
             public void onResponse(JSONObject response) {
