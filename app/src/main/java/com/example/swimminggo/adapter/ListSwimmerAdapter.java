@@ -29,8 +29,8 @@ public class ListSwimmerAdapter extends RecyclerView.Adapter<ListSwimmerAdapter.
     @Override
     public void onBindViewHolder(@NonNull SwimmerViewHolder holder, int position) {
         Swimmer swimmer = swimmers.get(position);
-        holder.swimmerName.setText(swimmer.getName());
-        holder.swimmerAge.setText(swimmer.getDob());
+        holder.swimmerName.setText(swimmer.getFullName());
+        holder.swimmerAge.setText(swimmer.getAge()+"");
     }
 
     @Override

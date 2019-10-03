@@ -3,9 +3,10 @@ package com.example.swimminggo.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Team {
+public class Team implements Serializable {
 
     private int teamID;
     private int coachID;

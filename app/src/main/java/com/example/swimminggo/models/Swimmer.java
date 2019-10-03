@@ -19,8 +19,9 @@ public class Swimmer extends User {
         this.parent_phone = parentPhone;
     }
 
-
-
+    public Swimmer(JSONObject swimmerObject){
+        super(swimmerObject);
+    }
 
     public String getParent_name() {
         return parent_name;
