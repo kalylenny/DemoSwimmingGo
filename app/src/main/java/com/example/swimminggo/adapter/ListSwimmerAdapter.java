@@ -3,6 +3,8 @@ package com.example.swimminggo.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.models.Swimmer;
+import com.example.swimminggo.singleton.ListSwimmer;
 
 import java.util.List;
 
@@ -27,10 +30,17 @@ public class ListSwimmerAdapter extends RecyclerView.Adapter<ListSwimmerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SwimmerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SwimmerViewHolder holder, final int position) {
         Swimmer swimmer = swimmers.get(position);
         holder.swimmerName.setText(swimmer.getFullName());
-        holder.swimmerAge.setText(swimmer.getAge()+"");
+        holder.swimmerAge.setText(swimmer.getAge() + "");
+        holder.checkBox.setChecked(ListSwimmer.getInstance().isCheckeds.get(position));
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ListSwimmer.getInstance().isCheckeds.set(position, isChecked);
+            }
+        });
     }
 
     @Override
@@ -40,14 +50,17 @@ public class ListSwimmerAdapter extends RecyclerView.Adapter<ListSwimmerAdapter.
 
     public class SwimmerViewHolder extends RecyclerView.ViewHolder {
         private TextView swimmerName, swimmerAge;
+        private CheckBox checkBox;
 
         public SwimmerViewHolder(View view) {
             super(view);
             swimmerName = (TextView) view.findViewById(R.id.name);
             swimmerAge = (TextView) view.findViewById(R.id.age);
+            checkBox = view.findViewById(R.id.checkBox);
         }
     }
+
     public ListSwimmerAdapter(List<Swimmer> swimmers) {
-        this.swimmers=swimmers;
+        this.swimmers = swimmers;
     }
 }

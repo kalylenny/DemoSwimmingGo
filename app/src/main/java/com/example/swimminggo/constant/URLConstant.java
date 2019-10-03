@@ -25,19 +25,19 @@ public class URLConstant {
         return ourInstance;
     }
 
-    public String getMainUrl() {
+    public String getMainUrl(){
         return mainUrl;
     }
 
-    public String getEditProfileUrl(int userId) {
+    public String getEditProfileUrl(int userId){
         return mainUrl + "/api/account/edit/" + userId;
     }
 
-    public String getUrlCheckOtp(String otp) {
+    public String getUrlCheckOtp(String otp){
         return mainUrl + "/api/otp/check/" + otp;
     }
 
-    public String getOTPUrl(String email) {
+    public String getOTPUrl(String email){
         return URL_GET_OTP + email;
     }
 
@@ -49,7 +49,7 @@ public class URLConstant {
         return mainUrl + "/api/team/delete/" + teamId;
     }
 
-    public String getUrlEditTeam(int teamId) {
+    public String getUrlEditTeam(int teamId){
         return mainUrl + "/api/team/edit/" + teamId;
     }
 
@@ -67,5 +67,9 @@ public class URLConstant {
 
     public String getUrlAddSwimmerNoTeam(int teamId) {
         return mainUrl + "/api/swimmer/addnoteam/" + teamId;
+    }
+
+    public String getUrlRemoveSwimmerFromTeam(int teamId){
+        return mainUrl + "/api/team/swimmer/" + teamId;
     }
 }
