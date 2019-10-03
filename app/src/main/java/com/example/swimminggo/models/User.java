@@ -1,11 +1,13 @@
 package com.example.swimminggo.models;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class User {
     private String username, dob, email, firstName, lastName, phone, roleName;
     private int gender, id;
     private int isVerified;
+    private int age;
 
     public User(){
         username = dob = email = firstName = lastName = phone = "";
@@ -21,6 +23,32 @@ public abstract class User {
         this.id = id;
         this.roleName = roleName;
         this.isVerified = isVerified;
+    }
+
+    public User(JSONObject userObject){
+        try {
+            this.dob = userObject.getString("dob");
+            this.email = userObject.getString("email");
+            this.firstName = userObject.getString("first_name");
+            this.gender = userObject.getInt("gender");
+            this.id = userObject.getInt("id");
+            this.isVerified = userObject.getInt("is_verified");
+            this.lastName = userObject.getString("last_name");
+            this.phone = userObject.getString("phone");
+            this.roleName = userObject.getString("role_name");
+            this.username = userObject.getString("username");
+            this.age = userObject.getInt("age");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getUsername() {
@@ -57,10 +85,6 @@ public abstract class User {
 
     public String getRoleName() {
         return roleName;
-    }
-
-    public String getName(){
-        return firstName + " " + lastName;
     }
 
     public void setUsername(String username){
