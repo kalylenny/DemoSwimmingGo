@@ -6,6 +6,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.swimminggo.constant.URLConstant;
 import com.example.swimminggo.models.Swimmer;
 import com.example.swimminggo.presenter.SwimmerPresenter;
+import com.example.swimminggo.singleton.ListSwimmer;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.coach.AddSwimmer;
 
@@ -35,12 +36,13 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getBoolean("success")){
-                                List<Swimmer> swimmers = new ArrayList<>();
+                                ListSwimmer.newInstance();
                                 JSONArray swimmerJSONArray = response.getJSONArray("swimmers");
                                 for(int i = 0; i < swimmerJSONArray.length(); i++){
-                                    swimmers.add(new Swimmer(swimmerJSONArray.getJSONObject(i)));
+                                    ListSwimmer.getInstance().swimmers.add(new Swimmer(swimmerJSONArray.getJSONObject(i)));
+                                    ListSwimmer.getInstance().isCheckeds.add(false);
                                 }
-                                swimmer.setListTeamAdapter(swimmers);
+                                swimmer.setListTeamAdapter(ListSwimmer.getInstance().swimmers);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -53,4 +55,45 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
                     }
                 });
     }
+
+    @Override
+    public void onRemoveSwimmersFromTeam(int teamId, final List<Integer> positions) {
+        JSONObject swimmerIds = swimmerJSONIds(positions);
+        AndroidNetworking.delete(URLConstant.getInstance().getUrlRemoveSwimmerFromTeam(teamId))
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .addJSONObjectBody(swimmerIds)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getBoolean("success")){
+                                swimmer.doRemoveSwimmer(positions);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+    }
+
+    private JSONObject swimmerJSONIds(List<Integer> positions){
+        JSONArray jsonArray = new JSONArray();
+        JSONObject result = new JSONObject();
+        for(Integer position : positions){
+            jsonArray.put(ListSwimmer.getInstance().swimmers.get(position).getId());
+        }
+        try {
+            result.put("swimmer_ids", jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

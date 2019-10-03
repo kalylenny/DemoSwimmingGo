@@ -1,6 +1,8 @@
 package com.example.swimminggo.presenter;
 
-public interface SwimmerPresenter {
+import java.util.List;
 
+public interface SwimmerPresenter {
     void onGetListSwimmerByTeamId(int teamId);
+    void onRemoveSwimmersFromTeam(int teamId, List<Integer> positions);
 }

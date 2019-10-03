@@ -49,4 +49,8 @@ public class URLConstant {
     public String getUrlGetListSwimmer(int teamId){
         return mainUrl + "/api/swimmer/list/" + teamId;
     }
+
+    public String getUrlRemoveSwimmerFromTeam(int teamId){
+        return mainUrl + "/api/team/swimmer/" + teamId;
+    }
 }
