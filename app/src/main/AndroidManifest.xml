@@ -10,7 +10,11 @@
         android:roundIcon="@drawable/logo_swimminggo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.profile.ViewProfile"></activity>
+        <activity android:name=".view.coach.Record"></activity>
+        <activity android:name=".view.coach.CreateLessonPlan" />
+        <activity android:name=".view.coach.CreateLesson" />
+        <activity android:name=".view.coach.CreateExercise" />
+        <activity android:name=".view.profile.ViewProfile" />
         <activity android:name=".view.coach.AddAvailableSwimmer" />
         <activity android:name=".view.coach.AddNewSwimmer" />
         <activity android:name=".view.coach.AddSwimmer" />
