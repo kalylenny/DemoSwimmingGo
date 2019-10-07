@@ -32,7 +32,6 @@ public class AddAvailableSwimmer extends AppCompatActivity {
 
     private void setupRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(AddAvailableSwimmer.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
     }

@@ -6,6 +6,9 @@
     android:background="@color/colorWhite"
     tools:context=".view.coach.fragment.TeamFragment">
 
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

@@ -51,7 +51,6 @@ public class AddSwimmer extends AppCompatActivity {
 
     private void initDatabase(){
         currentTeam = (Team) getIntent().getSerializableExtra("team");
-
         txtTeamName.setText(currentTeam.getTeamName());
         txtTeamAge.setText("Độ tuổi :" + currentTeam.getTeamAge());
         swimmerPresenter.onGetListSwimmerByTeamId(currentTeam.getTeamID());
