@@ -26,38 +26,38 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:paddingTop="10dp"
-            android:layout_weight="7"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:paddingTop="10dp">
 
             <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                 android:id="@+id/number_button"
-                android:paddingRight="100dp"
-                android:paddingLeft="100dp"
-                app:backGroundColor="@color/colorBlue"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:paddingLeft="100dp"
+                android:paddingRight="100dp"
+                app:backGroundColor="@color/colorBlue" />
         </LinearLayout>
 
         <LinearLayout
-            android:paddingTop="10dp"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="10dp">
 
             <Button
-                android:background="@drawable/button_login_border"
-                android:id="@+id/btn_createaccount"
-                android:text="Tạo"
-                android:textColor="@color/colorWhite"
+                android:id="@+id/btn_create_account"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_login_border"
+                android:text="Tạo"
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
 
@@ -67,36 +67,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingTop="10sp"
         android:weightSum="7">
+
         <ListView
             android:id="@+id/lv_swimmer"
-            android:layout_weight="6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:dividerHeight="2px">
-        </ListView>
+            android:layout_weight="6"
+            android:dividerHeight="2px"></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginBottom="10sp"
             android:gravity="center">
+
             <Button
                 android:id="@+id/btn_finish"
-                android:background="@drawable/button_login_border"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:text="Xong"/>
+                android:background="@drawable/button_login_border"
+                android:text="Xong"
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
     </LinearLayout>
-
-
-
-
-
-
-
 
 
 </LinearLayout>
