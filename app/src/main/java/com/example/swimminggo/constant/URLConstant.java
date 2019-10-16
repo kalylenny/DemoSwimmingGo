@@ -11,6 +11,10 @@ public class URLConstant {
     public String URL_TEAM = mainUrl + "/api/team";
     public String URL_AGE = mainUrl + "/api/public/age";
     public String URL_ADD_TEAM = mainUrl + "/api/team/add";
+    public String URL_GET_PHASES = mainUrl + "/api/public/phase";
+    public String URL_GET_STYLES = mainUrl + "/api/public/style";
+    public String URL_GET_DISNTACES = mainUrl + "/api/public/distance";
+    public String URL_CREATE_EXERCISE = mainUrl + "/api/exercise/create";
 
     public static URLConstant getInstance() {
         if (ourInstance == null)

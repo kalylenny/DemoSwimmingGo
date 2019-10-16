@@ -12,6 +12,11 @@
     <color name="colorYellow">#F8E254</color>
     <color name="colorTextView">#DFE9FD</color>
     <color name="colorTextBlue">#74b9ff</color>
+    <color name="colorBlue1">#00BCD4</color>
+    <color name="colorBlue2">#03A9F4</color>
+    <color name="colorBlue3">#2196F3</color>
+    <color name="colorBlue4">#2074B9</color>
+
 
 
 </resources>

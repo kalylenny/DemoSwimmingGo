@@ -34,6 +34,25 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
+            <TextView
+                android:textColor="@color/colorGray"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="40dp"
+                android:textSize="17sp"
+                android:text="Giai đoạn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:paddingRight="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spn_phase"
+                    android:paddingRight="50dp"
+                    android:autofillHints="Độ tuổi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
@@ -116,9 +135,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp">
             <Button
+                android:id="@+id/btn_create"
                 android:text="Tạo"
                 android:background="@drawable/button_login_border"
                 android:layout_width="wrap_content"
+                android:textColor="@color/colorWhite"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
