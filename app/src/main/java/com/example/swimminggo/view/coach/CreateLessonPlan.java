@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.PageAdapter;
@@ -26,6 +27,7 @@ public class CreateLessonPlan extends AppCompatActivity {
     PageAdapter pageAdapter;
     TabItem tabAvailable;
     TabItem tabNew;
+    TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class CreateLessonPlan extends AppCompatActivity {
     }
 
     private void actionCalendar() {
+        date = (TextView) findViewById(R.id.date);
         btn_calendar = (Button) findViewById(R.id.btn_calendar);
         btn_calendar.setOnClickListener(new View.OnClickListener() {
             Calendar calendar = Calendar.getInstance();
@@ -76,7 +79,7 @@ public class CreateLessonPlan extends AppCompatActivity {
                     @Override
 
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
+                        date.setText(day + "/" + (month+1) + "/" + year);
                     }
                 },year,month,dayOfMonth);
                 datePickerDialog.show();

@@ -7,7 +7,27 @@
     android:orientation="vertical"
     android:weightSum="8"
     tools:context=".view.coach.CreateLessonPlan">
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_profile_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="5sp">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tạo giáo án"
+            android:textColor="@color/colorWhite"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:gravity="center"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -17,6 +37,12 @@
             android:text="Chọn ngày"
             android:background="@drawable/button_login_border"
             android:id="@+id/btn_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/date"
+            android:paddingLeft="30dp"
+            android:text="20/10/2019"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

@@ -9,6 +9,24 @@
     tools:context=".view.coach.fragment.LessonNewFragment">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_profile_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="5sp">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tạo bài học mới"
+            android:textColor="@color/colorWhite"
+            android:textSize="26sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:gravity="center"
         android:orientation="vertical"
         android:layout_weight="1"
@@ -38,6 +56,7 @@
         android:layout_height="0dp">
 
         <LinearLayout
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -49,12 +68,20 @@
                 android:paddingLeft="80dp"
                 android:drawableLeft="@drawable/ic_warmup"
                 android:background="@color/colorWhite"
-                android:text="Khởi động"
+                android:text="Warm up"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+            <View
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray" />
+
 
         </LinearLayout>
         <LinearLayout
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -64,35 +91,65 @@
                 android:textAllCaps="false"
                 android:paddingRight="50dp"
                 android:paddingLeft="80dp"
-                android:drawableLeft="@drawable/ic_warmup"
+                android:drawableLeft="@drawable/ic_mainswim"
                 android:background="@color/colorWhite"
-                android:text="Bơi chính"
+                android:text="Main stroke"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+            <View
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray" />
 
         </LinearLayout>
         <LinearLayout
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <Button
-                android:text="Bài tập phụ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textAllCaps="false"
+                android:paddingRight="50dp"
+                android:paddingLeft="80dp"
+                android:drawableLeft="@drawable/ic_finalswim"
+                android:background="@color/colorWhite"
+                android:text="Final set"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <View
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray" />
 
         </LinearLayout>
         <LinearLayout
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <Button
-                android:text="Thả lỏng"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textAllCaps="false"
+                android:paddingRight="50dp"
+                android:paddingLeft="80dp"
+                android:drawableLeft="@drawable/ic_relax"
+                android:background="@color/colorWhite"
+                android:text="Swim down"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <View
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray" />
 
         </LinearLayout>
     </LinearLayout>

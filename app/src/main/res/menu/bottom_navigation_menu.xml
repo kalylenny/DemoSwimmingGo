@@ -16,9 +16,9 @@
         android:title="Thư viện"
         />
     <item
-        android:id="@+id/item_diary"
-        android:icon="@drawable/icon_diary"
-        android:title="Nhật ký"
+        android:id="@+id/item_chart"
+        android:icon="@drawable/ic_chart"
+        android:title="Thống kê"
         />
     <item
         android:id="@+id/item_setting"
