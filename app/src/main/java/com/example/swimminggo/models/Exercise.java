@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 public class Exercise {
     private int id;
-    private String name;
     private String styleId;
     private int distance;
     private int rep;
@@ -21,7 +20,6 @@ public class Exercise {
     public Exercise(JSONObject jsonObject){
         try {
             this.id = jsonObject.getInt("id");
-            this.name = jsonObject.getString("name");
             this.styleId = jsonObject.getString("style_id");
             this.distance = jsonObject.getInt("distance_num");
             this.rep = jsonObject.getInt("repetition");
@@ -56,14 +54,6 @@ public class Exercise {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getStyleId() {

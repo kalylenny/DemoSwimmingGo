@@ -63,9 +63,9 @@ public class CreateExercise extends AppCompatActivity {
 
 
     public void initDatabase() {
-        exercisePresenter.onGetPhases();
-        exercisePresenter.onGetDistances();
-        exercisePresenter.onGetStyles();
+        setupDistance();
+        setupPhase();
+        setupStyle();
         setupRep();
     }
 

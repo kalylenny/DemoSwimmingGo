@@ -15,6 +15,8 @@ public class URLConstant {
     public String URL_GET_STYLES = mainUrl + "/api/public/style";
     public String URL_GET_DISNTACES = mainUrl + "/api/public/distance";
     public String URL_CREATE_EXERCISE = mainUrl + "/api/exercise/create";
+    public String URL_GET_EXERCISE = mainUrl + "/api/exercise/get";
+    public String URL_CREATE_LESSON = mainUrl + "/api/lesson/create";
 
     public static URLConstant getInstance() {
         if (ourInstance == null)
