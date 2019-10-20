@@ -26,7 +26,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:weightSum="6"
+        android:weightSum="5"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,13 +37,14 @@
             <TextView
                 android:textColor="@color/colorGray"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="40dp"
+                android:paddingLeft="30dp"
                 android:textSize="17sp"
                 android:text="Giai đoạn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <LinearLayout
-                android:paddingRight="40dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatSpinner
@@ -62,13 +63,14 @@
             <TextView
                 android:textColor="@color/colorGray"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="40dp"
+                android:paddingLeft="30dp"
                 android:textSize="17sp"
                 android:text="Kiểu bơi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <LinearLayout
-                android:paddingRight="40dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatSpinner
@@ -87,13 +89,14 @@
             <TextView
                 android:textColor="@color/colorGray"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="40dp"
+                android:paddingLeft="30dp"
                 android:textSize="17sp"
                 android:text="Khoảng cách"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <LinearLayout
-                android:paddingRight="40dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatSpinner
@@ -112,13 +115,14 @@
             <TextView
                 android:textColor="@color/colorGray"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="40dp"
+                android:paddingLeft="30dp"
                 android:textSize="17sp"
                 android:text="Lần lặp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <LinearLayout
-                android:paddingRight="40dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <androidx.appcompat.widget.AppCompatSpinner
