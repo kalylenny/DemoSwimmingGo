@@ -128,10 +128,7 @@ public class AddSwimmer extends AppCompatActivity {
     }
 
     public void doRemoveSwimmer(List<Integer> positions) {
-        for (Integer position : positions) {
-            ListSwimmer.getInstance().swimmers.remove(position);
-        }
-        setListTeamAdapter(ListSwimmer.getInstance().swimmers);
+        swimmerPresenter.onGetListSwimmerByTeamId(currentTeam.getTeamID());
     }
 
 }

@@ -70,6 +70,6 @@ public class URLConstant {
     }
 
     public String getUrlRemoveSwimmerFromTeam(int teamId){
-        return mainUrl + "/api/team/swimmer/" + teamId;
+        return mainUrl + "/api/swimmer/tonoteam/" + teamId;
     }
 }

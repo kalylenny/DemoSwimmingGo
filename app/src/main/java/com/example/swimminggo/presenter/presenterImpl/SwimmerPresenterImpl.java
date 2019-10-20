@@ -28,9 +28,21 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
     private AddAvailableSwimmer addAvailableSwimmer;
     private Team currentTeam;
 
-    public SwimmerPresenterImpl(AddSwimmer swimmer){
+    public SwimmerPresenterImpl(AddSwimmer swimmer) {
         this.swimmer = swimmer;
         AndroidNetworking.initialize(swimmer.getApplicationContext());
+    }
+
+    public SwimmerPresenterImpl(AddNewSwimmer addNewSwimmer) {
+        this.addNewSwimmer = addNewSwimmer;
+        this.currentTeam = (Team) addNewSwimmer.getIntent().getSerializableExtra("team");
+        AndroidNetworking.initialize(addNewSwimmer.getApplicationContext());
+    }
+
+    public SwimmerPresenterImpl(AddAvailableSwimmer addAvailableSwimmer) {
+        this.addAvailableSwimmer = addAvailableSwimmer;
+        this.currentTeam = (Team) addAvailableSwimmer.getIntent().getSerializableExtra("team");
+        AndroidNetworking.initialize(addAvailableSwimmer.getApplicationContext());
     }
 
     @Override
@@ -42,10 +54,10 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if (response.getBoolean("success")){
+                            if (response.getBoolean("success")) {
                                 ListSwimmer.newInstance();
                                 JSONArray swimmerJSONArray = response.getJSONArray("swimmers");
-                                for(int i = 0; i < swimmerJSONArray.length(); i++){
+                                for (int i = 0; i < swimmerJSONArray.length(); i++) {
                                     ListSwimmer.getInstance().swimmers.add(new Swimmer(swimmerJSONArray.getJSONObject(i)));
                                     ListSwimmer.getInstance().isCheckeds.add(false);
                                 }
@@ -66,7 +78,7 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
     @Override
     public void onRemoveSwimmersFromTeam(int teamId, final List<Integer> positions) {
         JSONObject swimmerIds = swimmerJSONIds(positions);
-        AndroidNetworking.delete(URLConstant.getInstance().getUrlRemoveSwimmerFromTeam(teamId))
+        AndroidNetworking.put(URLConstant.getInstance().getUrlRemoveSwimmerFromTeam(teamId))
                 .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
                 .addJSONObjectBody(swimmerIds)
                 .build()
@@ -74,7 +86,7 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if (response.getBoolean("success")){
+                            if (response.getBoolean("success")) {
                                 swimmer.doRemoveSwimmer(positions);
                             }
                         } catch (JSONException e) {
@@ -89,14 +101,16 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
                 });
     }
 
-    private JSONObject swimmerJSONIds(List<Integer> positions){
+    private JSONObject swimmerJSONIds(List<Integer> positions) {
         JSONArray jsonArray = new JSONArray();
         JSONObject result = new JSONObject();
-        for(Integer position : positions){
-            jsonArray.put(ListSwimmer.getInstance().swimmers.get(position).getId());
-        }
         try {
-            result.put("swimmer_ids", jsonArray);
+            for (Integer position : positions) {
+                JSONObject id = new JSONObject();
+                id.put("id", ListSwimmer.getInstance().swimmers.get(position).getId());
+                jsonArray.put(id);
+            }
+            result.put("swimmers", jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
