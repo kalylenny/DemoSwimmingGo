@@ -81,6 +81,7 @@ public class AddSwimmer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddSwimmer.this, AddAvailableSwimmer.class);
+                intent.putExtra("team", currentTeam);
                 startActivity(intent);
             }
         });

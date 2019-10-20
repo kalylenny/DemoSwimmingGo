@@ -9,6 +9,7 @@ import com.example.swimminggo.models.Swimmer;
 import com.example.swimminggo.models.Team;
 import com.example.swimminggo.presenter.SwimmerPresenter;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.coach.AddAvailableSwimmer;
 import com.example.swimminggo.view.coach.AddNewSwimmer;
 import com.example.swimminggo.view.coach.AddSwimmer;
 
@@ -23,6 +24,7 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
 
     private AddSwimmer swimmer;
     private AddNewSwimmer addNewSwimmer;
+    private AddAvailableSwimmer addAvailableSwimmer;
     private Team currentTeam;
 
     public SwimmerPresenterImpl(AddSwimmer swimmer) {
@@ -34,6 +36,12 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
         this.addNewSwimmer = addNewSwimmer;
         this.currentTeam = (Team) addNewSwimmer.getIntent().getSerializableExtra("team");
         AndroidNetworking.initialize(addNewSwimmer.getApplicationContext());
+    }
+
+    public SwimmerPresenterImpl(AddAvailableSwimmer addAvailableSwimmer) {
+        this.addAvailableSwimmer = addAvailableSwimmer;
+        this.currentTeam = (Team) addAvailableSwimmer.getIntent().getSerializableExtra("team");
+        AndroidNetworking.initialize(addAvailableSwimmer.getApplicationContext());
     }
 
     @Override
@@ -95,6 +103,35 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
     }
 
     @Override
+    public void onGetListSwimmerNoTeam() {
+        List<Swimmer> swimmers = new ArrayList<>();
+        AndroidNetworking.get(URLConstant.getInstance().URL_GET_SWIMMER_NOTEAM)
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getBoolean("success")) {
+                                JSONArray swimmerJSONs = response.getJSONArray("swimmers");
+                                for (int i = 0; i < swimmerJSONs.length(); i++) {
+                                    swimmers.add(new Swimmer(swimmerJSONs.getJSONObject(i)));
+                                }
+                                addAvailableSwimmer.setListTeamAdapter(swimmers);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+    }
+
+    @Override
     public void onAddNewSwimmer(List<Account> accounts) {
         JSONObject accountObjects = addAccountObjects(accounts);
         AndroidNetworking.post(URLConstant.getInstance().getUrlAddSwimmer(currentTeam.getTeamID()))
@@ -105,7 +142,7 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if (response.getBoolean("success")){
+                            if (response.getBoolean("success")) {
                                 addNewSwimmer.doAddSwimmer(true, "Success");
                             } else {
                                 addNewSwimmer.doAddSwimmer(false, "False");
@@ -120,6 +157,50 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
 
                     }
                 });
+    }
+
+    @Override
+    public void onAddSwimmerToTeam(List<Swimmer> swimmers) {
+        JSONObject swimmerJSONs = addSwimmerObjects(swimmers);
+        AndroidNetworking.post(URLConstant.getInstance().getUrlAddSwimmerNoTeam(currentTeam.getTeamID()))
+                .addJSONObjectBody(swimmerJSONs)
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getBoolean("success")){
+                                addAvailableSwimmer.doAddSwimmerToTeam(true, "Success");
+                            } else {
+                                addAvailableSwimmer.doAddSwimmerToTeam(false, "False");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+    }
+
+    private JSONObject addSwimmerObjects(List<Swimmer> swimmers) {
+        JSONObject result = new JSONObject();
+        JSONArray swimmerJSONs = new JSONArray();
+        try {
+            for(Swimmer swimmer : swimmers){
+                JSONObject id = new JSONObject();
+                id.put("id", swimmer.getId());
+                swimmerJSONs.put(id);
+            }
+            result.put("swimmers", swimmerJSONs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     private JSONObject addAccountObjects(List<Account> accounts) {

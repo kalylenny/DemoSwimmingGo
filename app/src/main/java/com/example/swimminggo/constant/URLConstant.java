@@ -17,6 +17,7 @@ public class URLConstant {
     public String URL_CREATE_EXERCISE = mainUrl + "/api/exercise/create";
     public String URL_GET_EXERCISE = mainUrl + "/api/exercise/get";
     public String URL_CREATE_LESSON = mainUrl + "/api/lesson/create";
+    public String URL_GET_SWIMMER_NOTEAM = mainUrl + "/api/swimmer/noteam";
 
     public static URLConstant getInstance() {
         if (ourInstance == null)
@@ -62,5 +63,9 @@ public class URLConstant {
 
     public String getUrlAddSwimmer(int teamId) {
         return mainUrl + "/api/swimmer/add/" + teamId;
+    }
+
+    public String getUrlAddSwimmerNoTeam(int teamId) {
+        return mainUrl + "api/swimmer/add" + teamId;
     }
 }
