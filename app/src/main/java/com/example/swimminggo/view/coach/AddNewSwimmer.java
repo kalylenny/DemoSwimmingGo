@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.swimminggo.R;
 import com.example.swimminggo.models.Account;
+import com.example.swimminggo.models.Team;
 import com.example.swimminggo.presenter.SwimmerPresenter;
 import com.example.swimminggo.presenter.presenterImpl.SwimmerPresenterImpl;
 
@@ -26,7 +27,7 @@ public class AddNewSwimmer extends AppCompatActivity {
     Button btnFinish, btnCreateAccount;
     SwimmerPresenter swimmerPresenter;
     List<Account> swimmerAccounts;
-
+    Team team;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,9 @@ public class AddNewSwimmer extends AppCompatActivity {
     }
 
     private void initComponent() {
+        team = (Team) getIntent().getSerializableExtra("team");
         swimmerPresenter = new SwimmerPresenterImpl(this);
-        listViewSwimmer = findViewById(R.id.list_swimmer);
+        listViewSwimmer = findViewById(R.id.lv_swimmer);
         numberButton = (ElegantNumberButton) findViewById(R.id.number_button);
 
         numberButton.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
@@ -49,7 +51,7 @@ public class AddNewSwimmer extends AppCompatActivity {
         numberButton.setRange(1, 10);
 
         btnFinish = findViewById(R.id.btn_finish);
-        btnCreateAccount = findViewById(R.id.btn_create_account);
+        btnCreateAccount = findViewById(R.id.btn_create_workout);
     }
 
     private void action() {
@@ -79,7 +81,9 @@ public class AddNewSwimmer extends AppCompatActivity {
 
     public void doAddSwimmer(Boolean result, String message) {
         if (result) {
-            startActivity(new Intent(AddNewSwimmer.this, AddNewSwimmer.class));
+            Intent intent = new Intent(AddNewSwimmer.this, AddSwimmer.class);
+            intent.putExtra("team", team);
+            startActivity(intent);
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
