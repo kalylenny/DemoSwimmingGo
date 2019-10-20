@@ -104,7 +104,7 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
 
     @Override
     public void onGetListSwimmerNoTeam() {
-        List<Swimmer> swimmers = new ArrayList<>();
+        final List<Swimmer> swimmers = new ArrayList<>();
         AndroidNetworking.get(URLConstant.getInstance().URL_GET_SWIMMER_NOTEAM)
                 .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
                 .build()

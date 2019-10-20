@@ -28,7 +28,7 @@ public class AddAvailableSwimmer extends AppCompatActivity {
     private SwimmerPresenter swimmerPresenter;
     private RecyclerView recyclerView;
     private Button btnAddSwimmer;
-    private List<Swimmer> swimmers;
+    private List<Swimmer> swimmers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +47,14 @@ public class AddAvailableSwimmer extends AppCompatActivity {
         swimmerPresenter.onGetListSwimmerNoTeam();
     }
 
-    private void action(){
+    private void action() {
         btnAddSwimmer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<Swimmer> checkSwimmers = new ArrayList<>();
                 List<Boolean> checkBoxs = ListCheckBoxSwimmer.getInstance().checkSwimmers;
-                for(int i = 0; i < checkBoxs.size(); i++)
-                    if (checkBoxs.get(i)){
+                for (int i = 0; i < checkBoxs.size(); i++)
+                    if (checkBoxs.get(i)) {
                         checkSwimmers.add(swimmers.get(i));
                     }
                 swimmerPresenter.onAddSwimmerToTeam(checkSwimmers);
@@ -63,9 +63,9 @@ public class AddAvailableSwimmer extends AppCompatActivity {
     }
 
     public void setListTeamAdapter(List<Swimmer> swimmers) {
-
+        ListCheckBoxSwimmer.newInstance();
+        this.swimmers = swimmers;
         for (Swimmer swimmer : swimmers) {
-            ListCheckBoxSwimmer.newInstance();
             ListCheckBoxSwimmer.getInstance().checkSwimmers.add(false);
         }
         mAdapter = new ListAvailableSwimmerAdapter(swimmers);
@@ -77,8 +77,8 @@ public class AddAvailableSwimmer extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
     }
 
-    public void doAddSwimmerToTeam(Boolean result, String message){
-        if (result){
+    public void doAddSwimmerToTeam(Boolean result, String message) {
+        if (result) {
             Intent intent = new Intent(AddAvailableSwimmer.this, AddSwimmer.class);
             intent.putExtra("team", team);
             startActivity(intent);
