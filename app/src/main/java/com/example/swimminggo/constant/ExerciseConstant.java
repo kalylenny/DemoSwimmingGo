@@ -15,9 +15,11 @@ public class ExerciseConstant {
     private List<Integer> reps;
 
     public static ExerciseConstant getInstance() {
-        if (ourInstance == null)
-            ourInstance = new ExerciseConstant();
         return ourInstance;
+    }
+
+    public static void newInstance(){
+        ourInstance = new ExerciseConstant();
     }
 
     private ExerciseConstant() {

@@ -10,6 +10,9 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.swimminggo.R;
+import com.example.swimminggo.constant.ExerciseConstant;
+import com.example.swimminggo.presenter.ExercisePresenter;
+import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
 import com.example.swimminggo.view.coach.CreateExercise;
 import com.example.swimminggo.view.coach.CreateLesson;
 import com.example.swimminggo.view.coach.CreateLessonPlan;
@@ -18,7 +21,8 @@ import com.example.swimminggo.view.coach.Record;
 public class WorkoutFragment extends Fragment {
     View view;
     Button btn_excercise, btn_lesson_plan, btn_record;
-    public WorkoutFragment(){
+
+    public WorkoutFragment() {
 
     }
 
@@ -27,10 +31,11 @@ public class WorkoutFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_workout, container, false);
         button();
+        initDatabase();
         return view;
     }
 
-    public void button(){
+    public void button() {
         btn_excercise = (Button) view.findViewById(R.id.create_exercise);
         btn_lesson_plan = (Button) view.findViewById(R.id.lesson_plan);
         btn_record = (Button) view.findViewById(R.id.record);
@@ -56,5 +61,15 @@ public class WorkoutFragment extends Fragment {
             }
         });
 
+    }
+
+    private void initDatabase() {
+        ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
+        if (ExerciseConstant.getInstance() == null) {
+            ExerciseConstant.newInstance();
+            exercisePresenter.onGetStyles();
+            exercisePresenter.onGetDistances();
+            exercisePresenter.onGetPhases();
+        }
     }
 }

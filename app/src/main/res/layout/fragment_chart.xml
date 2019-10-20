@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.coach.fragment.DiaryFragment"
+    tools:context=".view.coach.fragment.ChartFragment"
     android:gravity="center">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="diary"
+        android:text="chart"
         android:textSize="58sp"/>
 
 </LinearLayout>

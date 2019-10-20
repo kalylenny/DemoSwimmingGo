@@ -7,4 +7,5 @@ public interface ExercisePresenter {
     void onGetDistances();
     void onGetStyles();
     void onCreateExercise(Exercise exercise);
+    void onGetListExercise();
 }

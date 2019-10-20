@@ -11,16 +11,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.swimminggo.R;
 
-public class DiaryFragment extends Fragment {
+public class ChartFragment extends Fragment {
     View view;
-    public DiaryFragment(){
+    public ChartFragment(){
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_diary, container, false);
+        view = inflater.inflate(R.layout.fragment_chart, container, false);
         return view;
     }
 }

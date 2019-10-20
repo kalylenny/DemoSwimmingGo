@@ -3,114 +3,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10"
     android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:weightSum="6"
+    android:layout_gravity="center"
     tools:context=".view.coach.fragment.LessonNewFragment">
 
     <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tên bài học"
-                android:textColor="@color/colorGray" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edt_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:ems="11" />
+        <TextView
+            android:textColor="@color/colorGray"
+            android:text="Tên bài học"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edt_lesson_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="11"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:weightSum="4"
-        android:layout_weight="8"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:weightSum="4">
 
         <LinearLayout
-            android:gravity="center"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <Button
+                android:id="@+id/btn_warm_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:drawableLeft="@drawable/ic_warmup32"
+                android:paddingLeft="80dp"
+                android:paddingRight="50dp"
+                android:text="Warm up"
+                android:textAllCaps="false" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/btn_main_stroke"
                 android:textAllCaps="false"
                 android:paddingRight="50dp"
                 android:paddingLeft="80dp"
-                android:drawableLeft="@drawable/ic_warmup"
+                android:drawableLeft="@drawable/ic_mainswim32"
                 android:background="@color/colorWhite"
-                android:text="Khởi động"
+                android:text="Main stroke"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/btn_final_set"
+                android:textAllCaps="false"
+                android:paddingRight="50dp"
+                android:paddingLeft="80dp"
+                android:drawableLeft="@drawable/ic_finalswim32"
+                android:background="@color/colorWhite"
+                android:text="Final set"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/btn_swim_down"
+                android:textAllCaps="false"
+                android:paddingRight="50dp"
+                android:paddingLeft="80dp"
+                android:drawableLeft="@drawable/ic_relax32"
+                android:background="@color/colorWhite"
+                android:text="Swim down"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
         </LinearLayout>
-        <LinearLayout
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <Button
-                android:textAllCaps="false"
-                android:paddingRight="50dp"
-                android:paddingLeft="80dp"
-                android:drawableLeft="@drawable/ic_warmup"
-                android:background="@color/colorWhite"
-                android:text="Bơi chính"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <Button
-                android:text="Bài tập phụ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:gravity="center"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <Button
-                android:text="Thả lỏng"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
         <Button
+            android:id="@+id/btn_create_lesson"
             android:textColor="@color/colorWhite"
             android:background="@drawable/button_login_border"
             android:text="Tạo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        </LinearLayout>
+
     </LinearLayout>
 
 
-</LinearLayout>
+

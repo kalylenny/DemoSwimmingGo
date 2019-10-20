@@ -4,34 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10"
     tools:context=".view.coach.fragment.LessonAvailableFragment">
 
     <LinearLayout
-        android:layout_weight="9"
+        android:orientation="vertical"
+        android:weightSum="10"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <LinearLayout
+            android:layout_weight="9"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-    </LinearLayout>
+        </LinearLayout>
 
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+            <Button
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/button_login_border"
+                android:text="Thêm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        <Button
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/button_login_border"
-            android:text="Thêm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        </LinearLayout>
 
     </LinearLayout>
 

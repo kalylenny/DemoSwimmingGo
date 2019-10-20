@@ -16,8 +16,20 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_lesson1"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_marginLeft="5dp"
-            android:layout_weight="8"
+            android:layout_weight="6"
             android:background="#ffffff"
             android:orientation="vertical"
             android:layout_width="0dp"

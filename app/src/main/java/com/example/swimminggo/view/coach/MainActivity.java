@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.swimminggo.R;
-import com.example.swimminggo.view.coach.fragment.DiaryFragment;
+import com.example.swimminggo.view.coach.fragment.ChartFragment;
 import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 import com.example.swimminggo.view.coach.fragment.SettingFragment;
 import com.example.swimminggo.view.coach.fragment.TeamFragment;
@@ -37,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_team:
                         loadFragment(new TeamFragment());
                         return true;
-                    case R.id.item_diary:
-                        loadFragment(new DiaryFragment());
+                    case R.id.item_chart:
+                        loadFragment(new ChartFragment());
                         return true;
                     case R.id.item_setting:
                         loadFragment(new SettingFragment());
