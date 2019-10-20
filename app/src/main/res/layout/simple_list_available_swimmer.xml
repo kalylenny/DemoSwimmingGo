@@ -67,7 +67,7 @@
 
             <CheckBox
                 android:button="@drawable/custom_checkbox"
-                android:id="@+id/checkBox"
+                android:id="@+id/check_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
