@@ -75,7 +75,6 @@ public class CreateExercise extends AppCompatActivity {
     }
 
     public void setupDistance() {
-        List<Integer> distances = new ArrayList<>();
         distanceAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, exerciseConstant.getDistances());
         spnDistance.setAdapter(distanceAdapter);
     }
@@ -90,15 +89,15 @@ public class CreateExercise extends AppCompatActivity {
         spnRep.setAdapter(repAdapter);
     }
 
-    public void doCreateExercise(boolean result, String message){
-        if (result){
+    public void doCreateExercise(boolean result, String message) {
+        if (result) {
             startActivity(new Intent(CreateExercise.this, MainActivity.class));
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public Exercise initExercise(){
+    public Exercise initExercise() {
         String styleId = Iterables.tryFind(exerciseConstant.getStyles(),
                 new Predicate<Style>() {
                     @Override

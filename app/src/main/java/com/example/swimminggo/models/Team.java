@@ -1,5 +1,7 @@
 package com.example.swimminggo.models;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,5 +71,11 @@ public class Team implements Serializable {
 
     public void setSwimmerID(List<Integer> swimmerID) {
         this.swimmerID = swimmerID;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return teamName;
     }
 }
