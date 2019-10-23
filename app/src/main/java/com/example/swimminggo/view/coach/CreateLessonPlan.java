@@ -20,20 +20,18 @@ import java.util.Calendar;
 
 public class CreateLessonPlan extends AppCompatActivity {
 
-    Button btn_calendar;
-    Spinner spn_team;
+
     TabLayout tabLayout;
     ViewPager viewPager;
     PageAdapter pageAdapter;
     TabItem tabAvailable;
     TabItem tabNew;
-    TextView date;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_create_lesson_plan);
-        actionCalendar();
         actionTabMenu();
     }
 
@@ -65,27 +63,7 @@ public class CreateLessonPlan extends AppCompatActivity {
         });
     }
 
-    private void actionCalendar() {
-        date = (TextView) findViewById(R.id.date);
-        btn_calendar = (Button) findViewById(R.id.btn_calendar);
-        btn_calendar.setOnClickListener(new View.OnClickListener() {
-            Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(CreateLessonPlan.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
 
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        date.setText(day + "/" + (month+1) + "/" + year);
-                    }
-                },year,month,dayOfMonth);
-                datePickerDialog.show();
-            }
-        });
-    }
 
 
 }

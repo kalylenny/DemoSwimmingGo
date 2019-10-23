@@ -20,7 +20,7 @@ import com.example.swimminggo.view.coach.Record;
 
 public class WorkoutFragment extends Fragment {
     View view;
-    Button btn_excercise, btn_lesson_plan, btn_record;
+    Button btn_excercise, btn_lesson_plan;
 
     public WorkoutFragment() {
 
@@ -38,7 +38,6 @@ public class WorkoutFragment extends Fragment {
     public void button() {
         btn_excercise = (Button) view.findViewById(R.id.create_exercise);
         btn_lesson_plan = (Button) view.findViewById(R.id.lesson_plan);
-        btn_record = (Button) view.findViewById(R.id.record);
         btn_excercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,14 +52,6 @@ public class WorkoutFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        btn_record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Record.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     private void initDatabase() {
