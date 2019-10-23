@@ -5,8 +5,10 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.swimminggo.constant.URLConstant;
 import com.example.swimminggo.models.Exercise;
+import com.example.swimminggo.models.Lesson;
 import com.example.swimminggo.presenter.LessonPresenter;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.coach.fragment.LessonAvailableFragment;
 import com.example.swimminggo.view.coach.fragment.LessonNewFragment;
 
 import org.json.JSONArray;
@@ -19,10 +21,16 @@ import java.util.List;
 public class LessonPresenterImpl implements LessonPresenter {
 
     private LessonNewFragment lessonNewFragment;
+    private LessonAvailableFragment lessonAvailableFragment;
 
     public LessonPresenterImpl(LessonNewFragment lessonNewFragment) {
         this.lessonNewFragment = lessonNewFragment;
         AndroidNetworking.initialize(lessonNewFragment.getContext());
+    }
+
+    public LessonPresenterImpl(LessonAvailableFragment createLessonPlan){
+        this.lessonAvailableFragment = createLessonPlan;
+        AndroidNetworking.initialize(createLessonPlan.getContext());
     }
 
     @Override
@@ -46,7 +54,7 @@ public class LessonPresenterImpl implements LessonPresenter {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if (response.getBoolean("success")){
+                            if (response.getBoolean("success")) {
                                 lessonNewFragment.doCreateLesson(true, "Success");
                             } else {
                                 lessonNewFragment.doCreateLesson(false, "False");
@@ -63,11 +71,40 @@ public class LessonPresenterImpl implements LessonPresenter {
                 });
     }
 
+    @Override
+    public void onGetListLesson() {
+        List<Lesson> lessons = new ArrayList<>();
+        AndroidNetworking.get(URLConstant.getInstance().URL_GET_LESSON)
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build().getAsJSONObject(new JSONObjectRequestListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getBoolean("success")){
+                        JSONArray lessonJSONs = response.getJSONArray("lesson");
+                        for(int i = 0; i < lessonJSONs.length(); i++){
+                            lessons.add(new Lesson(lessonJSONs.getJSONObject(i)));
+                        }
+                        lessonAvailableFragment.setupListLesson(lessons);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(ANError anError) {
+
+            }
+        });
+
+    }
+
     private JSONObject toJSONObject(List<Exercise> exercises, String name) {
         JSONObject result = new JSONObject();
         JSONArray exerciseArr = new JSONArray();
         try {
-            for(Exercise exercise : exercises){
+            for (Exercise exercise : exercises) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("exercise_id", exercise.getId());
                 exerciseArr.put(jsonObject);
