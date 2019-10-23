@@ -17,8 +17,8 @@
         />
     <item
         android:id="@+id/item_chart"
-        android:icon="@drawable/ic_chart"
-        android:title="Thống kê"
+        android:icon="@drawable/ic_calendar1"
+        android:title="Lịch"
         />
     <item
         android:id="@+id/item_setting"
