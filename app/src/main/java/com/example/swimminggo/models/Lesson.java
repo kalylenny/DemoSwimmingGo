@@ -1,35 +1,31 @@
 package com.example.swimminggo.models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Lesson {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-    private int id, coachId;
+public class Lesson implements Serializable {
+    private int coachId, id;
     private String name;
-
-    public Lesson(int id, int coachId, String name) {
-        this.id = id;
-        this.coachId = coachId;
-        this.name = name;
-    }
+    private List<Exercise> exercises;
 
     public Lesson(JSONObject jsonObject){
         try {
-            this.id = jsonObject.getInt("id");
             this.coachId = jsonObject.getInt("coach_id");
+            this.id = jsonObject.getInt("id");
             this.name = jsonObject.getString("name");
+            JSONArray jsonArray = jsonObject.getJSONArray("exercises");
+            this.exercises = new ArrayList<>();
+            for(int i = 0; i < jsonArray.length(); i++){
+                this.exercises.add(new Exercise(jsonArray.getJSONObject(i)));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getCoachId() {
@@ -40,6 +36,14 @@ public class Lesson {
         this.coachId = coachId;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -48,8 +52,11 @@ public class Lesson {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return name;
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
     }
 }

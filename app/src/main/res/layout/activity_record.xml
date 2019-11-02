@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".view.coach.Record">
+    tools:context=".view.coach.CreateRecord">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,64 +21,115 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Ghi thành tích"
+            android:text="Xem giáo án"
             android:textColor="@color/colorWhite"
             android:textSize="26sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-        <Button
-            android:textColor="@color/colorWhite"
-            android:text="Chọn ngày"
-            android:background="@drawable/button_login_border"
-            android:id="@+id/btn_calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/date"
-            android:paddingLeft="30dp"
-            android:text="20/10/2019"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="5">
 
-        <TextView
-            android:textColor="@color/colorGray"
-            android:layout_gravity="center_vertical"
-            android:paddingLeft="40dp"
-            android:textSize="17sp"
-            android:text="Nhóm bơi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
         <LinearLayout
-            android:paddingRight="40dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spn_team"
-                android:paddingRight="50dp"
-                android:autofillHints="Độ tuổi"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_weight="8"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
+            <Button
+                android:id="@+id/btn_warm_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:drawableLeft="@drawable/ic_warmup32"
+                android:paddingLeft="80dp"
+                android:paddingRight="50dp"
+                android:text="Warm up"
+                android:textAllCaps="false" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_main_stroke"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:drawableLeft="@drawable/ic_mainswim32"
+                android:paddingLeft="80dp"
+                android:paddingRight="50dp"
+                android:text="Main stroke"
+                android:textAllCaps="false" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_final_set"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:drawableLeft="@drawable/ic_finalswim32"
+                android:paddingLeft="80dp"
+                android:paddingRight="50dp"
+                android:text="Final set"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_swim_down"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:drawableLeft="@drawable/ic_relax32"
+                android:paddingLeft="80dp"
+                android:paddingRight="50dp"
+                android:text="Swim down"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:text="Ghi thành tích"
+                android:ems="11"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:id="@+id/btn_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_login_border"/>
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

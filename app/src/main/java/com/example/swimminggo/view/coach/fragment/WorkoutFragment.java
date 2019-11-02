@@ -14,9 +14,7 @@ import com.example.swimminggo.constant.ExerciseConstant;
 import com.example.swimminggo.presenter.ExercisePresenter;
 import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
 import com.example.swimminggo.view.coach.CreateExercise;
-import com.example.swimminggo.view.coach.CreateLesson;
 import com.example.swimminggo.view.coach.CreateLessonPlan;
-import com.example.swimminggo.view.coach.Record;
 
 public class WorkoutFragment extends Fragment {
     View view;

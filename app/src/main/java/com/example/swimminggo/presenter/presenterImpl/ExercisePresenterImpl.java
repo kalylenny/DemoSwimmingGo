@@ -15,6 +15,7 @@ import com.example.swimminggo.presenter.ExercisePresenter;
 import com.example.swimminggo.singleton.ListExercise;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.coach.CreateExercise;
+import com.example.swimminggo.view.coach.MainActivity;
 import com.example.swimminggo.view.coach.fragment.LessonNewFragment;
 import com.example.swimminggo.view.coach.fragment.WorkoutFragment;
 
@@ -30,6 +31,7 @@ public class ExercisePresenterImpl implements ExercisePresenter {
     CreateExercise createExercise;
     LessonNewFragment lessonNewFragment;
     WorkoutFragment workoutFragment;
+    MainActivity mainActivity;
 
     public ExercisePresenterImpl(CreateExercise createExercise){
         this.createExercise = createExercise;
@@ -44,6 +46,11 @@ public class ExercisePresenterImpl implements ExercisePresenter {
     public ExercisePresenterImpl(WorkoutFragment workoutFragment){
         this.workoutFragment = workoutFragment;
         AndroidNetworking.initialize(workoutFragment.getContext());
+    }
+
+    public ExercisePresenterImpl(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
+        AndroidNetworking.initialize(mainActivity.getApplicationContext());
     }
 
     @Override
