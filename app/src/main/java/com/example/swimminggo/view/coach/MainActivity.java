@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.swimminggo.R;
+import com.example.swimminggo.constant.ExerciseConstant;
+import com.example.swimminggo.presenter.ExercisePresenter;
+import com.example.swimminggo.presenter.TeamPresenter;
+import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
+import com.example.swimminggo.presenter.presenterImpl.TeamPresenterImpl;
+import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.view.coach.fragment.CalendarFragment;
 import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 import com.example.swimminggo.view.coach.fragment.SettingFragment;
@@ -24,8 +30,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_coach);
+        initDatabase();
         initView();
     }
+
+    private void initDatabase() {
+        if (ExerciseConstant.getInstance() == null)
+            ExerciseConstant.newInstance();
+        initListTeams();
+        initAges();
+        initDistances();
+        initStyles();
+    }
+
+    private void initStyles() {
+        ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
+        exercisePresenter.onGetStyles();
+    }
+
+    private void initDistances() {
+        ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
+        exercisePresenter.onGetDistances();
+    }
+
+    private void initAges() {
+
+    }
+
+    private void initListTeams() {
+        TeamPresenter teamPresenter = new TeamPresenterImpl(this);
+        ListTeam.newInstance();
+        teamPresenter.getListTeam();
+    }
+
     public void initView(){
         bottomNavigationView = findViewById(R.id.bottom_bar);
         loadFragment(new WorkoutFragment());
@@ -36,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_team:
                         loadFragment(new TeamFragment());
                         return true;
-                    case R.id.item_chart:
+                    case R.id.item_calendar:
                         loadFragment(new CalendarFragment());
                         return true;
                     case R.id.item_setting:

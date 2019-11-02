@@ -8,6 +8,7 @@ import com.example.swimminggo.models.Team;
 import com.example.swimminggo.presenter.TeamPresenter;
 import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.coach.MainActivity;
 import com.example.swimminggo.view.coach.fragment.TeamFragment;
 
 import org.json.JSONArray;
@@ -17,10 +18,16 @@ import org.json.JSONObject;
 public class TeamPresenterImpl implements TeamPresenter {
 
     TeamFragment teamFragment;
+    MainActivity mainActivity;
 
     public TeamPresenterImpl(TeamFragment teamFragment) {
         this.teamFragment = teamFragment;
         AndroidNetworking.initialize(teamFragment.getContext());
+    }
+
+    public TeamPresenterImpl(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
+        AndroidNetworking.initialize(mainActivity.getApplicationContext());
     }
 
     @Override
@@ -37,7 +44,6 @@ public class TeamPresenterImpl implements TeamPresenter {
                                 for (int i = 0; i < list.length(); i++) {
                                     ListTeam.getInstance().getListTeam().add(new Team(list.getJSONObject(i)));
                                 }
-                                teamFragment.setupRecyclerView();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

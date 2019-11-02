@@ -90,6 +90,7 @@ public class TeamFragment extends Fragment {
         if (ListTeam.getInstance() == null) {
             ListTeam.newInstance();
             teamPresenter.getListTeam();
+            setupRecyclerView();
         } else {
             setupRecyclerView();
         }
