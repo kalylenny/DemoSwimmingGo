@@ -20,6 +20,7 @@ public class URLConstant {
     public String URL_GET_SWIMMER_NOTEAM = mainUrl + "/api/swimmer/getnoteam";
     public String URL_GET_VIDEO = mainUrl + "/api/video/get";
     public String URL_GET_LESSON = mainUrl + "/api/lesson/get";
+    public String URL_GET_VIDEO = mainUrl + "/api/video/get";
 
     public static URLConstant getInstance() {
         if (ourInstance == null)
