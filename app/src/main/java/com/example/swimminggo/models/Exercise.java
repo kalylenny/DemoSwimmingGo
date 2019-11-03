@@ -3,7 +3,9 @@ package com.example.swimminggo.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
     private int id;
     private String styleId;
     private int distance;

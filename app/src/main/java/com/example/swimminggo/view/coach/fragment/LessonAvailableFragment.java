@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,8 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.ListAvailableLessonAdapter;
+import com.example.swimminggo.models.Team;
+import com.example.swimminggo.singleton.Position;
 import com.example.swimminggo.models.Lesson;
+import com.example.swimminggo.presenter.LessonPresenter;
+import com.example.swimminggo.presenter.presenterImpl.LessonPresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,8 +39,10 @@ public class LessonAvailableFragment extends Fragment {
     Button btnCalendar, btnAdd;
     Spinner spnTeam;
     RecyclerView recyclerViewLesson;
+    LessonPresenter lessonPresenter;
     View view;
     List<Lesson> lessons = new ArrayList<>();
+    String schedule;
     TextView date;
 
     @Override
@@ -48,6 +58,7 @@ public class LessonAvailableFragment extends Fragment {
 
 
     private void initComponent() {
+        lessonPresenter = new LessonPresenterImpl(this);
         date = (TextView) view.findViewById(R.id.date);
         btnCalendar = (Button) view.findViewById(R.id.btn_calendar);
         btnAdd = view.findViewById(R.id.btn_add);
@@ -58,7 +69,7 @@ public class LessonAvailableFragment extends Fragment {
     private void initDatabase() {
         initDate();
         initListTeam();
-
+        lessonPresenter.onGetListLesson();
     }
 
     private void initListTeam() {
@@ -81,10 +92,24 @@ public class LessonAvailableFragment extends Fragment {
         int month = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+
     }
 
     private void action() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int teamId = ListTeam.getInstance().getListTeam().get((int) spnTeam.getSelectedItemId()).getTeamID();
+                lessonPresenter.onCreateLessonPlan(lessons.get(Position.getInstance().getLastPosition()).getId(),
+                        teamId,schedule);
+            }
+        });
+    }
 
+    public void doCreateLessonPlan(Boolean result){
+        if (result){
+            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void actionCalendar() {
@@ -101,6 +126,7 @@ public class LessonAvailableFragment extends Fragment {
 
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         date.setText(day + "/" + (month + 1) + "/" + year);
+                        schedule = year + "-" + (month + 1) + "-" + day;
                     }
                 }, year, month, dayOfMonth);
                 datePickerDialog.show();

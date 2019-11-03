@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public void initView(){
         bottomNavigationView = findViewById(R.id.bottom_bar);
         loadFragment(new WorkoutFragment());
+        loadFragment(new CalendarFragment());
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

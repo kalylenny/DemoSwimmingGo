@@ -4,7 +4,9 @@ package com.example.swimminggo.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Swimmer extends User {
+import java.io.Serializable;
+
+public class Swimmer extends User implements Serializable {
     private String parent_name, parent_phone;
     private float weight, height;
 

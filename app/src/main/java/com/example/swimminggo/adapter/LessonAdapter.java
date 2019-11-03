@@ -1,5 +1,6 @@
 package com.example.swimminggo.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.swimminggo.R;
 import com.example.swimminggo.constant.ExerciseConstant;
 import com.example.swimminggo.models.Exercise;
 import com.example.swimminggo.models.Style;
+import com.example.swimminggo.view.coach.CreateRecordWithExercise;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -21,10 +23,15 @@ import java.util.List;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder> {
     List<Exercise> exercises;
+    int teamId;
+    int phaseId;
 
-    public LessonAdapter(List<Exercise> exercises){
+    public LessonAdapter(List<Exercise> exercises, int teamId, int phaseId) {
         this.exercises = exercises;
+        this.teamId = teamId;
+        this.phaseId = phaseId;
     }
+
     @NonNull
     @Override
     public LessonAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,8 +52,20 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                     }
                 }).orNull().getValue();
         holder.txtStyle.setText(style);
-        holder.txtDistance.setText(exercise.getDistance()+"");
-        holder.txtRepetition.setText(exercise.getRep());
+        holder.txtDistance.setText(exercise.getDistance() + "");
+        holder.txtRepetition.setText(exercise.getRep() + "");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (phaseId == 3) {
+                    Intent intent = new Intent(holder.itemView.getContext(), CreateRecordWithExercise.class);
+                    intent.putExtra("exercise", exercise);
+                    intent.putExtra("team_id", teamId);
+                    intent.putExtra("position", position);
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -56,6 +75,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtStyle, txtDistance, txtRepetition;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtStyle = itemView.findViewById(R.id.txt_style);
