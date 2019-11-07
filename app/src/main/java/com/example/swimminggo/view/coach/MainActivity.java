@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         initAges();
         initDistances();
         initStyles();
+        initPhases();
     }
 
     private void initStyles() {
@@ -51,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
     private void initDistances() {
         ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
         exercisePresenter.onGetDistances();
+    }
+
+    private void initPhases(){
+        ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
+        exercisePresenter.onGetPhases();
     }
 
     private void initAges() {

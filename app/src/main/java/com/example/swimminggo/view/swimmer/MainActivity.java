@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.view.coach.fragment.CalendarFragment;
+import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 import com.example.swimminggo.view.coach.fragment.SettingFragment;
 import com.example.swimminggo.view.swimmer.fragment.SwimmerChartFragment;
 import com.example.swimminggo.view.swimmer.fragment.SwimmerLibraryFragment;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new SwimmerWorkoutFragment());
                         return true;
                     case R.id.item_library:
-                        loadFragment(new SwimmerLibraryFragment());
+                        loadFragment(new LibraryFragment());
                         return true;
                     case R.id.item_chart:
                         loadFragment(new SwimmerChartFragment());

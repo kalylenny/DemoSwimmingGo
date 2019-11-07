@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".view.swimmer.fragment.SwimmerChartFragment">
 
@@ -26,29 +26,50 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:weightSum="10"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spn_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spn_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_view_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="10"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="vertical">
 
             <View
-                android:background="@color/colorBlue"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp"
+                android:background="@color/colorBlue" />
 
             <com.google.android.material.tabs.TabLayout
-                app:tabIndicatorColor="@color/colorBlue"
-                app:tabTextColor="@color/colorGray"
-                app:tabSelectedTextColor="@color/colorBlack"
-                app:tabIndicatorHeight="1dp"
                 android:id="@+id/tablayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/colorBlue"
+                app:tabIndicatorHeight="1dp"
+                app:tabSelectedTextColor="@color/colorBlack"
+                app:tabTextColor="@color/colorGray">
 
                 <com.google.android.material.tabs.TabItem
                     android:id="@+id/tab_month"

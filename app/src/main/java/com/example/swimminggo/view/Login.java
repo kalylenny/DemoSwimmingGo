@@ -71,7 +71,10 @@ public class Login extends AppCompatActivity {
     public void onLoginResult(Boolean result, String message) {
         if (result) {
             if (UserProfile.getInstance().currentUser.getIsVerified() == 1) {
-                startActivity(new Intent(Login.this, MainActivity.class));
+                if (UserProfile.getInstance().currentUser.getRoleName().equals("coach"))
+                    startActivity(new Intent(Login.this, MainActivity.class));
+                else
+                    startActivity(new Intent(Login.this, com.example.swimminggo.view.swimmer.MainActivity.class));
             } else {
                 startActivity(new Intent(Login.this, EditProfile.class));
             }
