@@ -33,7 +33,7 @@ public class CreateRecordWithLesson extends AppCompatActivity {
     Button btnFinish;
     static List<List<Record>> lists = new ArrayList<>();
     static int phaseId;
-    static int teamId;
+    int teamId;
     RecordPresenter recordPresenter;
 
     @Override

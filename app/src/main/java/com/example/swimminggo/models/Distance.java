@@ -6,6 +6,10 @@ import org.json.JSONObject;
 public class Distance {
     private int id, value;
 
+    public Distance(int value){
+        this.id = this.value = value;
+    }
+
     public Distance(int id, int value){
         this.id = id;
         this.value = value;

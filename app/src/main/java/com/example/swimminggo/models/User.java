@@ -3,7 +3,9 @@ package com.example.swimminggo.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
     private String username, dob, email, firstName, lastName, phone, roleName;
     private int gender, id;
     private int isVerified;

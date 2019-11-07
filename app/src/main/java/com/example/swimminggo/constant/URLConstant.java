@@ -22,6 +22,7 @@ public class URLConstant {
     public String URL_GET_VIDEO = mainUrl + "/api/video/get";
     public String URL_CREATE_LESSON_PLAN = mainUrl + "/api/plan/create";
     public String URL_CREATE_RECORD = mainUrl + "/api/record/create";
+    public String URL_GET_CHART_BY_MONTH = mainUrl +"/api/chartbymonth/get";
 
     public static URLConstant getInstance() {
         if (ourInstance == null)

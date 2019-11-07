@@ -15,6 +15,7 @@ import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.VideoAdapter;
 import com.example.swimminggo.presenter.VideoPresenter;
 import com.example.swimminggo.presenter.presenterImpl.VideoPresenterImpl;
+import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.singleton.Videos;
 
 public class LibraryFragment extends Fragment {
@@ -38,6 +39,8 @@ public class LibraryFragment extends Fragment {
     private void initComponent(){
         videoPresenter = new VideoPresenterImpl(this);
         btnAdd = view.findViewById(R.id.btn_add);
+        if (UserProfile.getInstance().currentUser.getRoleName().equals("swimmer"))
+            btnAdd.setVisibility(View.GONE);
         recyclerView = view.findViewById(R.id.recyclerView);
     }
 

@@ -1,111 +1,112 @@
 package com.example.swimminggo.view.swimmer.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.swimminggo.R;
+import com.example.swimminggo.constant.ExerciseConstant;
+import com.example.swimminggo.models.Style;
+import com.example.swimminggo.models.Swimmer;
+import com.example.swimminggo.presenter.ChartPresenter;
+import com.example.swimminggo.presenter.presenterImpl.ChartPresenterImpl;
+import com.example.swimminggo.singleton.CurrentDistance;
+import com.example.swimminggo.singleton.CurrentStyle;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SwimmerMonthChartFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SwimmerMonthChartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.view.LineChartView;
+
 public class SwimmerMonthChartFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    Spinner spnMonth, spnYear;
+    Button btnViewChart;
+    LineChartView lineChartView;
+    ChartPresenter chartPresenter;
+    View view;
+    int swimmerId;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public SwimmerMonthChartFragment() {
-        // Required empty public constructor
+    public SwimmerMonthChartFragment(int swimmerId) {
+        this.swimmerId = swimmerId;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SwimmerMonthChartFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SwimmerMonthChartFragment newInstance(String param1, String param2) {
-        SwimmerMonthChartFragment fragment = new SwimmerMonthChartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_swimmer_month_chart, container, false);
+        view = inflater.inflate(R.layout.fragment_swimmer_month_chart, container, false);
+        initComponent();
+        initDatabase();
+        action();
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private void initDatabase() {
+        ArrayList<String> months = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
+        spnMonth.setAdapter(new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, months));
+        ArrayList<String> years = new ArrayList<>();
+        for (int i = 2025; i >= 2000; i--)
+            years.add(i + "");
+
+        spnYear.setAdapter(new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, years));
+    }
+
+    private void initComponent() {
+        chartPresenter = new ChartPresenterImpl(this);
+        spnMonth = view.findViewById(R.id.spn_month);
+        spnYear = view.findViewById(R.id.spn_year);
+        btnViewChart = view.findViewById(R.id.btn_view_chart);
+        lineChartView = view.findViewById(R.id.lineChart);
+    }
+
+    private void action() {
+        btnViewChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chartPresenter.onGetDataByMonth(CurrentStyle.getInstance().getStyle().getId(),
+                        CurrentDistance.getInstance().getDistance().getId(),
+                        swimmerId,
+                        Integer.parseInt(spnMonth.getSelectedItem().toString()),
+                        Integer.parseInt(spnYear.getSelectedItem().toString()));
+            }
+        });
+    }
+
+    public void setupLineChart(List<String> axisData, List<Integer> yAxisData) {
+        List yAxisValues = new ArrayList();
+        List axisValues = new ArrayList();
+        Line line = new Line(yAxisValues);
+        for (int i = 0; i < axisData.size(); i++) {
+            axisValues.add(i, new AxisValue(i).setLabel(axisData.get(i)));
         }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        for (int i = 0; i < yAxisData.size(); i++) {
+            yAxisValues.add(new PointValue(i, yAxisData.get(i)));
         }
+        List lines = new ArrayList();
+        lines.add(line);
+        LineChartData data = new LineChartData();
+        data.setLines(lines);
+
+        Axis axis = new Axis();
+        axis.setValues(axisValues);
+        data.setAxisXBottom(axis);
+        lineChartView.setLineChartData(data);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
