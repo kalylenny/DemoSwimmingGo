@@ -17,6 +17,10 @@ public class Time {
         }
     }
 
+    public Time(int min){
+        this.min = min;
+    }
+
     public int getSec() {
         return sec;
     }

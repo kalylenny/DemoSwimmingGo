@@ -20,6 +20,7 @@ import com.example.swimminggo.models.Team;
 import com.example.swimminggo.presenter.SchedulePresenter;
 import com.example.swimminggo.presenter.presenterImpl.SchedulePresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
+import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.coach.CreateRecord;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -74,11 +75,6 @@ public class CalendarFragment extends Fragment {
         }
     }
 
-    private void initSchedule() {
-        for (int i = 0; i < 7; i++)
-            weekLayout.addView(layouts.get(i));
-    }
-
     public void setDayEventInSchedule(String date, int index, List<LessonPlan> lessonPlans) {
         LayoutInflater inflater = LayoutInflater.from(this.getContext());
         LinearLayout dayEventLayout = (LinearLayout) inflater.inflate(R.layout.item_date_event, null);
@@ -101,7 +97,8 @@ public class CalendarFragment extends Fragment {
             lessonEventLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showLessonDialog(lessonPlan);
+                    if (UserProfile.getInstance().currentUser.getRoleName().equals("coach"))
+                        showLessonDialog(lessonPlan);
                 }
             });
         }
@@ -132,10 +129,4 @@ public class CalendarFragment extends Fragment {
         dialog.show();
     }
 
-    private boolean isNotNullLayouts(List<LinearLayout> layouts) {
-        for (int i = 1; i <= 7; i++)
-            if (layouts.get(i) == null)
-                return false;
-        return true;
-    }
 }

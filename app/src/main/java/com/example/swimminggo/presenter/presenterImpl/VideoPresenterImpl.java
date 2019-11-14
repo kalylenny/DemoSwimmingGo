@@ -32,9 +32,9 @@ public class VideoPresenterImpl implements VideoPresenter {
             public void onResponse(JSONObject response) {
                 Videos.newInstance();
                 try {
-                    if (response.getBoolean("success")){
+                    if (response.getBoolean("success")) {
                         JSONArray jsonArray = response.getJSONArray("videos");
-                        for (int i = 0; i < jsonArray.length(); i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             Videos.getInstance().getVideos().add(new Video(jsonArray.getJSONObject(i)));
                         }
                         libraryFragment.setupRecyclerView();
@@ -53,7 +53,23 @@ public class VideoPresenterImpl implements VideoPresenter {
 
     @Override
     public void onAddVideos(Video video) {
+        AndroidNetworking.post(URLConstant.getInstance().URL_ADD_VIDEO)
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build().getAsJSONObject(new JSONObjectRequestListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    libraryFragment.doAddVideo(response.getBoolean("success"), response.getString("message"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onError(ANError anError) {
+
+            }
+        });
     }
 
     @Override
