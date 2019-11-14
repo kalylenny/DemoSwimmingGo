@@ -59,11 +59,11 @@ public class SwimmerChartFragment extends Fragment {
     }
 
     public void setDistance() {
-        spnDistance.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ExerciseConstant.getInstance().getDistances()));
+        spnDistance.setAdapter(new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_dropdown_item, ExerciseConstant.getInstance().getDistances()));
     }
 
     public void setStyle() {
-        spnStyle.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ExerciseConstant.getInstance().getStyles()));
+        spnStyle.setAdapter(new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_dropdown_item, ExerciseConstant.getInstance().getStyles()));
     }
 
     private void actionTabMenu() {

@@ -12,6 +12,7 @@ import com.example.swimminggo.R;
 import com.example.swimminggo.view.coach.fragment.CalendarFragment;
 import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 import com.example.swimminggo.view.coach.fragment.SettingFragment;
+import com.example.swimminggo.view.coach.fragment.WorkoutFragment;
 import com.example.swimminggo.view.swimmer.fragment.SwimmerChartFragment;
 import com.example.swimminggo.view.swimmer.fragment.SwimmerLibraryFragment;
 import com.example.swimminggo.view.swimmer.fragment.SwimmerWorkoutFragment;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.item_workout:
-                        loadFragment(new SwimmerWorkoutFragment());
+                        loadFragment(new CalendarFragment());
                         return true;
                     case R.id.item_library:
                         loadFragment(new LibraryFragment());

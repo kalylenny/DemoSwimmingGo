@@ -134,6 +134,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public void doEditProfile(boolean result, String message) {
+        addDataUser();
         if (result) {
             if (currentUser.getRoleName().equals("coach")) {
                 startActivity(new Intent(EditProfile.this, MainActivity.class));

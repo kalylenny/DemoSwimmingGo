@@ -14,6 +14,7 @@ import com.example.swimminggo.R;
 import com.example.swimminggo.constant.ExerciseConstant;
 import com.example.swimminggo.models.Style;
 import com.example.swimminggo.models.Swimmer;
+import com.example.swimminggo.models.Time;
 import com.example.swimminggo.presenter.ChartPresenter;
 import com.example.swimminggo.presenter.presenterImpl.ChartPresenterImpl;
 import com.example.swimminggo.singleton.CurrentDistance;
@@ -32,6 +33,7 @@ import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 public class SwimmerMonthChartFragment extends Fragment {
@@ -105,7 +107,22 @@ public class SwimmerMonthChartFragment extends Fragment {
         Axis axis = new Axis();
         axis.setValues(axisValues);
         data.setAxisXBottom(axis);
+        Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
+        viewport.top = maxTime(CurrentDistance.getInstance().getDistance().getValue());
+        lineChartView.setMaximumViewport(viewport);
+        lineChartView.setCurrentViewport(viewport);
         lineChartView.setLineChartData(data);
+    }
+
+    private int maxTime(int distance){
+        switch (distance){
+            case 50 : return new Time(1).toMillisec();
+            case 100 : return new Time(2).toMillisec();
+            case 200 : return new Time(4).toMillisec();
+            case 500 : return new Time(10).toMillisec();
+            case 1000 : return new Time(20).toMillisec();
+        }
+        return new Time(30).toMillisec();
     }
 
 
