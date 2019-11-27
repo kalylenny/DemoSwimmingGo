@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.constant.ExerciseConstant;
+import com.example.swimminggo.models.Exercise;
 import com.example.swimminggo.presenter.ExercisePresenter;
 import com.example.swimminggo.presenter.TeamPresenter;
 import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
@@ -35,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initDatabase() {
-        if (ExerciseConstant.getInstance() == null)
-            ExerciseConstant.newInstance();
+        ExerciseConstant.newInstance();
         initListTeams();
         initAges();
         initDistances();

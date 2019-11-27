@@ -1,5 +1,6 @@
 package com.example.swimminggo.view.swimmer.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,11 +107,16 @@ public class SwimmerMonthChartFragment extends Fragment {
 
         Axis axis = new Axis();
         axis.setValues(axisValues);
+        Axis yAxis = new Axis();
+        data.setAxisYLeft(yAxis);
         data.setAxisXBottom(axis);
+
+        axis.setTextColor(Color.parseColor("#9C27B0"));
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
         viewport.top = maxTime(CurrentDistance.getInstance().getDistance().getValue());
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
+
         lineChartView.setLineChartData(data);
     }
 
@@ -124,6 +130,7 @@ public class SwimmerMonthChartFragment extends Fragment {
         }
         return new Time(30).toMillisec();
     }
+
 
 
 }

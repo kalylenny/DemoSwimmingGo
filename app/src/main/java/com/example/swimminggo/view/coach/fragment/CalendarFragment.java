@@ -83,15 +83,20 @@ public class CalendarFragment extends Fragment {
         for (LessonPlan lessonPlan : lessonPlans) {
             LinearLayout lessonEventLayout = (LinearLayout) inflater.inflate(R.layout.item_lesson_event, null);
             TextView txtLessonName = lessonEventLayout.findViewById(R.id.txt_lesson_name);
-            TextView txtTeamName = lessonEventLayout.findViewById(R.id.txt_team_name);
+            TextView txtTeamName;
+            if (UserProfile.getInstance().currentUser.getRoleName().equals("coach")) {
+                txtTeamName = lessonEventLayout.findViewById(R.id.txt_team_name);
+                String teamName = Iterables.tryFind(ListTeam.getInstance().getListTeam(), new Predicate<Team>() {
+                    @Override
+                    public boolean apply(@NullableDecl Team input) {
+                        return input.getTeamID() == lessonPlan.getTeamId();
+                    }
+                }).orNull().getTeamName();
+                txtTeamName.setText(teamName);
+            }
+
             txtLessonName.setText(lessonPlan.getLessonName());
-            String teamName = Iterables.tryFind(ListTeam.getInstance().getListTeam(), new Predicate<Team>() {
-                @Override
-                public boolean apply(@NullableDecl Team input) {
-                    return input.getTeamID() == lessonPlan.getTeamId();
-                }
-            }).orNull().getTeamName();
-            txtTeamName.setText(teamName);
+
             dayEventLayout.addView(lessonEventLayout);
 
             lessonEventLayout.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +110,7 @@ public class CalendarFragment extends Fragment {
         weekLayout.addView(dayEventLayout);
     }
 
-    public void showLessonDialog(LessonPlan lessonPlan){
+    public void showLessonDialog(LessonPlan lessonPlan) {
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_lesson_plan);
         Button btnCreateRecord = dialog.findViewById(R.id.btn_create_record);

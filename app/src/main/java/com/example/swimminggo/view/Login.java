@@ -12,7 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.swimminggo.R;
+import com.example.swimminggo.constant.ExerciseConstant;
+import com.example.swimminggo.presenter.ExercisePresenter;
 import com.example.swimminggo.presenter.LoginPresenter;
+import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
 import com.example.swimminggo.presenter.presenterImpl.LoginPresenterImpl;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.coach.MainActivity;
@@ -30,6 +33,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initComponent();
+        initDatabase();
         action();
     }
 
@@ -44,6 +48,29 @@ public class Login extends AppCompatActivity {
         txtRegister = findViewById(R.id.txt_register);
         txtForgotPassword = findViewById(R.id.txt_forgot_password);
     }
+
+    private void initDatabase(){
+        ExerciseConstant.newInstance();
+        initStyles();
+        initDistances();
+        initPhases();
+    }
+
+    private void initStyles() {
+        ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
+        exercisePresenter.onGetStyles();
+    }
+
+    private void initDistances() {
+        ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
+        exercisePresenter.onGetDistances();
+    }
+
+    private void initPhases(){
+        ExercisePresenter exercisePresenter = new ExercisePresenterImpl(this);
+        exercisePresenter.onGetPhases();
+    }
+
 
     private void action() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
