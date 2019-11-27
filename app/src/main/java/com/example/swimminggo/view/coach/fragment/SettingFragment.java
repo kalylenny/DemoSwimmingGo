@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.example.swimminggo.R;
 import com.example.swimminggo.models.User;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.Login;
 import com.example.swimminggo.view.profile.ChangePassword;
 import com.example.swimminggo.view.profile.ViewProfile;
 
@@ -61,6 +62,13 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(view.getContext(), ChangePassword.class));
+            }
+        });
+
+        layoutLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(), Login.class));
             }
         });
     }

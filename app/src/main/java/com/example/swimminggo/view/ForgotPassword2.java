@@ -18,7 +18,7 @@ public class ForgotPassword2 extends AppCompatActivity {
     ForgotPasswordPresenter2 forgotPasswordPresenter2;
 
     EditText edtOtp;
-    Button btnConfirm;
+    Button btnConfirm, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class ForgotPassword2 extends AppCompatActivity {
         edtOtp = findViewById(R.id.edt_key);
 
         btnConfirm = findViewById(R.id.btn_confirm);
+        btnBack = findViewById(R.id.btn_back);
     }
 
     private void action() {
@@ -41,6 +42,13 @@ public class ForgotPassword2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 forgotPasswordPresenter2.onSendOtp(edtOtp.getText().toString());
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ForgotPassword2.this, ForgotPassword1.class));
             }
         });
     }
