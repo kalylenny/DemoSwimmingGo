@@ -1,9 +1,11 @@
 package com.example.swimminggo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class SwimmerProfile extends AppCompatActivity {
     ViewPager viewPager;
     PageAdapterSwimmer pageAdapter;
     TabItem tabMonth, tabQuarter, tabYear;
+    ImageView imageViewNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class SwimmerProfile extends AppCompatActivity {
         actionDistance();
         actionStyle();
         actionTabMenu();
+        action();
     }
 
     private void initDatabase() {
@@ -55,6 +59,17 @@ public class SwimmerProfile extends AppCompatActivity {
         txtDob.setText(swimmer.getDob());
         setDistance();
         setStyle();
+    }
+
+    private void action(){
+        imageViewNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SwimmerProfile.this, Notification.class);
+                intent.putExtra("swimmer_id", swimmer.getId());
+                startActivity(intent);
+            }
+        });
     }
 
     private void actionTabMenu() {
@@ -139,5 +154,6 @@ public class SwimmerProfile extends AppCompatActivity {
 
         spnDistance = findViewById(R.id.spn_distance);
         spnStyle = findViewById(R.id.spn_style);
+        imageViewNotification = findViewById(R.id.img_view_notification);
     }
 }

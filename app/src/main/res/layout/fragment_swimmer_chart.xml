@@ -7,11 +7,10 @@
     android:orientation="vertical"
     tools:context=".view.swimmer.fragment.SwimmerChartFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_profile_background"
-        android:gravity="center"
         android:orientation="horizontal"
         android:paddingVertical="5sp">
 
@@ -20,10 +19,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
             android:text="Thống kê"
             android:textColor="@color/colorWhite"
             android:textSize="26sp" />
-    </LinearLayout>
+
+        <ImageView
+            android:background="@drawable/ic_notification"
+            android:id="@+id/img_view_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10sp"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
