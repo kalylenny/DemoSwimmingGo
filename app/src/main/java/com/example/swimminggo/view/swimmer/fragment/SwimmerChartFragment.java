@@ -1,11 +1,14 @@
 package com.example.swimminggo.view.swimmer.fragment;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +22,7 @@ import com.example.swimminggo.models.Style;
 import com.example.swimminggo.singleton.CurrentDistance;
 import com.example.swimminggo.singleton.CurrentStyle;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.Notification;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.common.base.Predicate;
@@ -34,6 +38,8 @@ public class SwimmerChartFragment extends Fragment {
     ViewPager viewPager;
     PageAdapterSwimmer pageAdapter;
     TabItem tabMonth, tabQuarter, tabYear;
+    ImageView imgViewNotification;
+    Dialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class SwimmerChartFragment extends Fragment {
 
         spnDistance = view.findViewById(R.id.spn_distance);
         spnStyle = view.findViewById(R.id.spn_style);
+        imgViewNotification = view.findViewById(R.id.img_view_notification);
     }
 
     private void initDatabase(){
@@ -56,6 +63,17 @@ public class SwimmerChartFragment extends Fragment {
         actionDistance();
         setDistance();
         setStyle();
+    }
+
+    private void action(){
+        imgViewNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), Notification.class);
+                intent.putExtra("swimmer_id", UserProfile.getInstance().currentUser.getId());
+                startActivity(intent);
+            }
+        });
     }
 
     public void setDistance() {

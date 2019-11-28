@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_boder"
+    android:padding="10sp"
+    android:layout_margin="10sp">
+    <TextView
+        android:id="@+id/txt_note"
+        android:textSize="20sp"
+        android:maxLines="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingMultiplier="true"/>
+    <TextView
+        android:id="@+id/txt_date"
+        android:ems="11"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5sp"/>
+</LinearLayout>

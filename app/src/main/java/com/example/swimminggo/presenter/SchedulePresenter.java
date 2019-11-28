@@ -1,7 +1,7 @@
 package com.example.swimminggo.presenter;
 
-import java.util.Date;
+import com.example.swimminggo.models.Date;
 
 public interface SchedulePresenter {
-    void loadListLessonPlanByDate(int day, int month, int year, int dayOfWeek);
+    void loadListLessonPlanByDate(Date date);
 }
