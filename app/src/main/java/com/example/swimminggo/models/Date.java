@@ -12,7 +12,7 @@ public class Date {
     public Date(Calendar calendar){
         this.day = calendar.get(Calendar.DATE);
         this.month = calendar.get(Calendar.MONTH);
-        this.year = calendar.get(Calendar.MONTH);
+        this.year = calendar.get(Calendar.YEAR);
         this.fullName = getName(calendar);
     }
 
@@ -46,7 +46,7 @@ public class Date {
     }
 
     public String toFormatRequest() {
-        return day + "-" + month + "-" + year;
+        return year + "-" + month + "-" + day;
     }
 
     public String getFullName() {

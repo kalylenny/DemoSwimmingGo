@@ -36,7 +36,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ScheduleAdapter.ViewHolder holder, int position) {
         holder.txtTh.setText(dates.get(position).getFullName());
-        holder.txtDay.setText(dates.get(position).toString());
+        holder.txtDay.setText(dates.get(position).getDay()+"");
 
         if (currentDate.equals(dates.get(position))){
             calendarFragment.onGetListLessonPlanByDate(currentDate);

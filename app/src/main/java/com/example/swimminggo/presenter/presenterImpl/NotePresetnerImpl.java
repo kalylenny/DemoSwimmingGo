@@ -60,7 +60,12 @@ public class NotePresetnerImpl implements NotePresenter {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    notification.doAddNote(response.getBoolean("success"), response.getString("message"));
+//                    Boolean result = response.getBoolean("success");
+//                    String message = response.getString("message");
+                    if (response.getBoolean("success"))
+                        notification.doAddNote(true, "ASDASD");
+                    else
+                        notification.doAddNote(false, "ASDASD");
 
                 } catch (JSONException e) {
                     e.printStackTrace();

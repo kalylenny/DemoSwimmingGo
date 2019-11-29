@@ -14,7 +14,8 @@
         android:roundIcon="@drawable/logo_swimminggo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.Notification"></activity>
+        <activity android:name=".view.coach.fragment.Library"></activity>
+        <activity android:name=".view.Notification" />
         <activity android:name=".view.coach.CreateRecordWithExercise" />
         <activity android:name=".view.SwimmerProfile" />
         <activity android:name=".view.coach.CreateRecordWithLesson" />

@@ -47,7 +47,7 @@ public class Notification extends AppCompatActivity {
     private void initComponent() {
         swimmerId = getIntent().getIntExtra("swimmer_id", 0);
         notePresenter = new NotePresetnerImpl(this);
-        imageViewAddNotification = findViewById(R.id.img_view_notification);
+        imageViewAddNotification = findViewById(R.id.img_add_notification);
         if (UserProfile.getInstance().currentUser.getRoleName().equals("swimmer")) {
             imageViewAddNotification.setVisibility(View.GONE);
         }
@@ -69,7 +69,7 @@ public class Notification extends AppCompatActivity {
         LinearLayout layoutDate = dialog.findViewById(R.id.layout_date);
         EditText edtNote = dialog.findViewById(R.id.edt_note);
         TextView txtDate = dialog.findViewById(R.id.txt_date);
-        Button btnAdd = dialog.findViewById(R.id.btn_add);
+        Button btnAdd = dialog.findViewById(R.id.btn_add_note);
         Button btnCancel = dialog.findViewById(R.id.btn_cancel);
         layoutDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,10 +78,12 @@ public class Notification extends AppCompatActivity {
                 MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(Notification.this, new MonthPickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(int selectedMonth, int selectedYear) {
-                        txtDate.setText(selectedMonth + "/" + selectedYear);
+                        txtDate.setText((selectedMonth + 1) + "/" + selectedYear);
                     }
-                }, calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
-                builder.setTitle("Select month").build().show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH));
+                builder.setTitle("Select month")
+                        .setMonthAndYearRange(Calendar.JANUARY, Calendar.DECEMBER, 1900, 2030)
+                        .build().show();
 
             }
         });
@@ -91,7 +93,7 @@ public class Notification extends AppCompatActivity {
                 StringTokenizer tokens = new StringTokenizer(txtDate.getText().toString(), "/");
                 int month = Integer.parseInt(tokens.nextToken());
                 int year = Integer.parseInt(tokens.nextToken());
-                Note note = new Note(UserProfile.getInstance().currentUser.getId(), month, year, edtNote.getText().toString());
+                Note note = new Note(swimmerId, month, year, edtNote.getText().toString());
                 notePresenter.onAddNote(note);
             }
         });
@@ -102,6 +104,7 @@ public class Notification extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+        dialog.show();
     }
 
     private void initDatabase() {
