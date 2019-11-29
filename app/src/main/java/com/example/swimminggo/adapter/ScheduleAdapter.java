@@ -1,5 +1,6 @@
 package com.example.swimminggo.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     CalendarFragment calendarFragment;
     Date currentDate;
     View itemView;
+    Integer currentPosition;
+    Integer lastPosition;
+
     @NonNull
     @Override
     public ScheduleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,28 +31,21 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         return new ViewHolder(itemView);
     }
 
-    public ScheduleAdapter(List<Date> dates, CalendarFragment calendarFragment, Date currentDate){
+    public ScheduleAdapter(List<Date> dates, CalendarFragment calendarFragment, Date currentDate) {
         this.dates = dates;
         this.calendarFragment = calendarFragment;
         this.currentDate = currentDate;
+        this.currentPosition = dates.indexOf(currentDate);
+        this.lastPosition = currentPosition;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ScheduleAdapter.ViewHolder holder, int position) {
-        holder.txtTh.setText(dates.get(position).getFullName());
-        holder.txtDay.setText(dates.get(position).getDay()+"");
-
-        if (currentDate.equals(dates.get(position))){
-            calendarFragment.onGetListLessonPlanByDate(currentDate);
+        holder.rbDate.setText(dates.get(position).getFullName() + "     " +dates.get(position).getDay());
+        holder.rbDate.setChecked(position == lastPosition);
+        if (position == currentPosition){
+            calendarFragment.onGetListLessonPlanByDate(dates.get(position));
         }
-
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendarFragment.onGetListLessonPlanByDate(dates.get(position));
-            }
-        });
-
     }
 
     @Override
@@ -57,11 +54,20 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtDay, txtTh;
+        RadioButton rbDate;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtDay = itemView.findViewById(R.id.txt_day);
-            txtTh = itemView.findViewById(R.id.txt_th);
+            rbDate = itemView.findViewById(R.id.rb_date);
+
+            rbDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lastPosition = getAdapterPosition();
+                    calendarFragment.onGetListLessonPlanByDate(dates.get(lastPosition));
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
 }
