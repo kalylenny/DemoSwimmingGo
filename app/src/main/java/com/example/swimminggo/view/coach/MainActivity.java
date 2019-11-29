@@ -1,16 +1,15 @@
 package com.example.swimminggo.view.coach;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.swimminggo.R;
 import com.example.swimminggo.constant.ExerciseConstant;
-import com.example.swimminggo.models.Exercise;
 import com.example.swimminggo.presenter.ExercisePresenter;
 import com.example.swimminggo.presenter.TeamPresenter;
 import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
@@ -18,7 +17,6 @@ import com.example.swimminggo.presenter.presenterImpl.TeamPresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.view.coach.fragment.CalendarFragment;
 import com.example.swimminggo.view.coach.fragment.LibraryCategories;
-import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 import com.example.swimminggo.view.coach.fragment.SettingFragment;
 import com.example.swimminggo.view.coach.fragment.TeamFragment;
 import com.example.swimminggo.view.coach.fragment.WorkoutFragment;

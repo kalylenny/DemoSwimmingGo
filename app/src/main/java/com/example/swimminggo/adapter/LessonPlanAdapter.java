@@ -41,13 +41,13 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull LessonPlanAdapter.ViewHolder holder, int position) {
         holder.txtLessonName.setText(lessonPlans.get(position).getLessonName());
-        String teamName = Iterables.tryFind(ListTeam.getInstance().getListTeam(), new Predicate<Team>() {
-            @Override
-            public boolean apply(@NullableDecl Team input) {
-                return input.getTeamID() == lessonPlans.get(position).getTeamId();
-            }
-        }).orNull().getTeamName();
-        holder.txtTeamName.setText(teamName);
+//        String teamName = Iterables.tryFind(ListTeam.getInstance().getListTeam(), new Predicate<Team>() {
+//            @Override
+//            public boolean apply(@NullableDecl Team input) {
+//                return input.getTeamID() == lessonPlans.get(position).getTeamId();
+//            }
+//        }).orNull().getTeamName();
+//        holder.txtTeamName.setText(teamName);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
