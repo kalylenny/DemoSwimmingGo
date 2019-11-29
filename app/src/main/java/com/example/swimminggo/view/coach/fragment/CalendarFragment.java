@@ -26,9 +26,11 @@ import com.example.swimminggo.presenter.SchedulePresenter;
 import com.example.swimminggo.presenter.presenterImpl.SchedulePresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.Notification;
 import com.example.swimminggo.view.coach.CreateRecord;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.whiteelephant.monthpicker.MonthPickerDialog;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
@@ -45,6 +47,8 @@ public class CalendarFragment extends Fragment {
     ScheduleAdapter scheduleAdapter;
     LessonPlanAdapter lessonPlanAdapter;
     SchedulePresenter schedulePresenter;
+    Calendar calendar;
+
     public CalendarFragment() {
 
     }
@@ -68,7 +72,7 @@ public class CalendarFragment extends Fragment {
         schedulePresenter = new SchedulePresenterImpl(this);
     }
 
-    public void onGetListLessonPlanByDate(Date date){
+    public void onGetListLessonPlanByDate(Date date) {
         schedulePresenter.loadListLessonPlanByDate(date);
     }
 
@@ -76,25 +80,70 @@ public class CalendarFragment extends Fragment {
         btnNextWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                calendar.add(Calendar.DATE, 6);
+                calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+                Date currentDate = new Date(calendar);
+                txtDate.setText(currentDate.getMonth() + "/" + currentDate.getYear());
+                List<Date> dates = new ArrayList<>();
+                for (int i = 0; i < 7; i++) {
+                    dates.add(new Date(calendar));
+                    calendar.add(Calendar.DATE, 1);
+                }
+                setScheduleRecyclerView(dates, currentDate);
             }
         });
 
         btnPreviousWeek.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                calendar.add(Calendar.DATE, -14);
+                calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+                Date currentDate = new Date(calendar);
+                txtDate.setText(currentDate.getMonth() + "/" + currentDate.getYear());
+                List<Date> dates = new ArrayList<>();
+                for (int i = 0; i < 7; i++) {
+                    dates.add(new Date(calendar));
+                    calendar.add(Calendar.DATE, 1);
+                }
+                setScheduleRecyclerView(dates, currentDate);
+            }
+        });
 
+        txtDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar2 = Calendar.getInstance();
+                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(view.getContext(), new MonthPickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(int selectedMonth, int selectedYear) {
+                        calendar.set(Calendar.DAY_OF_MONTH, 1);
+                        calendar.set(Calendar.MONTH, selectedMonth);
+                        calendar.set(Calendar.YEAR, selectedYear);
+                        calendar.set(Calendar.DAY_OF_WEEK, calendar.SUNDAY);
+                        Date currentDate = new Date(calendar);
+                        txtDate.setText(currentDate.getMonth() + "/" + currentDate.getYear());
+                        List<Date> dates = new ArrayList<>();
+                        for (int i = 0; i < 7; i++) {
+                            dates.add(new Date(calendar));
+                            calendar.add(Calendar.DATE, 1);
+                        }
+                        setScheduleRecyclerView(dates, currentDate);
+                    }
+                }, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH));
+                builder.setTitle("Select month")
+                        .setMonthAndYearRange(Calendar.JANUARY, Calendar.DECEMBER, 1900, 2030)
+                        .build().show();
             }
         });
     }
 
     private void initDatabase() {
-        Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         Date currentDate = new Date(calendar);
-        txtDate.setText(currentDate.getFullName()+", " + currentDate.toString());
+        txtDate.setText(currentDate.getMonth() + "/" + currentDate.getYear());
         calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
         List<Date> dates = new ArrayList<>();
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 7; i++) {
             dates.add(new Date(calendar));
             calendar.add(Calendar.DATE, 1);
         }
@@ -102,13 +151,13 @@ public class CalendarFragment extends Fragment {
     }
 
 
-    private void setScheduleRecyclerView(List<Date> dates, Date currentDate){
+    private void setScheduleRecyclerView(List<Date> dates, Date currentDate) {
         scheduleAdapter = new ScheduleAdapter(dates, this, currentDate);
         recyclerViewSchedule.setAdapter(scheduleAdapter);
         recyclerViewSchedule.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
-    public void setUpLessonPlanRecyclerView(List<LessonPlan> lessonPlans){
+    public void setUpLessonPlanRecyclerView(List<LessonPlan> lessonPlans) {
         lessonPlanAdapter = new LessonPlanAdapter(lessonPlans, this);
         recyclerViewLessonPlan.setAdapter(lessonPlanAdapter);
         recyclerViewLessonPlan.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));

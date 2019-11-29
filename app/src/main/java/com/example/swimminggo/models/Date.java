@@ -9,9 +9,9 @@ public class Date {
     int day, month, year;
     String fullName;
 
-    public Date(Calendar calendar){
+    public Date(Calendar calendar) {
         this.day = calendar.get(Calendar.DATE);
-        this.month = calendar.get(Calendar.MONTH);
+        this.month = calendar.get(Calendar.MONTH) + 1;
         this.year = calendar.get(Calendar.YEAR);
         this.fullName = getName(calendar);
     }
@@ -57,9 +57,9 @@ public class Date {
         this.fullName = fullName;
     }
 
-    private String getName(Calendar calendar){
+    private String getName(Calendar calendar) {
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-        switch (day){
+        switch (day) {
             case Calendar.MONDAY:
                 return "Thứ 2";
             case Calendar.TUESDAY:
@@ -73,7 +73,7 @@ public class Date {
             case Calendar.SATURDAY:
                 return "Thứ 7";
         }
-        return "Chủ Nhật";
+        return "C.Nhật";
     }
 
     @Override
