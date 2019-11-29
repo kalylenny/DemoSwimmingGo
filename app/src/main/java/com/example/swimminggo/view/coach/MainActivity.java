@@ -17,6 +17,7 @@ import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
 import com.example.swimminggo.presenter.presenterImpl.TeamPresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.view.coach.fragment.CalendarFragment;
+import com.example.swimminggo.view.coach.fragment.LibraryCategories;
 import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 import com.example.swimminggo.view.coach.fragment.SettingFragment;
 import com.example.swimminggo.view.coach.fragment.TeamFragment;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     public void initView(){
         bottomNavigationView = findViewById(R.id.bottom_bar);
         loadFragment(new WorkoutFragment());
-        loadFragment(new CalendarFragment());
+//        loadFragment(new CalendarFragment());
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new WorkoutFragment());
                         return true;
                     case R.id.item_library:
-                        loadFragment(new LibraryFragment());
+                        loadFragment(new LibraryCategories());
                         return true;
                 }
                 return false;

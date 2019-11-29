@@ -8,6 +8,7 @@ import com.example.swimminggo.models.Video;
 import com.example.swimminggo.presenter.VideoPresenter;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.singleton.Videos;
+import com.example.swimminggo.view.coach.fragment.Library;
 import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 
 import org.json.JSONArray;
@@ -16,11 +17,11 @@ import org.json.JSONObject;
 
 public class VideoPresenterImpl implements VideoPresenter {
 
-    LibraryFragment libraryFragment;
+    Library library;
 
-    public VideoPresenterImpl(LibraryFragment libraryFragment) {
-        this.libraryFragment = libraryFragment;
-        AndroidNetworking.initialize(libraryFragment.getContext());
+    public VideoPresenterImpl(Library library) {
+        this.library = library;
+        AndroidNetworking.initialize(library.getApplicationContext());
     }
 
     @Override
@@ -37,7 +38,7 @@ public class VideoPresenterImpl implements VideoPresenter {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Videos.getInstance().getVideos().add(new Video(jsonArray.getJSONObject(i)));
                         }
-                        libraryFragment.setupRecyclerView();
+                        library.setupRecyclerView();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -54,12 +55,13 @@ public class VideoPresenterImpl implements VideoPresenter {
     @Override
     public void onAddVideos(Video video) {
         AndroidNetworking.post(URLConstant.getInstance().URL_ADD_VIDEO)
+                .addJSONObjectBody(video.toJSONObject())
                 .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
                 .build().getAsJSONObject(new JSONObjectRequestListener() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    libraryFragment.doAddVideo(response.getBoolean("success"), response.getString("message"));
+                    library.doAddVideo(response.getBoolean("success"), response.getString("message"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
