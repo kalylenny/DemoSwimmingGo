@@ -9,7 +9,6 @@ import com.example.swimminggo.presenter.VideoPresenter;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.singleton.Videos;
 import com.example.swimminggo.view.coach.fragment.Library;
-import com.example.swimminggo.view.coach.fragment.LibraryFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
