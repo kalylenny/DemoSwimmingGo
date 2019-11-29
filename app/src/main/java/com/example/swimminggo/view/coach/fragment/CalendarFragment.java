@@ -164,27 +164,9 @@ public class CalendarFragment extends Fragment {
     }
 
     public void showLessonDialog(LessonPlan lessonPlan) {
-        Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.dialog_lesson_plan);
-        Button btnCreateRecord = dialog.findViewById(R.id.btn_create_record);
-        Button btnCancel = dialog.findViewById(R.id.btn_cancel);
-
-        btnCreateRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), CreateRecord.class);
-                intent.putExtra("lesson_plan", lessonPlan);
-                startActivity(intent);
-            }
-        });
-
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+        Intent intent = new Intent(getContext(), CreateRecord.class);
+        intent.putExtra("lesson_plan", lessonPlan);
+        startActivity(intent);
     }
 
 }
