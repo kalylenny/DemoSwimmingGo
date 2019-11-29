@@ -10,10 +10,9 @@ import android.view.MenuItem;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.view.coach.fragment.CalendarFragment;
+import com.example.swimminggo.view.coach.fragment.LibraryCategories;
 import com.example.swimminggo.view.coach.fragment.SettingFragment;
 import com.example.swimminggo.view.swimmer.fragment.SwimmerChartFragment;
-import com.example.swimminggo.view.swimmer.fragment.SwimmerLibraryFragment;
-import com.example.swimminggo.view.swimmer.fragment.SwimmerWorkoutFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,16 +27,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         bottomNavigationView = findViewById(R.id.bottom_bar_swimmer);
-        loadFragment(new SwimmerWorkoutFragment());
+        loadFragment(new CalendarFragment());
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.item_workout:
-                        loadFragment(new SwimmerWorkoutFragment());
+                        loadFragment(new CalendarFragment());
                         return true;
                     case R.id.item_library:
-                        loadFragment(new SwimmerLibraryFragment());
+                        loadFragment(new LibraryCategories());
                         return true;
                     case R.id.item_chart:
                         loadFragment(new SwimmerChartFragment());

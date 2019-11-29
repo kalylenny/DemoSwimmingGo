@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.swimminggo">
+    package="com.example.swimminggo"
+    android:installLocation="preferExternal">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +14,11 @@
         android:roundIcon="@drawable/logo_swimminggo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.CreateRecordWithLesson"></activity>
+        <activity android:name=".view.coach.fragment.Library"></activity>
+        <activity android:name=".view.Notification" />
+        <activity android:name=".view.coach.CreateRecordWithExercise" />
+        <activity android:name=".view.SwimmerProfile" />
+        <activity android:name=".view.coach.CreateRecordWithLesson" />
         <activity android:name=".view.coach.CreateRecord" />
         <activity android:name=".view.coach.CreateLessonPlan" />
         <activity android:name=".view.coach.CreateLesson" />

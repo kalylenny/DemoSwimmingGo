@@ -1,5 +1,6 @@
 package com.example.swimminggo.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.swimminggo.R;
 import com.example.swimminggo.models.Swimmer;
 import com.example.swimminggo.singleton.ListSwimmer;
+import com.example.swimminggo.view.SwimmerProfile;
 
 import java.util.List;
 
@@ -39,6 +41,15 @@ public class ListSwimmerAdapter extends RecyclerView.Adapter<ListSwimmerAdapter.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ListSwimmer.getInstance().isCheckeds.set(position, isChecked);
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), SwimmerProfile.class);
+                intent.putExtra("swimmer", swimmer);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
     }

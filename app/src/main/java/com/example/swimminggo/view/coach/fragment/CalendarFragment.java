@@ -13,13 +13,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swimminggo.R;
+import com.example.swimminggo.adapter.LessonPlanAdapter;
+import com.example.swimminggo.adapter.ScheduleAdapter;
+import com.example.swimminggo.models.Date;
 import com.example.swimminggo.models.LessonPlan;
 import com.example.swimminggo.models.Team;
 import com.example.swimminggo.presenter.SchedulePresenter;
 import com.example.swimminggo.presenter.presenterImpl.SchedulePresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
+import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.coach.CreateRecord;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -33,12 +39,12 @@ import java.util.List;
 
 public class CalendarFragment extends Fragment {
     View view;
-    LinearLayout weekLayout;
-    Calendar calendar;
+    TextView txtDate;
+    Button btnNextWeek, btnPreviousWeek;
+    RecyclerView recyclerViewSchedule, recyclerViewLessonPlan;
+    ScheduleAdapter scheduleAdapter;
+    LessonPlanAdapter lessonPlanAdapter;
     SchedulePresenter schedulePresenter;
-    List<LinearLayout> layouts;
-    int count = 0;
-
     public CalendarFragment() {
 
     }
@@ -49,66 +55,66 @@ public class CalendarFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_calendar, container, false);
         initComponent();
         initDatabase();
+        action();
         return view;
     }
 
     private void initComponent() {
-        weekLayout = view.findViewById(R.id.week_layout);
-        calendar = Calendar.getInstance();
+        txtDate = view.findViewById(R.id.txt_date);
+        btnNextWeek = view.findViewById(R.id.btn_next_week);
+        btnPreviousWeek = view.findViewById(R.id.btn_previous_week);
+        recyclerViewSchedule = view.findViewById(R.id.recycler_view_schedule);
+        recyclerViewLessonPlan = view.findViewById(R.id.recycler_view_lesson_plan);
         schedulePresenter = new SchedulePresenterImpl(this);
-        layouts = new ArrayList<>(Arrays.asList(null, null, null, null, null, null, null, null));
+    }
+
+    public void onGetListLessonPlanByDate(Date date){
+        schedulePresenter.loadListLessonPlanByDate(date);
     }
 
     private void action() {
+        btnNextWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+
+        btnPreviousWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initDatabase() {
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        for (int i = 0; i < 7; i++) {
-            schedulePresenter.loadListLessonPlanByDate(calendar.get(Calendar.DATE),
-                    calendar.get(Calendar.MONTH) + 1,
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.DAY_OF_WEEK));
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = new Date(calendar);
+        txtDate.setText(currentDate.getFullName()+", " + currentDate.toString());
+        calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+        List<Date> dates = new ArrayList<>();
+        for (int i = 0; i < 7; i++){
+            dates.add(new Date(calendar));
             calendar.add(Calendar.DATE, 1);
         }
+        setScheduleRecyclerView(dates, currentDate);
     }
 
-    private void initSchedule() {
-        for (int i = 0; i < 7; i++)
-            weekLayout.addView(layouts.get(i));
+
+    private void setScheduleRecyclerView(List<Date> dates, Date currentDate){
+        scheduleAdapter = new ScheduleAdapter(dates, this, currentDate);
+        recyclerViewSchedule.setAdapter(scheduleAdapter);
+        recyclerViewSchedule.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
-    public void setDayEventInSchedule(String date, int index, List<LessonPlan> lessonPlans) {
-        LayoutInflater inflater = LayoutInflater.from(this.getContext());
-        LinearLayout dayEventLayout = (LinearLayout) inflater.inflate(R.layout.item_date_event, null);
-        TextView txtDate = dayEventLayout.findViewById(R.id.txt_date);
-        txtDate.setText(date);
-        for (LessonPlan lessonPlan : lessonPlans) {
-            LinearLayout lessonEventLayout = (LinearLayout) inflater.inflate(R.layout.item_lesson_event, null);
-            TextView txtLessonName = lessonEventLayout.findViewById(R.id.txt_lesson_name);
-            TextView txtTeamName = lessonEventLayout.findViewById(R.id.txt_team_name);
-            txtLessonName.setText(lessonPlan.getLessonName());
-            String teamName = Iterables.tryFind(ListTeam.getInstance().getListTeam(), new Predicate<Team>() {
-                @Override
-                public boolean apply(@NullableDecl Team input) {
-                    return input.getTeamID() == lessonPlan.getTeamId();
-                }
-            }).orNull().getTeamName();
-            txtTeamName.setText(teamName);
-            dayEventLayout.addView(lessonEventLayout);
-
-            lessonEventLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showLessonDialog(lessonPlan);
-                }
-            });
-        }
-        weekLayout.addView(dayEventLayout);
+    public void setUpLessonPlanRecyclerView(List<LessonPlan> lessonPlans){
+        lessonPlanAdapter = new LessonPlanAdapter(lessonPlans, this);
+        recyclerViewLessonPlan.setAdapter(lessonPlanAdapter);
+        recyclerViewLessonPlan.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
-    public void showLessonDialog(LessonPlan lessonPlan){
+    public void showLessonDialog(LessonPlan lessonPlan) {
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_lesson_plan);
         Button btnCreateRecord = dialog.findViewById(R.id.btn_create_record);
@@ -132,10 +138,4 @@ public class CalendarFragment extends Fragment {
         dialog.show();
     }
 
-    private boolean isNotNullLayouts(List<LinearLayout> layouts) {
-        for (int i = 1; i <= 7; i++)
-            if (layouts.get(i) == null)
-                return false;
-        return true;
-    }
 }

@@ -4,6 +4,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.swimminggo.constant.URLConstant;
+import com.example.swimminggo.models.Date;
 import com.example.swimminggo.models.LessonPlan;
 import com.example.swimminggo.presenter.SchedulePresenter;
 import com.example.swimminggo.singleton.UserProfile;
@@ -15,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SchedulePresenterImpl implements SchedulePresenter {
@@ -28,9 +28,9 @@ public class SchedulePresenterImpl implements SchedulePresenter {
     }
 
     @Override
-    public void loadListLessonPlanByDate(int day, int month, int year,final int dayOfWeek) {
+    public void loadListLessonPlanByDate(Date date) {
         final List<LessonPlan> lessonPlans = new ArrayList<>();
-        AndroidNetworking.get(URLConstant.getInstance().getUrlGetListLessonPlanByDate(new DateUtils().coverToDateString(day, month, year)))
+        AndroidNetworking.get(URLConstant.getInstance().getUrlGetListLessonPlanByDate(date.toFormatRequest()))
                 .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -42,8 +42,8 @@ public class SchedulePresenterImpl implements SchedulePresenter {
                                 for (int i = 0; i < lessonPlanJSONs.length(); i++) {
                                     lessonPlans.add(new LessonPlan(lessonPlanJSONs.getJSONObject(i)));
                                 }
-                                calendarFragment.setDayEventInSchedule(new DateUtils().fullNameDay(dayOfWeek) + ", " + day + "/" + month + "/" + year, dayOfWeek, lessonPlans);
                             }
+                            calendarFragment.setUpLessonPlanRecyclerView(lessonPlans);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

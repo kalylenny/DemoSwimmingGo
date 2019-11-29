@@ -12,17 +12,19 @@ import com.example.swimminggo.view.swimmer.fragment.SwimmerYearChartFragment;
 public class PageAdapterSwimmer extends FragmentStatePagerAdapter {
 
     private  int numOfTabs;
+    private int swimmerId;
 
-    public PageAdapterSwimmer(FragmentManager fm, int numOfTabs) {
+    public PageAdapterSwimmer(FragmentManager fm, int numOfTabs, int swimmerId) {
         super(fm);
         this.numOfTabs = numOfTabs;
+        this.swimmerId = swimmerId;
     }
     @NonNull
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new SwimmerMonthChartFragment();
+                return new SwimmerMonthChartFragment(swimmerId);
             case 1:
                 return new SwimmerQuarterChartFragment();
             case 2:

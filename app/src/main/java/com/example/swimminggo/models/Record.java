@@ -6,6 +6,13 @@ import org.json.JSONObject;
 public class Record {
     private int swimmerId, coachId, exerciseId, millisec, sec, min;
 
+    public Record(int swimmerId, int coachId, int exerciseId){
+        this.swimmerId = swimmerId;
+        this.coachId = coachId;
+        this.exerciseId = exerciseId;
+        this.millisec = this.min = this.sec = 0;
+    }
+
     public Record(JSONObject jsonObject){
         try{
             this.swimmerId = jsonObject.getInt("swimmer_id");
@@ -23,11 +30,11 @@ public class Record {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("swimmer_id", this.swimmerId);
-            jsonObject.put("coach_id", this.swimmerId);
-            jsonObject.put("exercise_id", this.swimmerId);
-            jsonObject.put("swim_millisec", this.swimmerId);
-            jsonObject.put("swim_sec", this.swimmerId);
-            jsonObject.put("swim_min", this.swimmerId);
+            jsonObject.put("coach_id", this.coachId);
+            jsonObject.put("exercise_id", this.exerciseId);
+            jsonObject.put("swim_millisec", this.millisec);
+            jsonObject.put("swim_sec", this.sec);
+            jsonObject.put("swim_min", this.min);
         } catch (JSONException e) {
             e.printStackTrace();
         }

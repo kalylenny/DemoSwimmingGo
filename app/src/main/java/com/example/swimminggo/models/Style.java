@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 
 import org.json.JSONObject;
 
-public class Style {
+import java.io.Serializable;
+
+public class Style implements Serializable {
     private String id, value;
 
     public Style(String id, String value) {

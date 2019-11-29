@@ -7,5 +7,8 @@ import java.util.List;
 public interface LessonPresenter {
 
     void onGetListExerciseByPhaseId(int phaseId, List<Exercise> exerciseList);
+    void onGetListExerciseByPhaseId(int phaseId, int lessonId);
     void onCreateLesson(List<Exercise> exercises, String name);
+    void onGetListLesson();
+    void onCreateLessonPlan(int lessonId, int teamId, String schedule);
 }

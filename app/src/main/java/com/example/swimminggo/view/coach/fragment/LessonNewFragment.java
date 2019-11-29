@@ -65,9 +65,8 @@ public class LessonNewFragment extends Fragment {
         if (ListExercise.getInstance() == null) {
             ListExercise.newInstance();
             exercisePresenter.onGetListExercise();
-            exercises = ListExercise.getInstance().getExercises();
         }
-
+        exercises = ListExercise.getInstance().getExercises();
         btnWarmUp = view.findViewById(R.id.btn_warm_up);
         btnMainStroke = view.findViewById(R.id.btn_main_stroke);
         btnFinalSet = view.findViewById(R.id.btn_final_set);

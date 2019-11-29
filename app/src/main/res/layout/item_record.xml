@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="10sp"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/txt_swim_name"
+        android:ems="9"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20sp"/>
+    <EditText
+        android:id="@+id/edt_min"
+        android:ems="2"
+        android:maxLength="2"
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edt_sec"
+        android:ems="2"
+        android:maxLength="2"
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edt_millisec"
+        android:ems="2"
+        android:inputType="number"
+        android:maxLength="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

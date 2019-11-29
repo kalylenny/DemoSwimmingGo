@@ -14,6 +14,7 @@ import com.example.swimminggo.models.Style;
 import com.example.swimminggo.presenter.ExercisePresenter;
 import com.example.swimminggo.singleton.ListExercise;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.Login;
 import com.example.swimminggo.view.coach.CreateExercise;
 import com.example.swimminggo.view.coach.MainActivity;
 import com.example.swimminggo.view.coach.fragment.LessonNewFragment;
@@ -32,6 +33,12 @@ public class ExercisePresenterImpl implements ExercisePresenter {
     LessonNewFragment lessonNewFragment;
     WorkoutFragment workoutFragment;
     MainActivity mainActivity;
+    Login login;
+
+    public ExercisePresenterImpl(Login login){
+        this.login = login;
+        AndroidNetworking.initialize(login.getApplicationContext());
+    }
 
     public ExercisePresenterImpl(CreateExercise createExercise){
         this.createExercise = createExercise;

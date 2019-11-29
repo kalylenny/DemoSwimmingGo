@@ -3,7 +3,9 @@ package com.example.swimminggo.models;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
     private String username, dob, email, firstName, lastName, phone, roleName;
     private int gender, id;
     private int isVerified;
@@ -56,10 +58,14 @@ public abstract class User {
     }
 
     public String getDob() {
+        if (dob.equals("null"))
+            return "";
         return dob;
     }
 
     public String getEmail() {
+        if (email.equals("null"))
+            return "";
         return email;
     }
 
@@ -72,6 +78,8 @@ public abstract class User {
     }
 
     public String getPhone() {
+        if (phone.equals("null"))
+            return "";
         return phone;
     }
 
