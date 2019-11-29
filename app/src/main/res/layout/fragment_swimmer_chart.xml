@@ -34,24 +34,32 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Spinner
-            android:id="@+id/spn_distance"
+
+            android:id="@+id/spn_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Spinner
-            android:id="@+id/spn_style"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/spn_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/btn_view_chart"
-            android:text="Xem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+
+<!--        <Button-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:textColor="@color/colorWhite"-->
+<!--            android:background="@drawable/button_login_border"-->
+<!--            android:id="@+id/btn_view_chart"-->
+<!--            android:text="Xem"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
     </LinearLayout>
 
     <LinearLayout
