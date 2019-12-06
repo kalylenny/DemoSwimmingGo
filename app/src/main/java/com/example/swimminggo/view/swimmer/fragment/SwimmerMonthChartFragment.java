@@ -102,22 +102,27 @@ public class SwimmerMonthChartFragment extends Fragment {
         }
         List lines = new ArrayList();
         lines.add(line);
+
         LineChartData data = new LineChartData();
         data.setLines(lines);
 
         Axis axis = new Axis();
         axis.setValues(axisValues);
-        Axis yAxis = new Axis();
-        data.setAxisYLeft(yAxis);
+        axis.setTextSize(12);
+        axis.setTextColor(Color.parseColor("#03A9F4"));
         data.setAxisXBottom(axis);
 
-        axis.setTextColor(Color.parseColor("#9C27B0"));
-        Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = maxTime(CurrentDistance.getInstance().getDistance().getValue());
-        lineChartView.setMaximumViewport(viewport);
-        lineChartView.setCurrentViewport(viewport);
+        Axis yAxis = new Axis();
+        yAxis.setTextColor(Color.parseColor("#03A9F4"));
+        yAxis.setTextSize(12);
+        data.setAxisYLeft(yAxis);
 
         lineChartView.setLineChartData(data);
+        Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
+        viewport.top = maxTime(CurrentDistance.getInstance().getDistance().getValue());
+        viewport.bottom = 0;
+        lineChartView.setMaximumViewport(viewport);
+        lineChartView.setCurrentViewport(viewport);
     }
 
     private int maxTime(int distance){
