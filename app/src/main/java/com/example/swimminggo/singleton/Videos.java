@@ -24,4 +24,8 @@ public class Videos {
     public List<Video> getVideos() {
         return videos;
     }
+
+    public void clearData() {
+        ourInstance = null;
+    }
 }

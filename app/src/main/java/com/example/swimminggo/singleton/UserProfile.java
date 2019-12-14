@@ -21,6 +21,10 @@ public class UserProfile {
         return ourInstance;
     }
 
+    public void clearData(){
+        ourInstance = null;
+    }
+
     public void getUserProfileByJSONObject(JSONObject jsonObject) {
         try {
             if (jsonObject.getString("role_name").equals("swimmer")) {

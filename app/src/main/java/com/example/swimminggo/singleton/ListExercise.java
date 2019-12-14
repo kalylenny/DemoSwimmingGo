@@ -23,4 +23,7 @@ public class ListExercise {
     private ListExercise() {
         exercises = new ArrayList<>();
     }
+    public void clearData() {
+        ourInstance = null;
+    }
 }

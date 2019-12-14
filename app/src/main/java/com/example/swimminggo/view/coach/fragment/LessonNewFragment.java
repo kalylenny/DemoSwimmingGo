@@ -106,19 +106,27 @@ public class LessonNewFragment extends Fragment {
         btnCreateLesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Exercise> exercises = new ArrayList<>();
-                for (Exercise exercise : warmUpExercises)
-                    exercises.add(exercise);
-                for (Exercise exercise : mainStrokeExercises)
-                    exercises.add(exercise);
-                for (Exercise exercise : finalSetExercises)
-                    exercises.add(exercise);
-                for (Exercise exercise : swimDownExercises)
-                    exercises.add(exercise);
+                if (!isFullExercises()) {
+                    List<Exercise> exercises = new ArrayList<>();
+                    for (Exercise exercise : warmUpExercises)
+                        exercises.add(exercise);
+                    for (Exercise exercise : mainStrokeExercises)
+                        exercises.add(exercise);
+                    for (Exercise exercise : finalSetExercises)
+                        exercises.add(exercise);
+                    for (Exercise exercise : swimDownExercises)
+                        exercises.add(exercise);
 
-                lessonPresenter.onCreateLesson(exercises, edtLessonName.getText().toString());
+                    lessonPresenter.onCreateLesson(exercises, edtLessonName.getText().toString());
+                } else {
+                    Toast.makeText(view.getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    private boolean isFullExercises(){
+        return (warmUpExercises == null || mainStrokeExercises == null || finalSetExercises == null || swimDownExercises == null);
     }
 
     public void doCreateLesson(boolean result, String message) {

@@ -90,9 +90,8 @@ public class CreateRecordWithExercise extends AppCompatActivity {
         btnCreateRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CreateRecordWithExercise.this, CreateRecordWithLesson.class);
                 TotalRecord.getInstance().getTotalRecord().set(position, Records.getInstance().getRecords());
-                startActivity(intent);
+                finish();
             }
         });
     }

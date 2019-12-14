@@ -1,5 +1,6 @@
 package com.example.swimminggo.view.coach.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +12,18 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.swimminggo.R;
+import com.example.swimminggo.constant.AgeConstant;
+import com.example.swimminggo.constant.ExerciseConstant;
 import com.example.swimminggo.models.User;
+import com.example.swimminggo.singleton.ListCheckBoxSwimmer;
+import com.example.swimminggo.singleton.ListExercise;
+import com.example.swimminggo.singleton.ListExerciseByPhase;
+import com.example.swimminggo.singleton.ListLesson;
+import com.example.swimminggo.singleton.ListSwimmer;
+import com.example.swimminggo.singleton.ListTeam;
+import com.example.swimminggo.singleton.Position;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.singleton.Videos;
 import com.example.swimminggo.view.Login;
 import com.example.swimminggo.view.profile.ChangePassword;
 import com.example.swimminggo.view.profile.ViewProfile;
@@ -24,10 +35,12 @@ public class SettingFragment extends Fragment {
     TextView txtFullName, txtRoleName;
     LinearLayout layoutViewProfile, layoutChangepassword, layoutLogout;
 
+    Activity mainActivity;
+
     User currentUser = UserProfile.getInstance().currentUser;
 
-    public SettingFragment() {
-
+    public SettingFragment(Activity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -68,7 +81,8 @@ public class SettingFragment extends Fragment {
         layoutLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), Login.class));
+                clearData();
+                mainActivity.finish();
             }
         });
     }
@@ -76,5 +90,25 @@ public class SettingFragment extends Fragment {
     private void initDatabase() {
         txtFullName.setText(currentUser.getFullName());
         txtRoleName.setText(currentUser.getRoleName());
+    }
+
+    private void clearData() {
+        UserProfile.getInstance().clearData();
+//        if (ExerciseConstant.getInstance() != null)
+//            ExerciseConstant.getInstance().clearData();
+        if (ListCheckBoxSwimmer.getInstance() != null)
+            ListCheckBoxSwimmer.getInstance().clearData();
+        if (ListExercise.getInstance() != null)
+            ListExercise.getInstance().clearData();
+        if (ListExerciseByPhase.getInstance() != null)
+            ListExerciseByPhase.getInstance().clearData();
+        if (ListSwimmer.getInstance() != null)
+            ListSwimmer.getInstance().clearData();
+        if (ListTeam.getInstance() != null)
+            ListTeam.getInstance().clearData();
+        if (Position.getInstance() != null)
+            Position.getInstance().clearData();
+        if (Videos.getInstance() != null)
+            Videos.getInstance().clearData();
     }
 }

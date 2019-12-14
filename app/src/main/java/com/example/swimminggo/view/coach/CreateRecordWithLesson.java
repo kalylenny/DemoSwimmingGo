@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,8 +34,9 @@ public class CreateRecordWithLesson extends AppCompatActivity {
     Button btnFinish;
     static List<List<Record>> lists = new ArrayList<>();
     static int phaseId;
-    int teamId;
+    static int teamId;
     RecordPresenter recordPresenter;
+    Activity fa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class CreateRecordWithLesson extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (phaseId != 3) {
-                    startActivity(new Intent(CreateRecordWithLesson.this, CreateRecord.class));
+                    finish();
                 } else if (isFullList()) {
                     ArrayList<Record> records = new ArrayList<>();
                     for (ArrayList<Record> listRecords : TotalRecord.getInstance().getTotalRecord()) {
@@ -105,7 +107,8 @@ public class CreateRecordWithLesson extends AppCompatActivity {
 
     public void doCreateRecord(boolean b) {
         if (b) {
-            startActivity(new Intent(CreateRecordWithLesson.this, MainActivity.class));
+            CreateRecord.fa.finish();
+            finish();
         }
     }
 }

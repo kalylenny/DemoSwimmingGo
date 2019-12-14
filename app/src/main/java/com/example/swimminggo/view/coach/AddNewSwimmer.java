@@ -28,6 +28,7 @@ public class AddNewSwimmer extends AppCompatActivity {
     SwimmerPresenter swimmerPresenter;
     List<Account> swimmerAccounts;
     Team team;
+    AddSwimmer addSwimmer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,9 +82,9 @@ public class AddNewSwimmer extends AppCompatActivity {
 
     public void doAddSwimmer(Boolean result, String message) {
         if (result) {
-            Intent intent = new Intent(AddNewSwimmer.this, AddSwimmer.class);
-            intent.putExtra("team", team);
-            startActivity(intent);
+            this.finish();
+            this.addSwimmer = (AddSwimmer) AddSwimmer.addSwimmerActivity;
+            addSwimmer.initDatabase();
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }

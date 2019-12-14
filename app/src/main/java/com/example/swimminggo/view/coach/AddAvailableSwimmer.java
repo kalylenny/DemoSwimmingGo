@@ -29,6 +29,7 @@ public class AddAvailableSwimmer extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button btnAddSwimmer;
     private List<Swimmer> swimmers = new ArrayList<>();
+    AddSwimmer addSwimmer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +80,9 @@ public class AddAvailableSwimmer extends AppCompatActivity {
 
     public void doAddSwimmerToTeam(Boolean result, String message) {
         if (result) {
-            Intent intent = new Intent(AddAvailableSwimmer.this, AddSwimmer.class);
-            intent.putExtra("team", team);
-            startActivity(intent);
+            this.finish();
+            this.addSwimmer = (AddSwimmer) AddSwimmer.addSwimmerActivity;
+            addSwimmer.initDatabase();
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }

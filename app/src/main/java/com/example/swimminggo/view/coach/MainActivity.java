@@ -1,5 +1,6 @@
 package com.example.swimminggo.view.coach;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -25,11 +26,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    Activity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_coach);
+        this.mainActivity = this;
         initDatabase();
         initView();
     }
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new CalendarFragment());
                         return true;
                     case R.id.item_setting:
-                        loadFragment(new SettingFragment());
+                        loadFragment(new SettingFragment(mainActivity));
                         return true;
                     case R.id.item_workout:
                         loadFragment(new WorkoutFragment());

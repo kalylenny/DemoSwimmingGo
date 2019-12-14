@@ -99,15 +99,20 @@ public class LessonAvailableFragment extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int teamId = ListTeam.getInstance().getListTeam().get((int) spnTeam.getSelectedItemId()).getTeamID();
-                lessonPresenter.onCreateLessonPlan(lessons.get(Position.getInstance().getLastPosition()).getId(),
-                        teamId,schedule);
+                if (Position.getInstance().getLastPosition() != -1) {
+                    int teamId = ListTeam.getInstance().getListTeam().get((int) spnTeam.getSelectedItemId()).getTeamID();
+                    lessonPresenter.onCreateLessonPlan(lessons.get(Position.getInstance().getLastPosition()).getId(),
+                            teamId, schedule);
+                } else {
+                    Toast.makeText(view.getContext(), "Vui lòng chọn giáo án", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
 
-    public void doCreateLessonPlan(Boolean result){
-        if (result){
+    public void doCreateLessonPlan(Boolean result) {
+        if (result) {
             Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
         }
     }

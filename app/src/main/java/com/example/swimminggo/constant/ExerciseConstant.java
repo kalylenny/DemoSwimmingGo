@@ -48,4 +48,7 @@ public class ExerciseConstant {
         return reps;
     }
 
+    public void clearData() {
+        ourInstance = null;
+    }
 }
