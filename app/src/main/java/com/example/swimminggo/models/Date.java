@@ -2,8 +2,12 @@ package com.example.swimminggo.models;
 
 import androidx.annotation.Nullable;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Date {
     int day, month, year;
@@ -14,6 +18,31 @@ public class Date {
         this.month = calendar.get(Calendar.MONTH) + 1;
         this.year = calendar.get(Calendar.YEAR);
         this.fullName = getName(calendar);
+    }
+
+    public Date(String date){
+        List<Integer> ints = Arrays.stream(date.split("-"))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        this.day = ints.get(2);
+        this.month = ints.get(1);
+        this.year = ints.get(0);
+    }
+
+    public int calculateAge(){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+        return ageInt;
     }
 
     public int getDay() {

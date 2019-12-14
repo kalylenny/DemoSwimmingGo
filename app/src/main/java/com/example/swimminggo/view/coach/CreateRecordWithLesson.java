@@ -49,24 +49,26 @@ public class CreateRecordWithLesson extends AppCompatActivity {
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isFullList()) {
+                if (phaseId != 3) {
+                    startActivity(new Intent(CreateRecordWithLesson.this, CreateRecord.class));
+                } else if (isFullList()) {
                     ArrayList<Record> records = new ArrayList<>();
-                    for (ArrayList<Record> listRecords : TotalRecord.getInstance().getTotalRecord()){
-                        for(Record record : listRecords){
+                    for (ArrayList<Record> listRecords : TotalRecord.getInstance().getTotalRecord()) {
+                        for (Record record : listRecords) {
                             records.add(record);
                         }
                     }
                     recordPresenter.onCreateRecord(records);
-                } else{
-                    Toast.makeText(CreateRecordWithLesson.this, "Nhập hết đi đã", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(CreateRecordWithLesson.this, "Nhập chưa xong", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     private boolean isFullList() {
-        for(ArrayList<Record> records : TotalRecord.getInstance().getTotalRecord()){
-            if (records.size() == 0){
+        for (ArrayList<Record> records : TotalRecord.getInstance().getTotalRecord()) {
+            if (records.size() == 0) {
                 return false;
             }
         }
@@ -78,8 +80,7 @@ public class CreateRecordWithLesson extends AppCompatActivity {
             teamId = getIntent().getIntExtra("team_id", 0);
         if (lesson == null)
             lesson = (Lesson) getIntent().getSerializableExtra("lesson");
-        if (phaseId == 0)
-            phaseId = getIntent().getIntExtra("phase_id", 0);
+        phaseId = getIntent().getIntExtra("phase_id", 0);
         lessonPresenter = new LessonPresenterImpl(this);
         recordPresenter = new RecordPresenterImpl(this);
         btnFinish = findViewById(R.id.btn_finish);
@@ -103,7 +104,7 @@ public class CreateRecordWithLesson extends AppCompatActivity {
     }
 
     public void doCreateRecord(boolean b) {
-        if (b){
+        if (b) {
             startActivity(new Intent(CreateRecordWithLesson.this, MainActivity.class));
         }
     }

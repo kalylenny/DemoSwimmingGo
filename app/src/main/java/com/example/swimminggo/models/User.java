@@ -46,7 +46,10 @@ public abstract class User implements Serializable {
     }
 
     public int getAge() {
-        return age;
+        if (dob.equals("null"))
+            return 0;
+        Date date = new Date(this.dob);
+        return date.calculateAge();
     }
 
     public void setAge(int age) {

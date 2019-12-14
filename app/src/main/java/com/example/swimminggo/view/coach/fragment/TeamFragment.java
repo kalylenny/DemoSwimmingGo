@@ -143,8 +143,8 @@ public class TeamFragment extends Fragment {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage("Bạn có muốn xóa nhóm này?").setPositiveButton("Đồng ý", dialogClickListener)
+                .setNegativeButton("Hủy", dialogClickListener).show();
     }
 
     private void loadEditTeamDialog(final int position, final Team team){

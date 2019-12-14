@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,8 +14,6 @@ import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.RecordAdapter;
 import com.example.swimminggo.constant.ExerciseConstant;
 import com.example.swimminggo.models.Exercise;
-import com.example.swimminggo.models.Lesson;
-import com.example.swimminggo.models.LessonPlan;
 import com.example.swimminggo.models.Record;
 import com.example.swimminggo.models.Style;
 import com.example.swimminggo.models.Swimmer;
@@ -30,7 +27,6 @@ import com.google.common.collect.Iterables;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateRecordWithExercise extends AppCompatActivity {
@@ -41,8 +37,8 @@ public class CreateRecordWithExercise extends AppCompatActivity {
     Exercise exercise;
     RecordPresenter recordPresenter;
     List<Swimmer> swimmers;
-    int position;
-    int teamId;
+    static int position;
+    static int teamId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +50,10 @@ public class CreateRecordWithExercise extends AppCompatActivity {
 
     private void initComponent(){
         exercise = (Exercise) getIntent().getSerializableExtra("exercise");
-        position = getIntent().getIntExtra("position", 0);
-        teamId = getIntent().getIntExtra("team_id", 0);
+        if (position == 0)
+            position = getIntent().getIntExtra("position", 0);
+        if (teamId == 0)
+            teamId = getIntent().getIntExtra("team_id", 0);
         recordPresenter = new RecordPresenterImpl(this);
         txtDistance = findViewById(R.id.txt_distance);
         txtStyle = findViewById(R.id.txt_style);
@@ -65,8 +63,8 @@ public class CreateRecordWithExercise extends AppCompatActivity {
     }
 
     private void initDatabase(){
-        txtRepetition.setText(exercise.getRep()+"");
-        txtDistance.setText(exercise.getDistance()+"");
+        txtRepetition.setText("Số lần lặp : "+ exercise.getRep());
+        txtDistance.setText("Khoảng cách : " + exercise.getDistance()+"");
         String style = Iterables.tryFind(ExerciseConstant.getInstance().getStyles(),
                 new Predicate<Style>() {
                     @Override
@@ -74,7 +72,7 @@ public class CreateRecordWithExercise extends AppCompatActivity {
                         return input.getId().equals(exercise.getStyleId());
                     }
                 }).orNull().getValue();
-        txtStyle.setText(style);
+        txtStyle.setText("Kiểu bơi : " + style);
         Records.newInstance();
         recordPresenter.onGetListSwimmerByTeamId(teamId);
     }

@@ -86,10 +86,10 @@ public class EditProfile extends AppCompatActivity {
     private void initDatabase() {
         ArrayAdapter<String> listSexAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<String>(Arrays.asList("Nam", "Nữ")));
         spnGender.setAdapter(listSexAdapter);
-        edtEmail.setText(currentUser.getEmail());
-        txtDob.setText(currentUser.getDob());
-        edtFirstName.setText(currentUser.getFirstName());
-        edtLastName.setText(currentUser.getLastName());
+        edtEmail.setText(currentUser.getEmail().equals("null")?"":currentUser.getEmail());
+        txtDob.setText(currentUser.getDob().equals("null")?"":currentUser.getDob());
+        edtFirstName.setText(currentUser.getFirstName().equals("null")?"":currentUser.getFirstName());
+        edtLastName.setText(currentUser.getLastName().equals("null")?"":currentUser.getLastName());
         edtPhone.setText(currentUser.getPhone());
     }
 
@@ -118,7 +118,7 @@ public class EditProfile extends AppCompatActivity {
         }
         user.setFirstName(edtFirstName.getText().toString());
         user.setEmail(edtEmail.getText().toString());
-        user.setDob("1998/5/5");
+        user.setDob(txtDob.getText().toString());
         user.setLastName(edtLastName.getText().toString());
         user.setGender(spnGender.getSelectedItem().toString().equals("Nam")? 1:0);
         user.setPhone(edtPhone.getText().toString());
@@ -136,7 +136,9 @@ public class EditProfile extends AppCompatActivity {
     public void doEditProfile(boolean result, String message) {
         addDataUser();
         if (result) {
+            changeDataUser();
             if (currentUser.getRoleName().equals("coach")) {
+
                 startActivity(new Intent(EditProfile.this, MainActivity.class));
             } else {
                 startActivity(new Intent(EditProfile.this, com.example.swimminggo.view.swimmer.MainActivity.class));
@@ -144,5 +146,14 @@ public class EditProfile extends AppCompatActivity {
         } else{
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void changeDataUser(){
+        UserProfile.getInstance().currentUser.setFirstName(edtFirstName.getText().toString());
+        UserProfile.getInstance().currentUser.setEmail(edtEmail.getText().toString());
+        UserProfile.getInstance().currentUser.setDob(txtDob.getText().toString());
+        UserProfile.getInstance().currentUser.setLastName(edtLastName.getText().toString());
+        UserProfile.getInstance().currentUser.setGender(spnGender.getSelectedItem().toString().equals("Nam")? 1:0);
+        UserProfile.getInstance().currentUser.setPhone(edtPhone.getText().toString());
     }
 }

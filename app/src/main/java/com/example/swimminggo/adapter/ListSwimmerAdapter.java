@@ -35,7 +35,7 @@ public class ListSwimmerAdapter extends RecyclerView.Adapter<ListSwimmerAdapter.
     public void onBindViewHolder(@NonNull SwimmerViewHolder holder, final int position) {
         Swimmer swimmer = swimmers.get(position);
         holder.swimmerName.setText(swimmer.getFullName());
-        holder.swimmerAge.setText(swimmer.getDob() + "");
+        holder.swimmerAge.setText(swimmer.getAge()==0?"Chưa cập nhật" : swimmer.getAge()+"");
         holder.checkBox.setChecked(ListSwimmer.getInstance().isCheckeds.get(position));
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
