@@ -14,7 +14,7 @@
         android:roundIcon="@drawable/logo_swimminggo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.coach.Exercise"></activity>
+        <activity android:name=".view.coach.ExerciseActivity"></activity>
         <activity android:name=".view.coach.CreateLesson" />
         <activity android:name=".view.coach.CreateSchedule" />
         <activity android:name=".view.coach.ListExercise" />

@@ -1,5 +1,7 @@
 package com.example.swimminggo.models;
 
+import androidx.annotation.Nullable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,5 +44,11 @@ public class Distance {
     @Override
     public String toString() {
         return value + "";
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Distance distance = (Distance) obj;
+        return this.value == distance.value;
     }
 }

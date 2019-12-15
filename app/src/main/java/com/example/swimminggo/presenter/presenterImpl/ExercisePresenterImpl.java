@@ -17,6 +17,7 @@ import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.Login;
 import com.example.swimminggo.view.coach.CreateExercise;
 import com.example.swimminggo.view.coach.CreateLesson;
+import com.example.swimminggo.view.coach.ExerciseActivity;
 import com.example.swimminggo.view.coach.MainActivity;
 import com.example.swimminggo.view.coach.fragment.WorkoutFragment;
 
@@ -30,6 +31,7 @@ public class ExercisePresenterImpl implements ExercisePresenter {
     CreateLesson createLesson;
     WorkoutFragment workoutFragment;
     MainActivity mainActivity;
+    ExerciseActivity exerciseActivity;
     Login login;
 
     public ExercisePresenterImpl(Login login){
@@ -50,6 +52,11 @@ public class ExercisePresenterImpl implements ExercisePresenter {
     public ExercisePresenterImpl(WorkoutFragment workoutFragment){
         this.workoutFragment = workoutFragment;
         AndroidNetworking.initialize(workoutFragment.getContext());
+    }
+
+    public ExercisePresenterImpl(ExerciseActivity exerciseActivity){
+        this.exerciseActivity = exerciseActivity;
+        AndroidNetworking.initialize(exerciseActivity.getApplicationContext());
     }
 
     public ExercisePresenterImpl(MainActivity mainActivity){
@@ -146,9 +153,9 @@ public class ExercisePresenterImpl implements ExercisePresenter {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getBoolean("success")){
-                                createExercise.doCreateExercise(true, "Success");
+                                exerciseActivity.doCreateExercise(true, response.getString("message"));
                             } else {
-                                createExercise.doCreateExercise(false, "False");
+                                exerciseActivity.doCreateExercise(false, response.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -164,6 +171,7 @@ public class ExercisePresenterImpl implements ExercisePresenter {
 
     @Override
     public void onGetListExercise() {
+        ListExercise.newInstance();
         AndroidNetworking.get(URLConstant.getInstance().URL_GET_EXERCISE)
                 .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
                 .build()
@@ -175,6 +183,8 @@ public class ExercisePresenterImpl implements ExercisePresenter {
                             for(int i = 0; i < exeJSONArray.length(); i++){
                                 ListExercise.getInstance().getExercises().add(new Exercise(exeJSONArray.getJSONObject(i)));
                             }
+                            if (exerciseActivity != null)
+                                exerciseActivity.setupRecyclerView();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -183,6 +193,59 @@ public class ExercisePresenterImpl implements ExercisePresenter {
                     @Override
                     public void onError(ANError anError) {
                         Log.d("error", "onError: " + anError);
+                    }
+                });
+    }
+
+    @Override
+    public void onDeleteExercise(int exerciseId) {
+        AndroidNetworking.delete(URLConstant.getInstance().getUrlDeleteExercise(exerciseId))
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getBoolean("success")){
+                                exerciseActivity.doDeleteExercise(true, "Success");
+                            } else {
+                                exerciseActivity.doDeleteExercise(false, response.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+    }
+
+    @Override
+    public void onEditExercise(Exercise exercise) {
+        AndroidNetworking.put(URLConstant.getInstance().URL_EDIT_EXERCISE)
+                .addJSONObjectBody(exercise.toJSONObject())
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (response.getBoolean("success")){
+                                exerciseActivity.doEditExercise(true, "Success");
+                            } else {
+                                exerciseActivity.doEditExercise(false, response.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
                     }
                 });
     }

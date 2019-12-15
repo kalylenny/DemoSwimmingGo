@@ -25,6 +25,7 @@ public class URLConstant {
     public String URL_GET_CHART_BY_MONTH = mainUrl + "/api/chartbymonth/get";
     public String URL_ADD_VIDEO = mainUrl + "/api/video/add";
     public String URL_ADD_NOTE = mainUrl + "/api/note/add";
+    public String URL_EDIT_EXERCISE = mainUrl + "/api/exercise/edit";
 
     public static URLConstant getInstance() {
         if (ourInstance == null)
@@ -95,4 +96,9 @@ public class URLConstant {
     public String getUrlGetNotesBySwimmerId(int swimmerId) {
         return mainUrl + "/api/note/get/" + swimmerId;
     }
+
+    public String getUrlDeleteExercise(int exerciseId) {
+        return mainUrl + "/api/exercise/delete/" + exerciseId;
+    }
+
 }
