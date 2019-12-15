@@ -14,7 +14,7 @@ import com.example.swimminggo.constant.ExerciseConstant;
 import com.example.swimminggo.presenter.ExercisePresenter;
 import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
 import com.example.swimminggo.view.coach.CreateExercise;
-import com.example.swimminggo.view.coach.CreateLessonPlan;
+import com.example.swimminggo.view.coach.LessonPlan;
 
 public class WorkoutFragment extends Fragment {
     View view;
@@ -46,7 +46,7 @@ public class WorkoutFragment extends Fragment {
         btn_lesson_plan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CreateLessonPlan.class);
+                Intent intent = new Intent(view.getContext(), LessonPlan.class);
                 startActivity(intent);
             }
         });

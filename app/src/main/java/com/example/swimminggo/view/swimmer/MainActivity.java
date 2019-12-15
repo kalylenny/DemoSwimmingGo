@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         bottomNavigationView = findViewById(R.id.bottom_bar_swimmer);
-        loadFragment(new CalendarFragment());
+        loadFragment(new CalendarFragment(mainActivity));
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.item_workout:
-                        loadFragment(new CalendarFragment());
+                        loadFragment(new CalendarFragment(mainActivity));
                         return true;
                     case R.id.item_library:
                         loadFragment(new LibraryCategories());

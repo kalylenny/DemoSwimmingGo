@@ -16,21 +16,18 @@ import com.example.swimminggo.singleton.ListExercise;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.Login;
 import com.example.swimminggo.view.coach.CreateExercise;
+import com.example.swimminggo.view.coach.CreateLesson;
 import com.example.swimminggo.view.coach.MainActivity;
-import com.example.swimminggo.view.coach.fragment.LessonNewFragment;
 import com.example.swimminggo.view.coach.fragment.WorkoutFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ExercisePresenterImpl implements ExercisePresenter {
 
     CreateExercise createExercise;
-    LessonNewFragment lessonNewFragment;
+    CreateLesson createLesson;
     WorkoutFragment workoutFragment;
     MainActivity mainActivity;
     Login login;
@@ -45,9 +42,9 @@ public class ExercisePresenterImpl implements ExercisePresenter {
         AndroidNetworking.initialize(createExercise.getApplicationContext());
     }
 
-    public ExercisePresenterImpl(LessonNewFragment lessonNewFragment){
-        this.lessonNewFragment = lessonNewFragment;
-        AndroidNetworking.initialize(lessonNewFragment.getContext());
+    public ExercisePresenterImpl(CreateLesson createLesson){
+        this.createLesson = createLesson;
+        AndroidNetworking.initialize(createLesson.getApplicationContext());
     }
 
     public ExercisePresenterImpl(WorkoutFragment workoutFragment){

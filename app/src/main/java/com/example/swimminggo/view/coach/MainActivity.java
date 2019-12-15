@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     public void initView(){
         bottomNavigationView = findViewById(R.id.bottom_bar);
         loadFragment(new WorkoutFragment());
-        loadFragment(new CalendarFragment());
+        loadFragment(new CalendarFragment(mainActivity));
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new TeamFragment());
                         return true;
                     case R.id.item_calendar:
-                        loadFragment(new CalendarFragment());
+                        loadFragment(new CalendarFragment(mainActivity));
                         return true;
                     case R.id.item_setting:
                         loadFragment(new SettingFragment(mainActivity));

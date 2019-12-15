@@ -8,9 +8,10 @@ import com.example.swimminggo.models.Exercise;
 import com.example.swimminggo.models.Lesson;
 import com.example.swimminggo.presenter.LessonPresenter;
 import com.example.swimminggo.singleton.UserProfile;
+import com.example.swimminggo.view.coach.CreateLesson;
 import com.example.swimminggo.view.coach.CreateRecordWithLesson;
-import com.example.swimminggo.view.coach.fragment.LessonAvailableFragment;
-import com.example.swimminggo.view.coach.fragment.LessonNewFragment;
+import com.example.swimminggo.view.coach.CreateSchedule;
+import com.example.swimminggo.view.coach.LessonPlan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,13 +22,19 @@ import java.util.List;
 
 public class LessonPresenterImpl implements LessonPresenter {
 
-    private LessonNewFragment lessonNewFragment;
-    private LessonAvailableFragment lessonAvailableFragment;
+    private CreateLesson createLesson;
+    private CreateSchedule createSchedule;
     private CreateRecordWithLesson createRecordWithLesson;
+    private LessonPlan lessonPlan;
 
-    public LessonPresenterImpl(LessonNewFragment lessonNewFragment) {
-        this.lessonNewFragment = lessonNewFragment;
-        AndroidNetworking.initialize(lessonNewFragment.getContext());
+    public LessonPresenterImpl(CreateLesson createLesson) {
+        this.createLesson = createLesson;
+        AndroidNetworking.initialize(createLesson.getApplicationContext());
+    }
+
+    public LessonPresenterImpl(LessonPlan lessonPlan){
+        this.lessonPlan = lessonPlan;
+        AndroidNetworking.initialize(lessonPlan.getApplicationContext());
     }
 
     public LessonPresenterImpl(CreateRecordWithLesson createRecordWithLesson){
@@ -35,9 +42,9 @@ public class LessonPresenterImpl implements LessonPresenter {
         AndroidNetworking.initialize(createRecordWithLesson.getApplicationContext());
     }
 
-    public LessonPresenterImpl(LessonAvailableFragment createLessonPlan){
-        this.lessonAvailableFragment = createLessonPlan;
-        AndroidNetworking.initialize(createLessonPlan.getContext());
+    public LessonPresenterImpl(CreateSchedule createSchedule){
+        this.createSchedule = createSchedule;
+        AndroidNetworking.initialize(createSchedule.getApplicationContext());
     }
 
     @Override
@@ -47,7 +54,7 @@ public class LessonPresenterImpl implements LessonPresenter {
             if (exercise.getPhaseId() == phaseId) {
                 exercises.add(exercise);
             }
-        lessonNewFragment.setupDialog(phaseId, exercises);
+        createLesson.setupDialog(phaseId, exercises);
     }
 
     @Override
@@ -91,9 +98,9 @@ public class LessonPresenterImpl implements LessonPresenter {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getBoolean("success")) {
-                                lessonNewFragment.doCreateLesson(true, "Success");
+                                createLesson.doCreateLesson(true, "Success");
                             } else {
-                                lessonNewFragment.doCreateLesson(false, "False");
+                                createLesson.doCreateLesson(false, "False");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -121,7 +128,11 @@ public class LessonPresenterImpl implements LessonPresenter {
                         for(int i = 0; i < lessonJSONs.length(); i++){
                             lessons.add(new Lesson(lessonJSONs.getJSONObject(i)));
                         }
-                        lessonAvailableFragment.setupListLesson(lessons);
+                        if (createSchedule != null)
+                            createSchedule.setupListLesson(lessons);
+                        if (lessonPlan != null){
+                            lessonPlan.setupListLesson(lessons);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -147,7 +158,7 @@ public class LessonPresenterImpl implements LessonPresenter {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getBoolean("success")){
-                                lessonAvailableFragment.doCreateLessonPlan(true);
+                                createSchedule.doCreateLessonPlan(true);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

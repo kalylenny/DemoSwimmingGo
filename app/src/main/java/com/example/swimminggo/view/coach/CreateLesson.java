@@ -1,107 +1,208 @@
 package com.example.swimminggo.view.coach;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ExpandableListView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swimminggo.R;
-import com.example.swimminggo.adapter.CustomExpandableListView;
+import com.example.swimminggo.adapter.ExerciseRecyclerViewAdapter;
+import com.example.swimminggo.constant.ExerciseConstant;
+import com.example.swimminggo.models.Exercise;
+import com.example.swimminggo.models.Phase;
+import com.example.swimminggo.presenter.ExercisePresenter;
+import com.example.swimminggo.presenter.LessonPresenter;
+import com.example.swimminggo.presenter.presenterImpl.ExercisePresenterImpl;
+import com.example.swimminggo.presenter.presenterImpl.LessonPresenterImpl;
+import com.example.swimminggo.singleton.ListExercise;
+import com.example.swimminggo.singleton.ListExerciseByPhase;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CreateLesson extends AppCompatActivity {
 
-    ExpandableListView expandableListView;
-    List<String> listdataHeader;
-    HashMap<String,List<String>> listdataChild;
-    CustomExpandableListView customExpandableListView;
+    EditText edtLessonName;
+    Button btnWarmUp, btnMainStroke, btnFinalSet, btnSwimDown, btnCreateLesson;
+
+    List<Exercise> exercises;
+    List<Exercise> warmUpExercises, mainStrokeExercises, finalSetExercises, swimDownExercises = new ArrayList<>();
+
+    ExercisePresenter exercisePresenter;
+    LessonPresenter lessonPresenter;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_lesson);
-        addControl();
-        customExpandableListView = new CustomExpandableListView(CreateLesson.this,listdataHeader,listdataChild);
-        expandableListView.setAdapter(customExpandableListView);
-        clickGroup();
-        clickChild();
-        closeGroup();
-        openGroup();
+        initComponent();
+        action();
     }
 
-    private void openGroup() {
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+    private void initComponent() {
+        exercisePresenter = new ExercisePresenterImpl(this);
+
+        lessonPresenter = new LessonPresenterImpl(this);
+        if (com.example.swimminggo.singleton.ListExercise.getInstance() == null) {
+            com.example.swimminggo.singleton.ListExercise.newInstance();
+            exercisePresenter.onGetListExercise();
+        }
+        exercises = ListExercise.getInstance().getExercises();
+        btnWarmUp = findViewById(R.id.btn_warm_up);
+        btnMainStroke = findViewById(R.id.btn_main_stroke);
+        btnFinalSet = findViewById(R.id.btn_final_set);
+        btnSwimDown = findViewById(R.id.btn_swim_down);
+        btnCreateLesson = findViewById(R.id.btn_create_lesson);
+
+        edtLessonName = findViewById(R.id.edt_lesson_name);
+    }
+
+    private void action() {
+        btnWarmUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onGroupExpand(int groupP) {
-                //su kien mo group
+            public void onClick(View v) {
+                lessonPresenter.onGetListExerciseByPhaseId(1, exercises);
+            }
+        });
+        btnMainStroke.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lessonPresenter.onGetListExerciseByPhaseId(2, exercises);
+            }
+        });
+        btnFinalSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lessonPresenter.onGetListExerciseByPhaseId(3, exercises);
+            }
+        });
+        btnSwimDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lessonPresenter.onGetListExerciseByPhaseId(4, exercises);
+            }
+        });
+
+
+        btnCreateLesson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isFullExercises()) {
+                    List<Exercise> exercises = new ArrayList<>();
+                    for (Exercise exercise : warmUpExercises)
+                        exercises.add(exercise);
+                    for (Exercise exercise : mainStrokeExercises)
+                        exercises.add(exercise);
+                    for (Exercise exercise : finalSetExercises)
+                        exercises.add(exercise);
+                    for (Exercise exercise : swimDownExercises)
+                        exercises.add(exercise);
+
+                    lessonPresenter.onCreateLesson(exercises, edtLessonName.getText().toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    private void closeGroup() {
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+    private boolean isFullExercises() {
+        return (warmUpExercises == null || mainStrokeExercises == null || finalSetExercises == null || swimDownExercises == null);
+    }
+
+    public void doCreateLesson(boolean result, String message) {
+        if (result) {
+            finish();
+            LessonPlan lessonPlan = (LessonPlan) LessonPlan.lessonPlanActivity;
+            lessonPlan.initDatabase();
+        } else {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void setupDialog(int phaseId, List<Exercise> exercises) {
+        for (Exercise exercise : exercises) {
+            ListExerciseByPhase.getInstance().getIsCheckeds().add(false);
+        }
+        String phaseName = Iterables.tryFind(ExerciseConstant.getInstance().getPhases(),
+                new Predicate<Phase>() {
+                    @Override
+                    public boolean apply(@NullableDecl Phase input) {
+                        return input.getId() == phaseId;
+                    }
+                }).orNull().getValue();
+
+        dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_exercises);
+        Button btnCreate, btnCancel;
+        RecyclerView recyclerView = dialog.findViewById(R.id.recyclerView_exercises);
+        TextView txtPhaseName = dialog.findViewById(R.id.txt_phase_name);
+
+        btnCreate = dialog.findViewById(R.id.btn_create);
+        btnCancel = dialog.findViewById(R.id.btn_cancel);
+
+        txtPhaseName.setText(phaseName);
+
+        ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(exercises);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(exerciseAdapter);
+        dialog.show();
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onGroupCollapse(int groupP) {
-                //su kien dong group
+            public void onClick(View v) {
+                if (phaseId == 1) {
+                    warmUpExercises = new ArrayList<>();
+                    for (int i = 0; i < exercises.size(); i++) {
+                        if (ListExerciseByPhase.getInstance().getIsCheckeds().get(i)) {
+                            warmUpExercises.add(exercises.get(i));
+                        }
+                    }
+                } else if (phaseId == 2) {
+                    mainStrokeExercises = new ArrayList<>();
+                    for (int i = 0; i < exercises.size(); i++) {
+                        if (ListExerciseByPhase.getInstance().getIsCheckeds().get(i)) {
+                            mainStrokeExercises.add(exercises.get(i));
+                        }
+                    }
+                } else if (phaseId == 3) {
+                    finalSetExercises = new ArrayList<>();
+                    for (int i = 0; i < exercises.size(); i++) {
+                        if (ListExerciseByPhase.getInstance().getIsCheckeds().get(i)) {
+                            finalSetExercises.add(exercises.get(i));
+                        }
+                    }
+                } else {
+                    swimDownExercises = new ArrayList<>();
+                    for (int i = 0; i < exercises.size(); i++) {
+                        if (ListExerciseByPhase.getInstance().getIsCheckeds().get(i)) {
+                            swimDownExercises.add(exercises.get(i));
+                        }
+                    }
+                }
+                dialog.dismiss();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
 
-    private void clickChild() {
-        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupP, int childP, long l) {
-                //su kien click item
-                return false;
-            }
-        });
-    }
-
-    private void clickGroup() {
-        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView expandableListView, View view, int groupP, long l) {
-                //su kien click group
-                return false;
-            }
-        });
-    }
-
-    private void addControl() {
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        listdataHeader = new ArrayList<>();
-        listdataChild = new HashMap<String, List<String>>();
-
-        listdataHeader.add("Khởi động");
-        listdataHeader.add("Bơi chính");
-        listdataHeader.add("Bơi phụ");
-        listdataHeader.add("Thả lỏng");
-
-        List<String> khoidong = new ArrayList<String>();
-        khoidong.add("1");
-        khoidong.add("2");
-        khoidong.add("3");
-        khoidong.add("4");
-
-        List<String> boichinh = new ArrayList<String>();
-        boichinh.add("1");
-
-        List<String> boiphu = new ArrayList<String>();
-        boiphu.add("1");
-
-        List<String> thalong = new ArrayList<String>();
-        thalong.add("1");
-
-        listdataChild.put(listdataHeader.get(0),khoidong);
-        listdataChild.put(listdataHeader.get(1),boichinh);
-        listdataChild.put(listdataHeader.get(2),boiphu);
-        listdataChild.put(listdataHeader.get(3),thalong);
-
-
-    }
 }
-

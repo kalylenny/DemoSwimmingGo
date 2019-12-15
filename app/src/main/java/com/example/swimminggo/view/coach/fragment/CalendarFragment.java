@@ -1,5 +1,7 @@
 package com.example.swimminggo.view.coach.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +30,9 @@ import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.view.Notification;
 import com.example.swimminggo.view.coach.CreateRecord;
+import com.example.swimminggo.view.coach.CreateSchedule;
+import com.example.swimminggo.view.coach.MainActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.whiteelephant.monthpicker.MonthPickerDialog;
@@ -47,10 +52,13 @@ public class CalendarFragment extends Fragment {
     ScheduleAdapter scheduleAdapter;
     LessonPlanAdapter lessonPlanAdapter;
     SchedulePresenter schedulePresenter;
+    FloatingActionButton btnCreateSchedule;
     Calendar calendar;
+    public static Fragment calendarFragment;
+    Activity mainActivity;
 
-    public CalendarFragment() {
-
+    public CalendarFragment(Activity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
     @Nullable
@@ -63,13 +71,18 @@ public class CalendarFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("RestrictedApi")
     private void initComponent() {
         txtDate = view.findViewById(R.id.txt_date);
         btnNextWeek = view.findViewById(R.id.btn_next_week);
         btnPreviousWeek = view.findViewById(R.id.btn_previous_week);
         recyclerViewSchedule = view.findViewById(R.id.recycler_view_schedule);
         recyclerViewLessonPlan = view.findViewById(R.id.recycler_view_lesson_plan);
+        btnCreateSchedule = view.findViewById(R.id.btn_create_schedule);
+        if (UserProfile.getInstance().currentUser.getRoleName().equals("swimmer"))
+            btnCreateSchedule.setVisibility(View.GONE);
         schedulePresenter = new SchedulePresenterImpl(this);
+        calendarFragment = this;
     }
 
     public void onGetListLessonPlanByDate(Date date) {
@@ -135,9 +148,16 @@ public class CalendarFragment extends Fragment {
                         .build().show();
             }
         });
+
+        btnCreateSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(view.getContext(), CreateSchedule.class));
+            }
+        });
     }
 
-    private void initDatabase() {
+    public void initDatabase() {
         calendar = Calendar.getInstance();
         Date currentDate = new Date(calendar);
         txtDate.setText(currentDate.getMonth() + "/" + currentDate.getYear());

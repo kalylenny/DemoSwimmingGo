@@ -1,10 +1,12 @@
-package com.example.swimminggo.view.coach.fragment;
+package com.example.swimminggo.view.coach;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -12,58 +14,47 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.ListAvailableLessonAdapter;
-import com.example.swimminggo.models.Team;
-import com.example.swimminggo.singleton.Position;
 import com.example.swimminggo.models.Lesson;
 import com.example.swimminggo.presenter.LessonPresenter;
 import com.example.swimminggo.presenter.presenterImpl.LessonPresenterImpl;
 import com.example.swimminggo.singleton.ListTeam;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import com.example.swimminggo.singleton.Position;
+import com.example.swimminggo.view.coach.fragment.CalendarFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
-public class LessonAvailableFragment extends Fragment {
+public class CreateSchedule extends AppCompatActivity {
 
     Button btnCalendar, btnAdd;
     Spinner spnTeam;
     RecyclerView recyclerViewLesson;
     LessonPresenter lessonPresenter;
-    View view;
     List<Lesson> lessons = new ArrayList<>();
     String schedule;
     TextView date;
+    CalendarFragment calendarFragment;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_lesson_available, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_schedule);
         initComponent();
         initDatabase();
         action();
         actionCalendar();
-        return view;
     }
-
 
     private void initComponent() {
         lessonPresenter = new LessonPresenterImpl(this);
-        date = (TextView) view.findViewById(R.id.date);
-        btnCalendar = (Button) view.findViewById(R.id.btn_calendar);
-        btnAdd = view.findViewById(R.id.btn_add);
-        recyclerViewLesson = view.findViewById(R.id.list_lesson);
-        spnTeam = view.findViewById(R.id.spn_team);
+        date = (TextView) findViewById(R.id.date);
+        btnCalendar = (Button) findViewById(R.id.btn_calendar);
+        btnAdd = findViewById(R.id.btn_add);
+        recyclerViewLesson = findViewById(R.id.list_lesson);
+        spnTeam = findViewById(R.id.spn_team);
     }
 
     private void initDatabase() {
@@ -73,7 +64,7 @@ public class LessonAvailableFragment extends Fragment {
     }
 
     private void initListTeam() {
-        spnTeam.setAdapter(new ArrayAdapter(getContext(), R.layout.support_simple_spinner_dropdown_item, ListTeam.getInstance().getListTeam()));
+        spnTeam.setAdapter(new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, ListTeam.getInstance().getListTeam()));
     }
 
     public void setupListLesson(List<Lesson> lessons) {
@@ -83,7 +74,7 @@ public class LessonAvailableFragment extends Fragment {
             isCheckeds.add(false);
         }
         recyclerViewLesson.setAdapter(new ListAvailableLessonAdapter(lessons));
-        recyclerViewLesson.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerViewLesson.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     private void initDate() {
@@ -92,7 +83,7 @@ public class LessonAvailableFragment extends Fragment {
         int month = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         date.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-
+        schedule = year + "-" + (month + 1) + "-" + dayOfMonth;
     }
 
     private void action() {
@@ -113,7 +104,10 @@ public class LessonAvailableFragment extends Fragment {
 
     public void doCreateLessonPlan(Boolean result) {
         if (result) {
-            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+            finish();
+            this.calendarFragment = (CalendarFragment) CalendarFragment.calendarFragment;
+            this.calendarFragment.initDatabase();
         }
     }
 
