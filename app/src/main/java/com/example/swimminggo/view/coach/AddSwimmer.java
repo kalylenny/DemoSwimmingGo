@@ -1,5 +1,6 @@
 package com.example.swimminggo.view.coach;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,13 +26,15 @@ import java.util.List;
 public class AddSwimmer extends AppCompatActivity {
 
     FloatingActionButton fab, fab_new, fab_available;
-    Team currentTeam;
+    static Team currentTeam;
     TextView txtTeamName, txtTeamAge;
     ImageView imgRemoveSwimmer;
     boolean showhide = false;
     ListSwimmerAdapter mAdapter;
 
     SwimmerPresenter swimmerPresenter;
+
+    public static Activity addSwimmerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class AddSwimmer extends AppCompatActivity {
     }
 
     private void initComponent() {
+        this.addSwimmerActivity = this;
         swimmerPresenter = new SwimmerPresenterImpl(this);
 
         txtTeamName = findViewById(R.id.txt_team_name);
@@ -55,7 +59,7 @@ public class AddSwimmer extends AppCompatActivity {
         fab_available = (FloatingActionButton) findViewById(R.id.btn_addavailable);
     }
 
-    private void initDatabase() {
+    public void initDatabase() {
         currentTeam = (Team) getIntent().getSerializableExtra("team");
         txtTeamName.setText(currentTeam.getTeamName());
         txtTeamAge.setText("Độ tuổi :" + currentTeam.getTeamAge());

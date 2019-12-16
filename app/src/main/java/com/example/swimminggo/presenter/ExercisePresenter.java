@@ -8,4 +8,6 @@ public interface ExercisePresenter {
     void onGetStyles();
     void onCreateExercise(Exercise exercise);
     void onGetListExercise();
+    void onDeleteExercise(int exerciseId);
+    void onEditExercise(Exercise exercise);
 }

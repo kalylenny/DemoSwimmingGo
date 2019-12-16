@@ -35,4 +35,7 @@ public class ListExerciseByPhase {
     public List<Boolean> getIsCheckeds() {
         return isCheckeds;
     }
+    public void clearData() {
+        ourInstance = null;
+    }
 }

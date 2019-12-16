@@ -28,4 +28,7 @@ public class ListSwimmer {
     public List<Swimmer> getSwimmers(){
         return swimmers;
     }
+    public void clearData() {
+        ourInstance = null;
+    }
 }

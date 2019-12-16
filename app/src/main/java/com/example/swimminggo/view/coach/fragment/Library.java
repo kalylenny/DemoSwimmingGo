@@ -1,15 +1,16 @@
 package com.example.swimminggo.view.coach.fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.VideoAdapter;
@@ -19,6 +20,10 @@ import com.example.swimminggo.presenter.VideoPresenter;
 import com.example.swimminggo.presenter.presenterImpl.VideoPresenterImpl;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.singleton.Videos;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +32,7 @@ public class Library extends AppCompatActivity {
 
     VideoPresenter videoPresenter;
     RecyclerView recyclerView;
-    Button btnAdd;
+    FloatingActionButton btnAdd;
     Dialog dialog;
     Style style;
 
@@ -40,6 +45,7 @@ public class Library extends AppCompatActivity {
         action();
     }
 
+    @SuppressLint("RestrictedApi")
     private void initComponent() {
         style = (Style) getIntent().getSerializableExtra("style");
         videoPresenter = new VideoPresenterImpl(this);
@@ -97,12 +103,17 @@ public class Library extends AppCompatActivity {
         dialog.show();
     }
 
-    public void doAddVideo(Boolean result, String message) {
-        if (result) {
-            initDatabase();
-            dialog.dismiss();
-        } else {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void doAddVideo(JSONObject response) {
+        int i = 0;
+        try {
+            if (response.getBoolean("success")) {
+                initDatabase();
+                dialog.dismiss();
+            } else {
+                Toast.makeText(this, response.getString("message"), Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

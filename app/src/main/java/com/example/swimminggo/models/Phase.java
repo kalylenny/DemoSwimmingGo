@@ -1,6 +1,7 @@
 package com.example.swimminggo.models;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,6 +9,10 @@ import org.json.JSONObject;
 public class Phase {
     private int id;
     private String value;
+
+    public Phase(int id){
+        this.id = id;
+    }
 
     public Phase(int id, String value) {
         this.id = id;
@@ -43,5 +48,11 @@ public class Phase {
     @Override
     public String toString() {
         return value;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Phase phase = (Phase) obj;
+        return this.id == phase.getId();
     }
 }

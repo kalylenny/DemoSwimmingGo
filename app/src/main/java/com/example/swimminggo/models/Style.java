@@ -1,6 +1,7 @@
 package com.example.swimminggo.models;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.json.JSONObject;
 
@@ -8,6 +9,14 @@ import java.io.Serializable;
 
 public class Style implements Serializable {
     private String id, value;
+
+    public Style(){
+
+    }
+
+    public Style(String id){
+        this.id = id;
+    }
 
     public Style(String id, String value) {
         this.id = id;
@@ -43,5 +52,11 @@ public class Style implements Serializable {
     @Override
     public String toString() {
         return value;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Style style = (Style) obj;
+        return style.getId().equals(this.id);
     }
 }

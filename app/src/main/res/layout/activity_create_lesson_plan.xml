@@ -5,72 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.coach.CreateLessonPlan">
+    tools:context=".view.coach.LessonPlan">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edit_profile_background"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingVertical="5sp">
-
-        <TextView
-            android:id="@+id/txt_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Tạo giáo án"
-            android:textColor="@color/colorWhite"
-            android:textSize="26sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:weightSum="10"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="10"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <View
-                android:background="@color/colorBlue"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_profile_background"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="5sp">
 
-            <com.google.android.material.tabs.TabLayout
-                app:tabIndicatorColor="@color/colorBlue"
-                app:tabTextColor="@color/colorGray"
-                app:tabSelectedTextColor="@color/colorBlack"
-                app:tabIndicatorHeight="1dp"
-                android:id="@+id/tablayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_available"
+                <TextView
+                    android:id="@+id/txt_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Có sẵn" />
+                    android:layout_gravity="center"
+                    android:text="Giáo án"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="26sp" />
+            </LinearLayout>
 
-                <com.google.android.material.tabs.TabItem
-                    android:id="@+id/tab_new"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tạo mới" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_lesson_plan"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="match_parent"
+                android:paddingTop="20sp" />
         </LinearLayout>
 
-    </LinearLayout>
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_create_lesson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/colorGreen"
+            android:src="@drawable/ic_plus" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

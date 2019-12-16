@@ -91,7 +91,7 @@ public class CreateExercise extends AppCompatActivity {
 
     public void doCreateExercise(boolean result, String message) {
         if (result) {
-            startActivity(new Intent(CreateExercise.this, MainActivity.class));
+            finish();
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }

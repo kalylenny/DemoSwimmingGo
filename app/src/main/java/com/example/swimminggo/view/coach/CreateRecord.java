@@ -2,6 +2,7 @@ package com.example.swimminggo.view.coach;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ public class CreateRecord extends AppCompatActivity {
     static LessonPlan lessonPlan;
     Lesson lesson;
     RecordPresenter recordPresenter;
+    public static Activity fa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class CreateRecord extends AppCompatActivity {
     }
 
     private void initComponent(){
+        fa = this;
         recordPresenter = new RecordPresenterImpl(this);
         if (lessonPlan == null)
             lessonPlan = (LessonPlan) getIntent().getSerializableExtra("lesson_plan");
@@ -48,6 +51,8 @@ public class CreateRecord extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back);
 
         recordPresenter.onGetLesson(lessonPlan.getLessonId());
+
+        TotalRecord.newInstance();
     }
 
     public void setupLesson(Lesson lesson){
@@ -69,7 +74,7 @@ public class CreateRecord extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CreateRecord.this, UserProfile.getInstance().currentUser.getRoleName().equals("coach")? com.example.swimminggo.view.coach.MainActivity.class: MainActivity.class));
+                finish();
             }
         });
 

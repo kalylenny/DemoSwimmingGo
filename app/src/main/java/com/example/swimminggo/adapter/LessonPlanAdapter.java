@@ -26,7 +26,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
     CalendarFragment calendarFragment;
     View itemView;
 
-    public LessonPlanAdapter(List<LessonPlan> lessonPlans, CalendarFragment calendarFragment){
+    public LessonPlanAdapter(List<LessonPlan> lessonPlans, CalendarFragment calendarFragment) {
         this.lessonPlans = lessonPlans;
         this.calendarFragment = calendarFragment;
     }
@@ -41,13 +41,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull LessonPlanAdapter.ViewHolder holder, int position) {
         holder.txtLessonName.setText(lessonPlans.get(position).getLessonName());
-//        String teamName = Iterables.tryFind(ListTeam.getInstance().getListTeam(), new Predicate<Team>() {
-//            @Override
-//            public boolean apply(@NullableDecl Team input) {
-//                return input.getTeamID() == lessonPlans.get(position).getTeamId();
-//            }
-//        }).orNull().getTeamName();
-//        holder.txtTeamName.setText(teamName);
+        holder.txtTeamName.setText(lessonPlans.get(position).getTeamName());
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +58,7 @@ public class LessonPlanAdapter extends RecyclerView.Adapter<LessonPlanAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtLessonName, txtTeamName;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtLessonName = itemView.findViewById(R.id.txt_lesson_name);

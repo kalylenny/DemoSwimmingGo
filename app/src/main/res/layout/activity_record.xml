@@ -121,8 +121,9 @@
             android:gravity="center">
 
             <Button
-                android:text="Quay về"
-                android:ems="11"
+                android:text="Xong"
+                android:ems="7"
+                android:textSize="24sp"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:id="@+id/btn_back"

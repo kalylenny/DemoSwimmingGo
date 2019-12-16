@@ -10,6 +10,10 @@ public class Position {
         return ourInstance;
     }
 
+    public static Position newInstance(){
+        return new Position();
+    }
+
     private Position() {
         lastPosition = -1;
     }
@@ -20,5 +24,9 @@ public class Position {
 
     public void setLastPosition(int lastPosition) {
         this.lastPosition = lastPosition;
+    }
+
+    public void clearData() {
+        ourInstance = null;
     }
 }

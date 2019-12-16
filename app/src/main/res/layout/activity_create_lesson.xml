@@ -24,46 +24,128 @@
             android:textSize="26sp" />
     </LinearLayout>
     <LinearLayout
-        android:orientation="vertical"
-        android:weightSum="8"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/colorGray"
+            android:text="Tên bài học"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edt_lesson_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="11"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:weightSum="4">
+
         <LinearLayout
-            android:gravity="center"
-            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
-            <EditText
-                android:textColorHint="@color/colorGray"
-                android:hint="Tên bài học"
-                android:id="@+id/edt_team_name"
-                android:layout_width="300dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_warm_up"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableRight="@drawable/ic_lesson" />
+                android:background="@color/colorWhite"
+                android:drawableLeft="@drawable/ic_warmup32"
+                android:paddingLeft="80dp"
+                android:paddingRight="50dp"
+                android:text="Warm up"
+                android:textAllCaps="false" />
+
+
         </LinearLayout>
         <LinearLayout
-            android:layout_weight="6"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
-            <ExpandableListView
-                android:listSelector="#03A9F4"
-                android:id="@+id/expandableListView"
+            <Button
+                android:id="@+id/btn_main_stroke"
+                android:textAllCaps="false"
+                android:paddingRight="50dp"
+                android:paddingLeft="80dp"
+                android:drawableLeft="@drawable/ic_mainswim32"
+                android:background="@color/colorWhite"
+                android:text="Main stroke"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </ExpandableListView>
+                android:layout_height="match_parent"/>
+
+
         </LinearLayout>
         <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:gravity="center"
             android:layout_height="0dp">
+
             <Button
-                android:background="@drawable/button_login_border"
-                android:textColor="@color/colorWhite"
-                android:text="Tạo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:id="@+id/btn_final_set"
+                android:textAllCaps="false"
+                android:paddingRight="50dp"
+                android:paddingLeft="80dp"
+                android:drawableLeft="@drawable/ic_finalswim32"
+                android:background="@color/colorWhite"
+                android:text="Final set"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <Button
+                android:id="@+id/btn_swim_down"
+                android:textAllCaps="false"
+                android:paddingRight="50dp"
+                android:paddingLeft="80dp"
+                android:drawableLeft="@drawable/ic_relax32"
+                android:background="@color/colorWhite"
+                android:text="Swim down"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <Button
+            android:id="@+id/btn_create_lesson"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/button_login_border"
+            android:text="Tạo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </LinearLayout>

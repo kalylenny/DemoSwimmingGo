@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.coach.fragment.CalendarFragment">
+    tools:context=".view.coach.ExerciseActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -19,50 +19,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/login_background"
+                android:background="@drawable/edit_profile_background"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:weightSum="8">
-
-                <Button
-                    android:id="@+id/btn_previous_week"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/ic_media_previous" />
+                android:paddingVertical="5sp">
 
                 <TextView
-                    android:id="@+id/txt_date"
-                    android:layout_width="0sp"
+                    android:id="@+id/txt_title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:gravity="center"
-                    android:text="asdasd"
+                    android:layout_gravity="center"
+                    android:text="Bài tập"
                     android:textColor="@color/colorWhite"
                     android:textSize="26sp" />
 
-                <Button
-                    android:id="@+id/btn_next_week"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@android:drawable/ic_media_next" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_schedule"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_lesson_plan"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20sp" />
+                android:paddingHorizontal="5sp"
+                android:paddingTop="10sp" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_create_schedule"
+            android:id="@+id/btn_create_exercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

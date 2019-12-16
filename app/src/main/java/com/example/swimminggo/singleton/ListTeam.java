@@ -24,4 +24,8 @@ public class ListTeam {
     public List<Team> getListTeam() {
         return listTeam;
     }
+
+    public void clearData() {
+        ourInstance = null;
+    }
 }

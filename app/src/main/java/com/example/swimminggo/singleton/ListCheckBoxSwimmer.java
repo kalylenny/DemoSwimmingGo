@@ -18,4 +18,8 @@ public class ListCheckBoxSwimmer {
     private ListCheckBoxSwimmer() {
         checkSwimmers = new ArrayList<>();
     }
+
+    public void clearData() {
+        ourInstance = null;
+    }
 }

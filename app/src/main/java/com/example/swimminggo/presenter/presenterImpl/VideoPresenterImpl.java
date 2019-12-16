@@ -59,11 +59,7 @@ public class VideoPresenterImpl implements VideoPresenter {
                 .build().getAsJSONObject(new JSONObjectRequestListener() {
             @Override
             public void onResponse(JSONObject response) {
-                try {
-                    library.doAddVideo(response.getBoolean("success"), response.getString("message"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                library.doAddVideo(response);
             }
 
             @Override

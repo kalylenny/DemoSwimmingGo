@@ -1,11 +1,14 @@
 package com.example.swimminggo.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public class Exercise implements Serializable {
+public class Exercise implements Serializable, Parcelable {
     private int id;
     private String styleId;
     private int distance;
@@ -13,6 +16,13 @@ public class Exercise implements Serializable {
     private int phaseId;
 
     public Exercise(String styleId, int distance, int rep, int phaseId) {
+        this.styleId = styleId;
+        this.distance = distance;
+        this.rep = rep;
+        this.phaseId = phaseId;
+    }
+    public Exercise(int id, String styleId, int distance, int rep, int phaseId) {
+        this.id = id;
         this.styleId = styleId;
         this.distance = distance;
         this.rep = rep;
@@ -31,6 +41,26 @@ public class Exercise implements Serializable {
         }
     }
 
+    protected Exercise(Parcel in) {
+        id = in.readInt();
+        styleId = in.readString();
+        distance = in.readInt();
+        rep = in.readInt();
+        phaseId = in.readInt();
+    }
+
+    public static final Creator<Exercise> CREATOR = new Creator<Exercise>() {
+        @Override
+        public Exercise createFromParcel(Parcel in) {
+            return new Exercise(in);
+        }
+
+        @Override
+        public Exercise[] newArray(int size) {
+            return new Exercise[size];
+        }
+    };
+
     public JSONObject toJSONObject(){
         JSONObject result = new JSONObject();
         JSONObject jsonObject = new JSONObject();
@@ -40,6 +70,7 @@ public class Exercise implements Serializable {
             jsonObject.put("distance_num", this.distance);
             jsonObject.put("repetition", this.rep);
             jsonObject.put("phase_id", this.phaseId);
+            jsonObject.put("name","");
             if (this.id != 0){
                 jsonObject.put("id", this.id);
             }
@@ -88,5 +119,19 @@ public class Exercise implements Serializable {
 
     public void setPhaseId(int phaseId) {
         this.phaseId = phaseId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(styleId);
+        dest.writeInt(distance);
+        dest.writeInt(rep);
+        dest.writeInt(phaseId);
     }
 }

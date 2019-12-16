@@ -1,6 +1,8 @@
 package com.example.swimminggo.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.google.common.collect.Iterables;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder> {
@@ -59,7 +62,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
             public void onClick(View view) {
                 if (phaseId == 3) {
                     Intent intent = new Intent(holder.itemView.getContext(), CreateRecordWithExercise.class);
-                    intent.putExtra("exercise", exercise);
+                    intent.putExtra("exercise", (Serializable) exercise);
                     intent.putExtra("team_id", teamId);
                     intent.putExtra("position", position);
                     holder.itemView.getContext().startActivity(intent);

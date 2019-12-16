@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -18,22 +19,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    Activity mainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_swimmer);
+        this.mainActivity = this;
         initView();
     }
 
     private void initView() {
         bottomNavigationView = findViewById(R.id.bottom_bar_swimmer);
-        loadFragment(new CalendarFragment());
+        loadFragment(new CalendarFragment(mainActivity));
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.item_workout:
-                        loadFragment(new CalendarFragment());
+                        loadFragment(new CalendarFragment(mainActivity));
                         return true;
                     case R.id.item_library:
                         loadFragment(new LibraryCategories());
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(new SwimmerChartFragment());
                         return true;
                     case R.id.item_more:
-                        loadFragment(new SettingFragment());
+                        loadFragment(new SettingFragment(mainActivity));
                         return true;
                 }
                 return false;

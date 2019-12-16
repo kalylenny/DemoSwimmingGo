@@ -18,6 +18,10 @@ public class AgeConstant {
         return ourInstance;
     }
 
+    public void clearData(){
+        ourInstance = new AgeConstant();
+    }
+
     public AgeConstant(){
         listAge = new ArrayList<>();
     }

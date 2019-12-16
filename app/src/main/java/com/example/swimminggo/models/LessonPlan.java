@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class LessonPlan implements Serializable {
     private int id, userId, teamId, lessonId;
-    private String lessonName, date;
+    private String lessonName, date, teamName;
 
     public LessonPlan(JSONObject jsonObject){
         try {
@@ -17,6 +17,7 @@ public class LessonPlan implements Serializable {
             this.lessonName = jsonObject.getString("lesson_name");
             this.lessonId = jsonObject.getInt("lesson_id");
             this.date = jsonObject.getString("schedule");
+            this.teamName = jsonObject.getString("team_name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -72,5 +73,13 @@ public class LessonPlan implements Serializable {
 
     public void setLessonId(int lessonId) {
         this.lessonId = lessonId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 }
