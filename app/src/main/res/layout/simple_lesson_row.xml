@@ -8,7 +8,6 @@
     android:clickable="true"
     android:layout_margin="5dp"
     android:background="?android:attr/selectableItemBackground">
-
     <LinearLayout
         android:weightSum="10"
         android:orientation="horizontal"
@@ -52,7 +51,7 @@
             </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
+        <RelativeLayout
             android:gravity="center"
             android:layout_weight="2"
             android:layout_width="0dp"
@@ -60,10 +59,16 @@
             <CheckBox
                 android:button="@drawable/custom_checkbox"
                 android:id="@+id/check_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 />
-
-        </LinearLayout>
+            <TextView
+                android:id="@+id/txt_option"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="&#8942;"
+                android:textSize="24sp" />
+        </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

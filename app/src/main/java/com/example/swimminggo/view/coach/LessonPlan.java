@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.swimminggo.R;
 import com.example.swimminggo.adapter.ListAvailableLessonAdapter;
@@ -27,6 +28,7 @@ public class LessonPlan extends AppCompatActivity {
     LessonPresenter lessonPresenter;
     FloatingActionButton btnCreateLesson;
     public static Activity lessonPlanActivity;
+    ListAvailableLessonAdapter listAvailableLessonAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,8 @@ public class LessonPlan extends AppCompatActivity {
         for (Lesson lesson : lessons) {
             isCheckeds.add(false);
         }
-        recyclerViewLessonPlan.setAdapter(new ListAvailableLessonAdapter(lessons));
+        listAvailableLessonAdapter = new ListAvailableLessonAdapter(lessons, this);
+        recyclerViewLessonPlan.setAdapter(listAvailableLessonAdapter);
         recyclerViewLessonPlan.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
@@ -68,4 +71,15 @@ public class LessonPlan extends AppCompatActivity {
         });
     }
 
+    public void onDeleteLesson(int lessonId) {
+        lessonPresenter.onDeleteLesson(lessonId);
+    }
+
+    public void doDeleteLesson(boolean result, String message){
+        if (result){
+            initDatabase();
+        } else {
+            Toast.makeText(lessonPlanActivity, message, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

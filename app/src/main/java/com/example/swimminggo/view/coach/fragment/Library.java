@@ -1,5 +1,6 @@
 package com.example.swimminggo.view.coach.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.swimminggo.presenter.VideoPresenter;
 import com.example.swimminggo.presenter.presenterImpl.VideoPresenterImpl;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.singleton.Videos;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +32,7 @@ public class Library extends AppCompatActivity {
 
     VideoPresenter videoPresenter;
     RecyclerView recyclerView;
-    Button btnAdd;
+    FloatingActionButton btnAdd;
     Dialog dialog;
     Style style;
 
@@ -43,6 +45,7 @@ public class Library extends AppCompatActivity {
         action();
     }
 
+    @SuppressLint("RestrictedApi")
     private void initComponent() {
         style = (Style) getIntent().getSerializableExtra("style");
         videoPresenter = new VideoPresenterImpl(this);

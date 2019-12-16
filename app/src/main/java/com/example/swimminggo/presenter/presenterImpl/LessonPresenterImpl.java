@@ -172,6 +172,36 @@ public class LessonPresenterImpl implements LessonPresenter {
                 });
     }
 
+    @Override
+    public void onDeleteLesson(int lessonId) {
+        AndroidNetworking.delete(URLConstant.getInstance().getUrlDeleteLesson(lessonId))
+                .addHeaders("Authorization", "Bearer " + UserProfile.getInstance().accessToken)
+                .build().getAsJSONObject(new JSONObjectRequestListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    if (response.getBoolean("success")){
+                        lessonPlan.doDeleteLesson(true, "Tạo thành công");
+                    } else {
+                        lessonPlan.doDeleteLesson(false, response.getString("message"));
+                    }
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(ANError anError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onEditLesson(Lesson lesson) {
+
+    }
+
     private JSONObject toLessonPlanObject(int lessonId, int teamId, String schedule){
         JSONObject jsonObject = new JSONObject();
         try {

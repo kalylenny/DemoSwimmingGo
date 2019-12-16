@@ -27,6 +27,7 @@ public class URLConstant {
     public String URL_ADD_NOTE = mainUrl + "/api/note/add";
     public String URL_EDIT_EXERCISE = mainUrl + "/api/exercise/edit";
 
+
     public static URLConstant getInstance() {
         if (ourInstance == null)
             ourInstance = new URLConstant();
@@ -99,6 +100,10 @@ public class URLConstant {
 
     public String getUrlDeleteExercise(int exerciseId) {
         return mainUrl + "/api/exercise/delete/" + exerciseId;
+    }
+
+    public String getUrlDeleteLesson(int lessonId){
+        return mainUrl + "/api/lesson/delete/" + lessonId;
     }
 
 }
