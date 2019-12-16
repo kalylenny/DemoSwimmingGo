@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/item_workout"
-        android:icon="@drawable/icon_workout"
-        android:title="Bài tập"
+        android:icon="@drawable/ic_calendar1"
+        android:title="Lịch"
         />
     <item
         android:id="@+id/item_library"

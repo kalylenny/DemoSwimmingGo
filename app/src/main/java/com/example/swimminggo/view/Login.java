@@ -2,12 +2,14 @@ package com.example.swimminggo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ public class Login extends AppCompatActivity {
     private TextView txtRegister, txtForgotPassword;
     EditText edtUsername, edtPassword;
     Button btnLogin;
+    public ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class Login extends AppCompatActivity {
     private void initComponent() {
         loginPresenter = new LoginPresenterImpl(this);
 
+        progressDialog = new ProgressDialog(this);
         btnLogin = findViewById(R.id.btn_login);
 
         edtUsername = findViewById(R.id.edt_username);
@@ -50,6 +54,9 @@ public class Login extends AppCompatActivity {
     }
 
     private void initDatabase(){
+        progressDialog.setMessage("Vui lòng chờ");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMax(100);
         ExerciseConstant.newInstance();
         initStyles();
         initDistances();
@@ -71,12 +78,12 @@ public class Login extends AppCompatActivity {
         exercisePresenter.onGetPhases();
     }
 
-
     private void action() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 loginPresenter.onLogin(edtUsername.getText().toString(), edtPassword.getText().toString());
+                progressDialog.show();
             }
         });
 

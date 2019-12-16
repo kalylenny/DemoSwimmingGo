@@ -4,20 +4,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Time {
-    private int sec, millisec, min, numOfWeek;
+    private int sec, millisec, min, numOfWeek, quarter, month;
 
     public Time(JSONObject jsonObject) {
         try {
             this.sec = jsonObject.getInt("swim_sec");
             this.millisec = jsonObject.getInt("swim_millisec");
             this.min = jsonObject.getInt("swim_min");
-            this.numOfWeek = jsonObject.getInt("number_of_week");
+            if (jsonObject.has("number_of_week"))
+                this.numOfWeek = jsonObject.getInt("number_of_week");
+            if (jsonObject.has("quarter"))
+                this.quarter = jsonObject.getInt("quarter");
+            if (jsonObject.has("month"))
+                this.month = jsonObject.getInt("month");
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public Time(int min){
+    public Time(int min) {
         this.min = min;
     }
 
@@ -51,6 +56,22 @@ public class Time {
 
     public void setNumOfWeek(int numOfWeek) {
         this.numOfWeek = numOfWeek;
+    }
+
+    public int getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(int quarter) {
+        this.quarter = quarter;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
     }
 
     public int toMillisec() {

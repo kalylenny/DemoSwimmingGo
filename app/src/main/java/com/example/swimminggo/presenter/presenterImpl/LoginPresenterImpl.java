@@ -38,6 +38,7 @@ public class LoginPresenterImpl implements com.example.swimminggo.presenter.Logi
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
                         public void onResponse(JSONObject response) {
+                            loginView.progressDialog.dismiss();
                             try {
                                 if (response.getBoolean("success")) {
                                     UserProfile.getInstance().getUserProfileByJSONObject(response.getJSONObject("user"));

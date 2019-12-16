@@ -26,9 +26,9 @@ public class PageAdapterSwimmer extends FragmentStatePagerAdapter {
             case 0:
                 return new SwimmerMonthChartFragment(swimmerId);
             case 1:
-                return new SwimmerQuarterChartFragment();
+                return new SwimmerQuarterChartFragment(swimmerId);
             case 2:
-                return new SwimmerYearChartFragment();
+                return new SwimmerYearChartFragment(swimmerId);
             default:
                 return null;
         }

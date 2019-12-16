@@ -1,6 +1,8 @@
 package com.example.swimminggo.adapter.expandable_menu;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -99,14 +101,36 @@ public class ExerciseViewHolder extends ChildViewHolder {
 
                             dialog.show();
                         } else {
-                            exerciseActivity.onDeleteExercise(exercise.getId());
+                            showAlertDialog(exercise.getId());
                         }
                         pop.dismiss();
                         return false;
+                    }
+                    private void showAlertDialog(final int exerciseId){
+                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        exerciseActivity.onDeleteExercise(exerciseId);
+                                        break;
+
+                                    case DialogInterface.BUTTON_NEGATIVE:
+                                        dialog.dismiss();
+                                        break;
+                                }
+                            }
+                        };
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                        builder.setMessage("Bạn có muốn xóa nhóm này?").setPositiveButton("Đồng ý", dialogClickListener)
+                                .setNegativeButton("Hủy", dialogClickListener).show();
                     }
                 });
                 pop.show();
             }
         });
     }
+
+
 }

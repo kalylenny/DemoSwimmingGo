@@ -23,6 +23,8 @@ public class URLConstant {
     public String URL_CREATE_LESSON_PLAN = mainUrl + "/api/plan/create";
     public String URL_CREATE_RECORD = mainUrl + "/api/record/create";
     public String URL_GET_CHART_BY_MONTH = mainUrl + "/api/chartbymonth/get";
+    public String URL_GET_CHART_BY_QUARTER = mainUrl + "/api/chartbyquarter/get";
+    public String URL_GET_CHART_BY_YEAR = mainUrl + "/api/chartbyyear/get";
     public String URL_ADD_VIDEO = mainUrl + "/api/video/add";
     public String URL_ADD_NOTE = mainUrl + "/api/note/add";
     public String URL_EDIT_EXERCISE = mainUrl + "/api/exercise/edit";

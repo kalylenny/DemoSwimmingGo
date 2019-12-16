@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -72,7 +74,28 @@ public class LessonPlan extends AppCompatActivity {
     }
 
     public void onDeleteLesson(int lessonId) {
-        lessonPresenter.onDeleteLesson(lessonId);
+        showAlertDialog(lessonId);
+    }
+
+    private void showAlertDialog(final int lessonId){
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        lessonPresenter.onDeleteLesson(lessonId);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dialog.dismiss();
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn có muốn xóa nhóm này?").setPositiveButton("Đồng ý", dialogClickListener)
+                .setNegativeButton("Hủy", dialogClickListener).show();
     }
 
     public void doDeleteLesson(boolean result, String message){

@@ -2,6 +2,7 @@ package com.example.swimminggo.view.coach;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class AddNewSwimmer extends AppCompatActivity {
     List<Account> swimmerAccounts;
     Team team;
     AddSwimmer addSwimmer;
+    public ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,11 @@ public class AddNewSwimmer extends AppCompatActivity {
         });
         numberButton.setRange(1, 10);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Vui lòng chờ");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMax(100);
+        progressDialog.incrementProgressBy(2);
         btnFinish = findViewById(R.id.btn_finish);
         btnCreateAccount = findViewById(R.id.btn_create_workout);
     }
@@ -66,6 +73,7 @@ public class AddNewSwimmer extends AppCompatActivity {
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 swimmerPresenter.onAddNewSwimmer(swimmerAccounts);
             }
         });

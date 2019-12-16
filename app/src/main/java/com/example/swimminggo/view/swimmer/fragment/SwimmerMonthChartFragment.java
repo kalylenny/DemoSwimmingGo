@@ -136,6 +136,4 @@ public class SwimmerMonthChartFragment extends Fragment {
         return new Time(30).toMillisec();
     }
 
-
-
 }

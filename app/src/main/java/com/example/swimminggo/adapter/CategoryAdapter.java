@@ -39,7 +39,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-        holder.imgViewVideo.setBackgroundResource(R.drawable.ic_ytb);
+        if (styles.get(position).getValue().equals("Bướm"))
+            holder.imgViewVideo.setBackgroundResource(R.drawable.buom64);
+        if (styles.get(position).getValue().equals("Ếch"))
+            holder.imgViewVideo.setBackgroundResource(R.drawable.ech64);
+        if (styles.get(position).getValue().equals("Ngửa"))
+            holder.imgViewVideo.setBackgroundResource(R.drawable.ngua64);
+        if (styles.get(position).getValue().equals("Sải"))
+            holder.imgViewVideo.setBackgroundResource(R.drawable.sai64);
+        if (styles.get(position).getValue().equals("Tổng hợp"))
+            holder.imgViewVideo.setBackgroundResource(R.drawable.tonghop64);
+
         holder.txtVideoName.setText(styles.get(position).getValue());
 
         itemView.setOnClickListener(new View.OnClickListener() {
