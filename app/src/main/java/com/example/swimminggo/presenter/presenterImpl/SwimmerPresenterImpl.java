@@ -186,6 +186,7 @@ public class SwimmerPresenterImpl implements SwimmerPresenter {
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        addNewSwimmer.progressDialog.dismiss();
                         try {
                             if (response.getBoolean("success")) {
                                 addNewSwimmer.doAddSwimmer(true, "Success");

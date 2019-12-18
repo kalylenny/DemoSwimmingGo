@@ -122,32 +122,32 @@ public class CalendarFragment extends Fragment {
             }
         });
 
-        txtDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar2 = Calendar.getInstance();
-                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(view.getContext(), new MonthPickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(int selectedMonth, int selectedYear) {
-                        calendar.set(Calendar.DAY_OF_MONTH, 1);
-                        calendar.set(Calendar.MONTH, selectedMonth);
-                        calendar.set(Calendar.YEAR, selectedYear);
-                        calendar.set(Calendar.DAY_OF_WEEK, calendar.SUNDAY);
-                        Date currentDate = new Date(calendar);
-                        txtDate.setText(currentDate.getMonth() + "/" + currentDate.getYear());
-                        List<Date> dates = new ArrayList<>();
-                        for (int i = 0; i < 7; i++) {
-                            dates.add(new Date(calendar));
-                            calendar.add(Calendar.DATE, 1);
-                        }
-                        setScheduleRecyclerView(dates, currentDate);
-                    }
-                }, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH));
-                builder.setTitle("Select month")
-                        .setMonthAndYearRange(Calendar.JANUARY, Calendar.DECEMBER, 1900, 2030)
-                        .build().show();
-            }
-        });
+//        txtDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Calendar calendar2 = Calendar.getInstance();
+//                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(view.getContext(), new MonthPickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(int selectedMonth, int selectedYear) {
+//                        calendar.set(Calendar.DAY_OF_MONTH, 1);
+//                        calendar.set(Calendar.MONTH, selectedMonth);
+//                        calendar.set(Calendar.YEAR, selectedYear);
+//                        calendar.set(Calendar.DAY_OF_WEEK, calendar.SUNDAY);
+//                        Date currentDate = new Date(calendar);
+//                        txtDate.setText(currentDate.getMonth() + "/" + currentDate.getYear());
+//                        List<Date> dates = new ArrayList<>();
+//                        for (int i = 0; i < 7; i++) {
+//                            dates.add(new Date(calendar));
+//                            calendar.add(Calendar.DATE, 1);
+//                        }
+//                        setScheduleRecyclerView(dates, currentDate);
+//                    }
+//                }, calendar2.get(Calendar.YEAR), calendar2.get(Calendar.MONTH));
+//                builder.setTitle("Select month")
+//                        .setMonthAndYearRange(Calendar.JANUARY, Calendar.DECEMBER, 1900, 2030)
+//                        .build().show();
+//            }
+//        });
 
         btnCreateSchedule.setOnClickListener(new View.OnClickListener() {
             @Override

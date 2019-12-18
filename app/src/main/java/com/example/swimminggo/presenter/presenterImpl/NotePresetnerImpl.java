@@ -65,7 +65,7 @@ public class NotePresetnerImpl implements NotePresenter {
                     if (response.getBoolean("success"))
                         notification.doAddNote(true, "ASDASD");
                     else
-                        notification.doAddNote(false, "ASDASD");
+                        notification.doAddNote(false, response.getString("message"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

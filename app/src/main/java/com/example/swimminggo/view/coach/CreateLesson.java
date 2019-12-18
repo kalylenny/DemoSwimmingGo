@@ -125,6 +125,7 @@ public class CreateLesson extends AppCompatActivity {
 
     public void doCreateLesson(boolean result, String message) {
         if (result) {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             finish();
             LessonPlan lessonPlan = (LessonPlan) LessonPlan.lessonPlanActivity;
             lessonPlan.initDatabase();

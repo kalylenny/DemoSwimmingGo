@@ -1,6 +1,8 @@
 package com.example.swimminggo.view.coach;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -104,9 +106,30 @@ public class AddSwimmer extends AppCompatActivity {
                     if (ListSwimmer.getInstance().isCheckeds.get(i)) {
                         positions.add(i);
                     }
-                swimmerPresenter.onRemoveSwimmersFromTeam(currentTeam.getTeamID(), positions);
+                showAlertDialog(positions);
             }
         });
+    }
+
+    private void showAlertDialog(final List<Integer> positions){
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        swimmerPresenter.onRemoveSwimmersFromTeam(currentTeam.getTeamID(), positions);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dialog.dismiss();
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bạn muốn loại người này ?").setPositiveButton("Đồng ý", dialogClickListener)
+                .setNegativeButton("Hủy", dialogClickListener).show();
     }
 
     private void Show() {

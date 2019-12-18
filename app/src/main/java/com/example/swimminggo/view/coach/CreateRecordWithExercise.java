@@ -39,6 +39,7 @@ public class CreateRecordWithExercise extends AppCompatActivity {
     List<Swimmer> swimmers;
     static int position;
     static int teamId;
+    String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class CreateRecordWithExercise extends AppCompatActivity {
 
     private void initComponent(){
         exercise = (Exercise) getIntent().getSerializableExtra("exercise");
+        date = getIntent().getStringExtra("date");
         if (position == 0)
             position = getIntent().getIntExtra("position", 0);
         if (teamId == 0)
@@ -80,7 +82,7 @@ public class CreateRecordWithExercise extends AppCompatActivity {
     public void setupRecyclerView(List<Swimmer> swimmers){
         this.swimmers = swimmers;
         for(Swimmer swimmer:swimmers){
-            Records.getInstance().getRecords().add(new Record(swimmer.getId(), UserProfile.getInstance().currentUser.getId(), exercise.getId()));
+            Records.getInstance().getRecords().add(new Record(swimmer.getId(), UserProfile.getInstance().currentUser.getId(), exercise.getId(), date));
         }
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(new RecordAdapter(swimmers));

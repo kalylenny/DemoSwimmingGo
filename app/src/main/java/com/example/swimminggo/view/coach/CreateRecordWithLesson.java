@@ -35,6 +35,7 @@ public class CreateRecordWithLesson extends AppCompatActivity {
     static List<List<Record>> lists = new ArrayList<>();
     static int phaseId;
     static int teamId;
+    static String date;
     RecordPresenter recordPresenter;
     Activity fa;
 
@@ -78,10 +79,9 @@ public class CreateRecordWithLesson extends AppCompatActivity {
     }
 
     private void initComponent() {
-        if (teamId == 0)
-            teamId = getIntent().getIntExtra("team_id", 0);
-        if (lesson == null)
-            lesson = (Lesson) getIntent().getSerializableExtra("lesson");
+        date = getIntent().getStringExtra("date");
+        teamId = getIntent().getIntExtra("team_id", 0);
+        lesson = (Lesson) getIntent().getSerializableExtra("lesson");
         phaseId = getIntent().getIntExtra("phase_id", 0);
         lessonPresenter = new LessonPresenterImpl(this);
         recordPresenter = new RecordPresenterImpl(this);
@@ -99,7 +99,7 @@ public class CreateRecordWithLesson extends AppCompatActivity {
                 TotalRecord.getInstance().getTotalRecord().add(new ArrayList<>());
             }
         }
-        LessonAdapter lessonAdapter = new LessonAdapter(exercises, teamId, phaseId);
+        LessonAdapter lessonAdapter = new LessonAdapter(exercises, teamId, phaseId, date);
         recyclerView.setAdapter(lessonAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(CreateRecordWithLesson.this, LinearLayoutManager.VERTICAL, false));
 

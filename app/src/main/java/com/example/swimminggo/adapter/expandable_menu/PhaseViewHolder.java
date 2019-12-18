@@ -22,12 +22,12 @@ public class PhaseViewHolder extends GroupViewHolder {
     public void setPhaseTitle(ExpandableGroup group, String phaseName) {
         phaseTitle.setText(group.getTitle());
         if (phaseName.equals("Warm Up"))
-            imgViewPhase.setBackgroundResource(R.drawable.ic_warmup32);
+            imgViewPhase.setBackgroundResource(R.drawable.warmup64);
         else if (phaseName.equals("Main Stroke"))
-            imgViewPhase.setBackgroundResource(R.drawable.ic_mainswim32);
+            imgViewPhase.setBackgroundResource(R.drawable.main64);
         else if (phaseName.equals("Final Set"))
-            imgViewPhase.setBackgroundResource(R.drawable.ic_finalswim32);
+            imgViewPhase.setBackgroundResource(R.drawable.final64);
         else
-            imgViewPhase.setBackgroundResource(R.drawable.ic_sw32);
+            imgViewPhase.setBackgroundResource(R.drawable.relax64);
     }
 }

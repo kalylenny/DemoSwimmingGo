@@ -2,7 +2,7 @@ package com.example.swimminggo.constant;
 
 public class URLConstant {
     private static URLConstant ourInstance;
-    public String mainUrl = "http://ec2-13-229-83-241.ap-southeast-1.compute.amazonaws.com";
+    public String mainUrl = "http://13.250.35.65";
     public String URL_LOGIN = mainUrl + "/api/public/login";
     public String URL_REGISTER = mainUrl + "/api/public/register";
     public String URL_GET_OTP = mainUrl + "/api/public/otp/send/";
@@ -23,6 +23,8 @@ public class URLConstant {
     public String URL_CREATE_LESSON_PLAN = mainUrl + "/api/plan/create";
     public String URL_CREATE_RECORD = mainUrl + "/api/record/create";
     public String URL_GET_CHART_BY_MONTH = mainUrl + "/api/chartbymonth/get";
+    public String URL_GET_CHART_BY_QUARTER = mainUrl + "/api/chartbyquarter/get";
+    public String URL_GET_CHART_BY_YEAR = mainUrl + "/api/chartbyyear/get";
     public String URL_ADD_VIDEO = mainUrl + "/api/video/add";
     public String URL_ADD_NOTE = mainUrl + "/api/note/add";
     public String URL_EDIT_EXERCISE = mainUrl + "/api/exercise/edit";

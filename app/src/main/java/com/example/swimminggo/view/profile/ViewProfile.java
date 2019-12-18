@@ -2,6 +2,7 @@ package com.example.swimminggo.view.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class ViewProfile extends AppCompatActivity {
 
     TextView txtFullName, txtDob, txtPhone, txtGender, txtEmail;
     ImageView imgEdit;
+    public static Activity viewProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class ViewProfile extends AppCompatActivity {
     }
 
     private void initComponent(){
+        viewProfile = this;
+
         txtFullName = findViewById(R.id.txt_fullname);
         txtDob = findViewById(R.id.txt_dob);
         txtPhone = findViewById(R.id.txt_phone);
