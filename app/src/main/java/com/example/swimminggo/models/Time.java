@@ -77,4 +77,8 @@ public class Time {
     public int toMillisec() {
         return this.min * 1000 * 60 + this.sec * 1000 + millisec;
     }
+
+    public float toSecond(){
+        return this.min * 60 + this.sec + (float)this.millisec/ 1000;
+    }
 }

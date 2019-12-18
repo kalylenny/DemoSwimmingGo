@@ -51,10 +51,10 @@ public class ChartPresenterImpl implements ChartPresenter {
                 try {
                     if (response.getBoolean("success")) {
                         JSONArray jsonArray = response.getJSONArray("chart");
-                        List<Integer> yAxisData = new ArrayList<>(jsonArray.length());
+                        List<Float> yAxisData = new ArrayList<>(jsonArray.length());
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Time time = new Time(jsonArray.getJSONObject(i));
-                            yAxisData.add(time.getNumOfWeek() - 1, time.toMillisec());
+                            yAxisData.add(time.getNumOfWeek() - 1, time.toSecond());
                         }
                         List<String> axisData = new ArrayList<>(Arrays.asList("Tuần 1", "Tuần 2", "Tuần 3", "Tuần 4"));
                         swimmerMonthChartFragment.setupLineChart(axisData, yAxisData);
@@ -82,13 +82,13 @@ public class ChartPresenterImpl implements ChartPresenter {
                 try {
                     if (response.getBoolean("success")) {
                         JSONArray jsonArray = response.getJSONArray("chart");
-                        List<Integer> yAxisData = new ArrayList<>(jsonArray.length());
+                        List<Float> yAxisData = new ArrayList<>(jsonArray.length());
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Time time = new Time(jsonArray.getJSONObject(i));
                             if (time.getMonth() % 3 != 0)
-                                yAxisData.add(time.getMonth()%3 - 1, time.toMillisec());
+                                yAxisData.add(time.getMonth()%3 - 1, time.toSecond());
                             else
-                                yAxisData.add(2, time.toMillisec());
+                                yAxisData.add(2, time.toSecond());
                         }
                         String month1 = "Tháng " + ((quarter - 1) * 3 + 1);
                         String month2 = "Tháng " + ((quarter - 1) * 3 + 2);
@@ -119,10 +119,10 @@ public class ChartPresenterImpl implements ChartPresenter {
                 try {
                     if (response.getBoolean("success")) {
                         JSONArray jsonArray = response.getJSONArray("chart");
-                        List<Integer> yAxisData = new ArrayList<>(jsonArray.length());
+                        List<Float> yAxisData = new ArrayList<>(jsonArray.length());
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Time time = new Time(jsonArray.getJSONObject(i));
-                            yAxisData.add(time.getQuarter() - 1, time.toMillisec());
+                            yAxisData.add(time.getQuarter() - 1, time.toSecond());
                         }
                         List<String> axisData = new ArrayList<String>(Arrays.asList("Quý 1", "Quý 2", "Quý 3", "Quý 4"));
                         swimmerYearChartFragment.setupLineChart(axisData, yAxisData);

@@ -44,7 +44,7 @@
             android:id="@+id/edt_video_name"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:drawableRight="@drawable/ic_team"
+            android:drawableRight="@drawable/youtube"
             android:hint="Tên video"
             android:textColorHint="@color/colorGray" />
     </LinearLayout>
@@ -66,7 +66,7 @@
                 android:id="@+id/edt_link"
                 android:layout_width="300dp"
                 android:layout_height="match_parent"
-                android:drawableRight="@drawable/ic_team"
+                android:drawableRight="@drawable/unlink"
                 android:hint="Link"
                 android:textColorHint="@color/colorGray" />
 

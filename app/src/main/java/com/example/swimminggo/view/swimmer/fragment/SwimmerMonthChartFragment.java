@@ -89,7 +89,7 @@ public class SwimmerMonthChartFragment extends Fragment {
         });
     }
 
-    public void setupLineChart(List<String> axisData, List<Integer> yAxisData) {
+    public void setupLineChart(List<String> axisData, List<Float> yAxisData) {
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();
         Line line = new Line(yAxisValues);
@@ -125,17 +125,17 @@ public class SwimmerMonthChartFragment extends Fragment {
         lineChartView.setCurrentViewport(viewport);
     }
 
-    private int maxTime(int distance){
+    private float maxTime(int distance){
         switch (distance){
-            case 50 : return new Time(1).toMillisec();
-            case 100 : return new Time(2).toMillisec();
-            case 200 : return new Time(3).toMillisec();
-            case 400 : return new Time(4).toMillisec();
-            case 800 : return new Time(10).toMillisec();
-            case 1000 : return new Time(15).toMillisec();
-            case 1500 : return new Time(20).toMillisec();
+            case 50 : return new Time(1).toSecond();
+            case 100 : return new Time(2).toSecond();
+            case 200 : return new Time(3).toSecond();
+            case 400 : return new Time(4).toSecond();
+            case 800 : return new Time(10).toSecond();
+            case 1000 : return new Time(15).toSecond();
+            case 1500 : return new Time(20).toSecond();
         }
-        return new Time(30).toMillisec();
+        return new Time(30).toSecond();
     }
 
 }
