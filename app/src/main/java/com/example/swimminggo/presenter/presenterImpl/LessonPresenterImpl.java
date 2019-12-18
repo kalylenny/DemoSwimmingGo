@@ -98,9 +98,9 @@ public class LessonPresenterImpl implements LessonPresenter {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getBoolean("success")) {
-                                createLesson.doCreateLesson(true, "Success");
+                                createLesson.doCreateLesson(true, response.getString("message"));
                             } else {
-                                createLesson.doCreateLesson(false, "False");
+                                createLesson.doCreateLesson(false, response.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

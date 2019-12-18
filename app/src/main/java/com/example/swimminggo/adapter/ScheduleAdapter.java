@@ -41,7 +41,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ScheduleAdapter.ViewHolder holder, int position) {
-        holder.rbDate.setText(dates.get(position).getFullName() + "     " +dates.get(position).getDay());
+        holder.rbDate.setText(dates.get(position).getFullName() + "\n" +dates.get(position).getDay());
         holder.rbDate.setChecked(position == lastPosition);
         if (position == lastPosition){
             calendarFragment.onGetListLessonPlanByDate(dates.get(position));
@@ -67,6 +67,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                     notifyDataSetChanged();
                 }
             });
+
         }
     }
 }

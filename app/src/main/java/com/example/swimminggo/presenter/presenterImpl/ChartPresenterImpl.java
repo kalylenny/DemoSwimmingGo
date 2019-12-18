@@ -124,7 +124,7 @@ public class ChartPresenterImpl implements ChartPresenter {
                             Time time = new Time(jsonArray.getJSONObject(i));
                             yAxisData.add(time.getQuarter() - 1, time.toMillisec());
                         }
-                        List<String> axisData = new ArrayList<String>(Arrays.asList("Quí 1", "Quí 2", "Quí 3", "Quí 4"));
+                        List<String> axisData = new ArrayList<String>(Arrays.asList("Quý 1", "Quý 2", "Quý 3", "Quý 4"));
                         swimmerYearChartFragment.setupLineChart(axisData, yAxisData);
                     }
                 } catch (JSONException e) {

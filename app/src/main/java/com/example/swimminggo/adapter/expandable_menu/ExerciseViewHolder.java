@@ -123,7 +123,7 @@ public class ExerciseViewHolder extends ChildViewHolder {
                         };
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-                        builder.setMessage("Bạn có muốn xóa nhóm này?").setPositiveButton("Đồng ý", dialogClickListener)
+                        builder.setMessage("Bạn muốn xóa bài tập này?").setPositiveButton("Đồng ý", dialogClickListener)
                                 .setNegativeButton("Hủy", dialogClickListener).show();
                     }
                 });

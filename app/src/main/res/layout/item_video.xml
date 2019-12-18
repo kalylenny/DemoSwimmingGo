@@ -4,6 +4,7 @@
     android:layout_height="100dp"
     android:layout_margin="5sp">
     <ImageView
+        android:layout_gravity="center"
         android:id="@+id/img_view_video"
         android:layout_width="120sp"
         android:layout_height="80sp"/>

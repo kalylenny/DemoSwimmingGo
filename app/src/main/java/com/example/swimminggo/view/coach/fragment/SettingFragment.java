@@ -12,19 +12,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.swimminggo.R;
-import com.example.swimminggo.constant.AgeConstant;
-import com.example.swimminggo.constant.ExerciseConstant;
 import com.example.swimminggo.models.User;
 import com.example.swimminggo.singleton.ListCheckBoxSwimmer;
 import com.example.swimminggo.singleton.ListExercise;
 import com.example.swimminggo.singleton.ListExerciseByPhase;
-import com.example.swimminggo.singleton.ListLesson;
 import com.example.swimminggo.singleton.ListSwimmer;
 import com.example.swimminggo.singleton.ListTeam;
 import com.example.swimminggo.singleton.Position;
 import com.example.swimminggo.singleton.UserProfile;
 import com.example.swimminggo.singleton.Videos;
-import com.example.swimminggo.view.Login;
 import com.example.swimminggo.view.profile.ChangePassword;
 import com.example.swimminggo.view.profile.ViewProfile;
 
@@ -83,6 +79,8 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
                 clearData();
                 mainActivity.finish();
+//                if (EditProfile.editProfile != null)
+//                    EditProfile.editProfile.finish();
             }
         });
     }

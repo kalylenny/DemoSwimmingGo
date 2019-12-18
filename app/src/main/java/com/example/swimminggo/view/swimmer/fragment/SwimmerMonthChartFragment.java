@@ -129,9 +129,11 @@ public class SwimmerMonthChartFragment extends Fragment {
         switch (distance){
             case 50 : return new Time(1).toMillisec();
             case 100 : return new Time(2).toMillisec();
-            case 200 : return new Time(4).toMillisec();
-            case 500 : return new Time(10).toMillisec();
-            case 1000 : return new Time(20).toMillisec();
+            case 200 : return new Time(3).toMillisec();
+            case 400 : return new Time(4).toMillisec();
+            case 800 : return new Time(10).toMillisec();
+            case 1000 : return new Time(15).toMillisec();
+            case 1500 : return new Time(20).toMillisec();
         }
         return new Time(30).toMillisec();
     }

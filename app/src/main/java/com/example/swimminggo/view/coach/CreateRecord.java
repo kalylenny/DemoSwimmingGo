@@ -40,8 +40,7 @@ public class CreateRecord extends AppCompatActivity {
     private void initComponent(){
         fa = this;
         recordPresenter = new RecordPresenterImpl(this);
-        if (lessonPlan == null)
-            lessonPlan = (LessonPlan) getIntent().getSerializableExtra("lesson_plan");
+        lessonPlan = (LessonPlan) getIntent().getSerializableExtra("lesson_plan");
         TotalRecord.newInstance();
         btnFinalSet = findViewById(R.id.btn_final_set);
         btnWarmUp = findViewById(R.id.btn_warm_up);
@@ -65,6 +64,7 @@ public class CreateRecord extends AppCompatActivity {
             intent.putExtra("lesson", lesson);
             intent.putExtra("team_id", lessonPlan.getTeamId());
             intent.putExtra("phase_id", phaseId);
+            intent.putExtra("date", lessonPlan.getDate());
             startActivity(intent);
         }
     }

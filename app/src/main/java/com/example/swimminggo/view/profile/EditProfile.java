@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -41,6 +42,7 @@ public class EditProfile extends AppCompatActivity {
     TextView txtDob;
     Spinner spnGender;
     Button btnSave;
+    public static Activity editProfile;
     DatePickerDialog datePickerDialog;
 
     @Override
@@ -53,6 +55,8 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private void initComponentView() {
+        editProfile = this;
+
         editProfilePresenter = new EditProfilePresenterImpl(this);
 
         //imgAvatar = findViewById(R.id.img_avatar);
@@ -137,8 +141,10 @@ public class EditProfile extends AppCompatActivity {
         addDataUser();
         if (result) {
             changeDataUser();
-            if (currentUser.getRoleName().equals("coach")) {
-
+            finish();
+            if (ViewProfile.viewProfile != null)
+                ViewProfile.viewProfile.finish();
+            else if (currentUser.getRoleName().equals("coach")) {
                 startActivity(new Intent(EditProfile.this, MainActivity.class));
             } else {
                 startActivity(new Intent(EditProfile.this, com.example.swimminggo.view.swimmer.MainActivity.class));

@@ -5,12 +5,14 @@ import org.json.JSONObject;
 
 public class Record {
     private int swimmerId, coachId, exerciseId, millisec, sec, min;
+    private String date;
 
-    public Record(int swimmerId, int coachId, int exerciseId){
+    public Record(int swimmerId, int coachId, int exerciseId, String date){
         this.swimmerId = swimmerId;
         this.coachId = coachId;
         this.exerciseId = exerciseId;
         this.millisec = this.min = this.sec = 0;
+        this.date = date;
     }
 
     public Record(JSONObject jsonObject){
@@ -21,6 +23,7 @@ public class Record {
             this.millisec = jsonObject.getInt("swim_millisec");
             this.sec = jsonObject.getInt("swim_sec");
             this.min = jsonObject.getInt("swim_min");
+            this.date = jsonObject.getString("schedule");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -35,6 +38,7 @@ public class Record {
             jsonObject.put("swim_millisec", this.millisec);
             jsonObject.put("swim_sec", this.sec);
             jsonObject.put("swim_min", this.min);
+            jsonObject.put("schedule",this.date);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -87,5 +91,13 @@ public class Record {
 
     public void setMin(int min) {
         this.min = min;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

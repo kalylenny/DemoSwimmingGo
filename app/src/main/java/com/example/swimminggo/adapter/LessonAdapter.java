@@ -28,11 +28,13 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
     List<Exercise> exercises;
     int teamId;
     int phaseId;
+    String date;
 
-    public LessonAdapter(List<Exercise> exercises, int teamId, int phaseId) {
+    public LessonAdapter(List<Exercise> exercises, int teamId, int phaseId, String date) {
         this.exercises = exercises;
         this.teamId = teamId;
         this.phaseId = phaseId;
+        this.date = date;
     }
 
     @NonNull
@@ -65,6 +67,7 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.ViewHolder
                     intent.putExtra("exercise", (Serializable) exercise);
                     intent.putExtra("team_id", teamId);
                     intent.putExtra("position", position);
+                    intent.putExtra("date",date);
                     holder.itemView.getContext().startActivity(intent);
                 }
             }

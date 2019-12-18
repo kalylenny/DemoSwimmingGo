@@ -47,6 +47,7 @@ public class SwimmerChartFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_swimmer_chart, container, false);
         initComponent();
         initDatabase();
+        action();
         return view;
     }
 

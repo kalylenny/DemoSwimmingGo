@@ -128,7 +128,7 @@ public class AddSwimmer extends AppCompatActivity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Bạn có muốn xóa nhóm này?").setPositiveButton("Đồng ý", dialogClickListener)
+        builder.setMessage("Bạn muốn loại người này ?").setPositiveButton("Đồng ý", dialogClickListener)
                 .setNegativeButton("Hủy", dialogClickListener).show();
     }
 
